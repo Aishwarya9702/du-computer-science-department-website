@@ -444,3 +444,95 @@ main h2 {
         font-size: 24px;
     }
 }
+
+
+
+/* Vision and Mission Section */
+
+.vision-mission-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+.vision-mission-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+/* Cards Container */
+
+.vision-mission-container {
+    display: flex;
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* Vision and Mission Cards */
+
+.vision-card,
+.mission-card {
+    flex: 1;
+    min-width: 0;
+    background-color: #f7f9fc;
+    border: 1px solid #dce3eb;
+    border-top: 4px solid #234F7B;
+    border-radius: 8px;
+    padding: 25px;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Card Hover Effect */
+
+.vision-card:hover,
+.mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Headings */
+
+.vision-card h3,
+.mission-card h3 {
+    color: #14345A;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Paragraph and List Styling */
+
+.vision-card p,
+.mission-card li {
+    color: #24364b;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.mission-card ul {
+    padding-left: 20px;
+}
+
+.mission-card li {
+    margin-bottom: 12px;
+}
+
+/* Responsive Layout */
+
+@media (max-width: 600px) {
+    .vision-mission-section {
+        padding: 25px 20px;
+    }
+
+    .vision-mission-container {
+        flex-direction: column;
+    }
+
+    .vision-card,
+    .mission-card {
+        padding: 20px;
+    }
+}
