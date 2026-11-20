@@ -727,3 +727,113 @@ main h2 {
         padding: 20px;
     }
 }
+
+
+
+/* News, Events and Notices Section */
+
+.updates-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+.updates-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.updates-intro {
+    color: #24364b;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.updates-note {
+    color: #666;
+    font-size: 13px;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+/* Three Column Flexbox Layout */
+
+.updates-container {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+/* Individual Cards */
+
+.updates-card {
+    flex: 1;
+    min-width: 0;
+    background-color: #f7f9fc;
+    border: 1px solid #dce3eb;
+    border-top: 4px solid #234F7B;
+    border-radius: 8px;
+    padding: 25px;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.updates-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Headings */
+
+.updates-card h3 {
+    color: #14345A;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* List Styling */
+
+.updates-card ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.updates-card li {
+    color: #24364b;
+    margin-bottom: 22px;
+    line-height: 1.6;
+}
+
+.updates-card li strong {
+    color: #14345A;
+    font-size: 16px;
+}
+
+.updates-card li p {
+    color: #34495e;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* Responsive Layout */
+
+@media (max-width: 900px) {
+    .updates-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .updates-section {
+        padding: 25px 20px;
+    }
+
+    .updates-card {
+        padding: 20px;
+    }
+}
