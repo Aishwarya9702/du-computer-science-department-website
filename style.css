@@ -1142,3 +1142,139 @@ main h2 {
         width: 100%;
     }
 }
+
+
+/* ==================================
+   Course Timetable Page
+================================== */
+
+/* Timetable Section */
+
+.timetable-section {
+    background-color: #f4f6f9;
+    padding: 40px;
+    min-height: 450px;
+}
+
+.timetable-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.timetable-section p {
+    color: #34495e;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* Table Wrapper */
+
+.timetable-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Timetable */
+
+.course-timetable {
+    width: 100%;
+    min-width: 950px;
+    border-collapse: collapse;
+    background-color: white;
+    text-align: center;
+}
+
+/* Table Caption */
+
+.course-timetable caption {
+    caption-side: top;
+    background-color: #e8eef5;
+    color: #14345A;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 18px;
+}
+
+/* Table Header */
+
+.course-timetable thead {
+    background-color: #14345A;
+    color: white;
+}
+
+.course-timetable thead th {
+    padding: 18px 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid #365879;
+    white-space: nowrap;
+}
+
+/* Table Cells */
+
+.course-timetable tbody th,
+.course-timetable tbody td {
+    padding: 18px 12px;
+    font-size: 15px;
+    color: #24364b;
+    border: 1px solid #dce3eb;
+    vertical-align: middle;
+}
+
+/* Day Column */
+
+.course-timetable tbody th {
+    background-color: #e8eef5;
+    color: #14345A;
+    font-weight: 700;
+}
+
+/* Alternate Row Colors */
+
+.course-timetable tbody tr:nth-child(even) {
+    background-color: #f7f9fc;
+}
+
+/* Row Hover Effect */
+
+.course-timetable tbody tr:hover {
+    background-color: #eaf2fb;
+}
+
+/* Lunch Break Column */
+
+.course-timetable tbody td:nth-child(5) {
+    background-color: #fff3d6;
+    color: #805500;
+    font-weight: 600;
+}
+
+/* Practical Lab Cells */
+
+.course-timetable tbody td[colspan="2"] {
+    background-color: #e5f1ed;
+    color: #245c4b;
+    font-weight: 600;
+}
+
+/* Responsive Timetable */
+
+@media (max-width: 600px) {
+    .timetable-section {
+        padding: 25px 15px;
+    }
+
+    .timetable-section h2 {
+        font-size: 24px;
+    }
+
+    .course-timetable caption {
+        font-size: 18px;
+    }
+}
