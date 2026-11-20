@@ -837,3 +837,97 @@ main h2 {
         padding: 20px;
     }
 }
+
+
+/* Contact Section */
+
+.contact-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+.contact-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.contact-intro {
+    color: #24364b;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.contact-card {
+    background-color: #f7f9fc;
+    border: 1px solid #dce3eb;
+    border-left: 4px solid #234F7B;
+    border-radius: 8px;
+    padding: 25px;
+    max-width: 650px;
+}
+
+.contact-card h3 {
+    color: #14345A;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.contact-card address {
+    color: #34495e;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.contact-card p {
+    margin-bottom: 0;
+    line-height: 1.8;
+}
+
+.contact-card a {
+    color: #234F7B;
+    font-weight: 600;
+}
+
+/* Footer Styling */
+
+.site-footer {
+    background-color: #14345A;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.site-footer p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.footer-note {
+    font-size: 14px;
+    color: #dce3eb;
+}
+
+.footer-disclaimer {
+    font-size: 12px;
+    color: #c5d4e5;
+}
+
+/* Responsive Contact Section */
+
+@media (max-width: 600px) {
+    .contact-section {
+        padding: 25px 20px;
+    }
+
+    .contact-card {
+        padding: 20px;
+    }
+
+    .site-footer {
+        padding: 25px 15px;
+    }
+}
