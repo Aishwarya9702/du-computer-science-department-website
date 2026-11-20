@@ -96,3 +96,160 @@ function calculateFacultyExperience() {
 }
 
 calculateFacultyExperience();
+
+
+/* Practical 11: Alumni Form Validation */
+
+const alumniForm = document.getElementById("alumni-form");
+const feedback = document.getElementById("feedback");
+const characterCount = document.getElementById("character-count");
+const formMessage = document.getElementById("form-message");
+
+/* Live Character Counter */
+
+if (feedback && characterCount) {
+    feedback.addEventListener("input", function() {
+        characterCount.textContent =
+            feedback.value.length + " / 300 characters";
+    });
+}
+
+/* Form Validation */
+
+if (alumniForm) {
+
+    alumniForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const fullName = document.getElementById("full-name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const dob = document.getElementById("dob").value;
+        const batch = document.getElementById("batch").value;
+        const degree = document.getElementById("degree").value;
+        const designation = document.getElementById("designation").value.trim();
+        const organization = document.getElementById("organization").value.trim();
+        const about = document.getElementById("about-yourself").value.trim();
+        const feedbackText = feedback.value.trim();
+
+        let error = "";
+
+        /* Empty Field Validation */
+
+        if (
+            !fullName || !email || !phone ||
+            !dob || !batch || !degree ||
+            !designation || !organization ||
+            !about || !feedbackText
+        ) {
+            error = "Please fill in all fields.";
+        }
+
+        /* Minimum Length Validation */
+
+        else if (fullName.length < 3) {
+            error = "Full Name must contain at least 3 characters.";
+        }
+
+        else if (designation.length < 2) {
+            error = "Designation must contain at least 2 characters.";
+        }
+
+        else if (organization.length < 2) {
+            error = "Organization must contain at least 2 characters.";
+        }
+
+        else if (about.length < 10) {
+            error = "About Yourself must contain at least 10 characters.";
+        }
+
+        else if (feedbackText.length < 10) {
+            error = "Feedback must contain at least 10 characters.";
+        }
+
+        else if (feedback.value.length > 300) {
+            error = "Feedback cannot exceed 300 characters.";
+        }
+
+        /* Email Validation */
+
+        else if (
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+        ) {
+            error = "Please enter a valid email address.";
+        }
+
+        /* Phone Validation */
+
+        else if (!/^[0-9]{10}$/.test(phone)) {
+            error = "Please enter a valid 10-digit phone number.";
+        }
+
+        /* Date of Birth Validation */
+
+        else if (!isValidDOB(dob)) {
+            error = "Please enter a valid date of birth.";
+        }
+
+        /* Graduation Batch Validation */
+
+        else if (
+            !/^\d{4}$/.test(batch) ||
+            Number(batch) < 1980 ||
+            Number(batch) > new Date().getFullYear()
+        ) {
+            error = "Please enter a valid graduation year.";
+        }
+
+        /* Display Result */
+
+        if (error) {
+            formMessage.textContent = error;
+            formMessage.className = "form-message error";
+        } else {
+            formMessage.textContent =
+                "Form validated successfully! " +
+                "This is a demonstration; no data has been submitted.";
+
+            formMessage.className = "form-message success";
+        }
+
+    });
+
+    /* Reset Form Message and Counter */
+
+    alumniForm.addEventListener("reset", function() {
+
+        formMessage.textContent = "";
+        formMessage.className = "form-message";
+
+        if (characterCount) {
+            characterCount.textContent = "0 / 300 characters";
+        }
+    });
+}
+
+/* Validate Date of Birth */
+
+function isValidDOB(dateString) {
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+        return false;
+    }
+
+    const [year, month, day] = dateString
+        .split("-")
+        .map(Number);
+
+    const date = new Date(year, month - 1, day);
+    const today = new Date();
+
+    return (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day &&
+        date <= today &&
+        year >= 1900
+    );
+}

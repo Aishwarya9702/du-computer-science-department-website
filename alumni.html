@@ -45,9 +45,11 @@
                 Please complete the registration form below.
             </p>
 
-            <form class="alumni-form"
-                  action="#"
-                  method="get">
+            
+<form class="alumni-form"
+      id="alumni-form"
+      novalidate>
+
 
                 <!-- Full Name -->
                 <div class="form-group">
@@ -79,6 +81,19 @@
                            title="Enter a 10-digit phone number"
                            placeholder="10-digit mobile number">
                 </div>
+
+
+<!-- Date of Birth -->
+
+<div class="form-group">
+    <label for="dob">Date of Birth</label>
+
+    <input type="date"
+           id="dob"
+           name="dob"
+           required>
+</div>
+
 
                 <!-- Graduation Batch -->
                 <div class="form-group">
@@ -163,6 +178,36 @@
                               placeholder="Share your professional journey"></textarea>
                 </div>
 
+
+<!-- Alumni Feedback -->
+
+<div class="form-group">
+    <label for="feedback">Alumni Feedback</label>
+
+    <textarea id="feedback"
+              name="feedback"
+              rows="4"
+              maxlength="300"
+              minlength="10"
+              placeholder="Share your feedback about the department"
+              required></textarea>
+
+    <p id="character-count" class="character-count"
+       aria-live="polite">
+        0 / 300 characters
+    </p>
+</div>
+
+
+                
+<!-- Form Validation Message -->
+
+<p id="form-message"
+   class="form-message"
+   role="status"
+   aria-live="polite"></p>
+
+
                 <!-- Form Buttons -->
                 <div class="form-buttons">
                     <button type="submit">
@@ -197,5 +242,6 @@
         </p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>

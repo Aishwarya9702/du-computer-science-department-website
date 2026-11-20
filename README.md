@@ -155,7 +155,7 @@ du-computer-science-department-website/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/USERNAME/du-computer-science-department-website.git
+   git clone https://github.com/Aishwarya9702/du-computer-science-department-website.git
    ```
 
 2. Open the project folder in Visual Studio Code.
@@ -166,7 +166,7 @@ du-computer-science-department-website/
 
 5. Navigate between the homepage, alumni registration form, and timetable using the navigation links.
 
-Replace `USERNAME` with your actual GitHub username.
+Replace `Aishwarya9702` with your actual GitHub username.
 
 No additional libraries, package installation, or backend setup are required.
 

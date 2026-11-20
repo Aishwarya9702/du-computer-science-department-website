@@ -1349,3 +1349,34 @@ main h2 {
     font-weight: 700;
 }
 
+
+/* Practical 11: Feedback and Validation */
+
+.alumni-form .character-count {
+    font-size: 13px;
+    color: #667085;
+    text-align: right;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.alumni-form .form-message {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.alumni-form .form-message.error {
+    color: #b42318;
+}
+
+.alumni-form .form-message.success {
+    color: #167347;
+}
+
+.alumni-form input:invalid,
+.alumni-form textarea:invalid {
+    border-color: #cbd5e1;
+}
+
