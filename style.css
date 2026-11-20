@@ -344,3 +344,103 @@
         font-size: 16px;
     }
 }
+
+
+/* Department History Section */
+
+.history-section {
+    background-color: #ffffff;
+    padding: 35px 40px;
+    margin-top: 25px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+.history-section h2 {
+    color: #14345A;
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.history-section p {
+    color: #24364b;
+    font-size: 16px;
+    line-height: 1.9;
+    text-align: justify;
+    margin: 0;
+}
+
+/* Responsive History Section */
+
+@media (max-width: 600px) {
+    .history-section {
+        padding: 25px 20px;
+    }
+
+    .history-section h2 {
+        font-size: 23px;
+    }
+
+    .history-section p {
+        text-align: left;
+    }
+}
+
+
+/* Global Website Styling */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    color: #24364b;
+}
+
+/* Consistent Headings */
+
+main h2 {
+    color: #14345A;
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* About and Gallery Sections */
+
+#about,
+#gallery {
+    background-color: #ffffff;
+    padding: 35px 40px;
+}
+
+/* Paragraph Styling */
+
+#about p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #24364b;
+    margin-bottom: 0;
+}
+
+/* Gallery Spacing */
+
+#gallery {
+    padding-top: 15px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+/* Responsive Styling */
+
+@media (max-width: 600px) {
+    #about,
+    #gallery {
+        padding: 25px 20px;
+    }
+
+    main h2 {
+        font-size: 24px;
+    }
+}
