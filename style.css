@@ -1380,3 +1380,91 @@ main h2 {
     border-color: #cbd5e1;
 }
 
+
+/* ==================================
+   Digital Clock Section
+================================== */
+
+.clock-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-bottom: 1px solid #dce3eb;
+    text-align: center;
+}
+
+.clock-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.clock-section > p {
+    color: #34495e;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* Clock Container */
+
+.clock-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 35px 25px;
+    background: linear-gradient(
+        135deg,
+        #14345A,
+        #234F7B
+    );
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Clock Icon */
+
+.clock-icon {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+/* Digital Time */
+
+.digital-clock {
+    display: block;
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 15px;
+}
+
+/* Date */
+
+.clock-container .current-date {
+    color: #dce3eb;
+    font-size: 17px;
+    margin: 0;
+}
+
+/* Responsive Design */
+
+@media (max-width: 600px) {
+    .clock-section {
+        padding: 25px 20px;
+    }
+
+    .clock-container {
+        padding: 30px 15px;
+    }
+
+    .digital-clock {
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+
+    .clock-container .current-date {
+        font-size: 15px;
+    }
+}
+

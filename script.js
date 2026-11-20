@@ -253,3 +253,71 @@ function isValidDOB(dateString) {
         year >= 1900
     );
 }
+
+
+/* ==================================
+   Practical 16: Digital Clock
+================================== */
+
+function updateDigitalClock() {
+
+    const clockElement = document.getElementById(
+        "digital-clock"
+    );
+
+    const dateElement = document.getElementById(
+        "current-date"
+    );
+
+    if (!clockElement || !dateElement) {
+        return;
+    }
+
+    const now = new Date();
+
+    // Get hours, minutes and seconds
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    // Determine AM or PM
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    // Convert 24-hour format to 12-hour format
+    hours = hours % 12 || 12;
+
+    // Add leading zeros
+    const formattedHours = String(hours).padStart(2, "0");
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(seconds).padStart(2, "0");
+
+    // Display time
+    const currentTime =
+        `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${ampm}`;
+
+    clockElement.textContent = currentTime;
+
+    // Machine-readable time
+    clockElement.dateTime = now.toISOString();
+
+    // Format current date
+    const dateOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
+
+    dateElement.textContent = now.toLocaleDateString(
+        "en-IN",
+        dateOptions
+    );
+}
+
+// Display immediately when page loads
+updateDigitalClock();
+
+// Update every second
+if (document.getElementById("digital-clock")) {
+    setInterval(updateDigitalClock, 1000);
+}
