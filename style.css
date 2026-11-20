@@ -1468,3 +1468,117 @@ main h2 {
     }
 }
 
+
+/* ==================================
+   Practical 17: Dynamic Activity List
+================================== */
+
+.activity-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+.activity-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.activity-section > p {
+    color: #34495e;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.activity-container {
+    max-width: 700px;
+    margin: 25px auto;
+    padding: 30px;
+    background-color: #f7f9fc;
+    border: 1px solid #dce3eb;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.activity-container label {
+    display: block;
+    color: #14345A;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.activity-input-group {
+    display: flex;
+    gap: 12px;
+}
+
+.activity-input-group input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 15px;
+    font-size: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+.activity-input-group input:focus {
+    outline: 2px solid #234F7B;
+    outline-offset: 1px;
+}
+
+.activity-input-group button {
+    background-color: #14345A;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.activity-input-group button:hover {
+    background-color: #234F7B;
+}
+
+.activity-message {
+    min-height: 20px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.activity-container h3 {
+    color: #14345A;
+    font-size: 20px;
+    margin-top: 25px;
+}
+
+.activity-list {
+    padding-left: 25px;
+}
+
+.activity-list li {
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border: 1px solid #dce3eb;
+    border-radius: 6px;
+    color: #24364b;
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    .activity-section {
+        padding: 25px 20px;
+    }
+
+    .activity-container {
+        padding: 20px;
+    }
+
+    .activity-input-group {
+        flex-direction: column;
+    }
+}
+

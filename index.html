@@ -783,6 +783,54 @@
 </section>
 
 
+<!-- Practical 17: Dynamic List Using jQuery -->
+
+<section id="activity-planner" class="activity-section">
+
+    <h2>Student Activity Planner</h2>
+
+    <p>
+        Add academic activities, workshops, seminars,
+        or personal learning tasks to your list.
+    </p>
+
+    <div class="activity-container">
+
+        <form id="activity-form">
+
+            <label for="activity-input">
+                Enter an Activity
+            </label>
+
+            <div class="activity-input-group">
+
+                <input type="text"
+                       id="activity-input"
+                       placeholder="e.g. Attend AI Workshop"
+                       maxlength="100">
+
+                <button type="submit" id="add-item-btn">
+                    Add Item
+                </button>
+
+            </div>
+
+        </form>
+
+        <p id="activity-message"
+           class="activity-message"
+           aria-live="polite"></p>
+
+        <h3>My Activities</h3>
+
+        <ul id="activity-list" class="activity-list">
+        </ul>
+
+    </div>
+
+</section>
+
+
 
 <!-- Contact Section -->
 
@@ -848,7 +896,16 @@
 </footer>
 
 
+
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Existing JavaScript -->
 <script src="script.js"></script>
+
+<!-- jQuery Practicals -->
+<script src="jquery-script.js"></script>
+
 
 
 </body>
