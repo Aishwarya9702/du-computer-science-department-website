@@ -43,3 +43,24 @@ $(document).ready(function() {
     });
 
 });
+
+
+
+
+/* Practical 18: Gallery Image Fade Effects */
+
+$(document).ready(function() {
+
+    $("#gallery-fade-in").click(function() {
+        $(".gallery-fade-image")
+            .stop(true, true)
+            .fadeTo(800, 1);
+    });
+
+    $("#gallery-fade-out").click(function() {
+        $(".gallery-fade-image")
+            .stop(true, true)
+            .fadeTo(800, 0);
+    });
+
+});
