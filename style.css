@@ -1278,3 +1278,74 @@ main h2 {
         font-size: 18px;
     }
 }
+
+
+
+/* Practical 9: Random Event Image */
+
+.event-highlights-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+.event-highlights-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.event-highlights-section > p {
+    color: #34495e;
+    line-height: 1.8;
+}
+
+.random-event-container {
+    max-width: 750px;
+    margin: 25px auto;
+    padding: 15px;
+    background-color: #f7f9fc;
+    border: 1px solid #dce3eb;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.random-event-container img {
+    display: block;
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.random-event-container figcaption {
+    color: #14345A;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.event-highlights-section .event-note {
+    font-size: 13px;
+    color: #667085;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .event-highlights-section {
+        padding: 25px 20px;
+    }
+
+    .random-event-container img {
+        height: 220px;
+    }
+}
+
+
+/* Faculty Experience Styling */
+
+.faculty-experience {
+    color: #234F7B;
+    font-weight: 700;
+}
+
