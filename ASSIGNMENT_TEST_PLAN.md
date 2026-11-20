@@ -100,61 +100,61 @@ All tests are initially marked **Not Tested**.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| FT-01 | FR-01 | Inspect the beginning of index.html | Document uses HTML5 doctype | Not Tested |
-| FT-02 | FR-01 | Inspect the page header | Semantic header element exists | Not Tested |
-| FT-03 | FR-01 | Inspect navigation structure | Navigation uses a nav element | Not Tested |
-| FT-04 | FR-01 | Inspect main content | Main element contains primary content | Not Tested |
-| FT-05 | FR-01 | Inspect content grouping | Logical sections use section elements | Not Tested |
-| FT-06 | FR-01 | Inspect footer | Semantic footer element exists | Not Tested |
+| FT-01 | FR-01 | Inspect the beginning of index.html | Document uses HTML5 doctype | Pass |
+| FT-02 | FR-01 | Inspect the page header | Semantic header element exists | Pass |
+| FT-03 | FR-01 | Inspect navigation structure | Navigation uses a nav element | Pass |
+| FT-04 | FR-01 | Inspect main content | Main element contains primary content | Pass |
+| FT-05 | FR-01 | Inspect content grouping | Logical sections use section elements | Pass |
+| FT-06 | FR-01 | Inspect footer | Semantic footer element exists | Pass |
 
 ### 3.2 Department Identification and Overview
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| FT-07 | FR-02 | Open homepage | University of Delhi name is visible | Not Tested |
-| FT-08 | FR-02 | Check department heading | Department of Computer Science is identified | Not Tested |
-| FT-09 | FR-05 | Locate departmental overview | A concise overview paragraph is present | Not Tested |
-| FT-10 | FR-05 | Inspect overview placement | Overview appears within main content | Not Tested |
+| FT-07 | FR-02 | Open homepage | University of Delhi name is visible | Pass |
+| FT-08 | FR-02 | Check department heading | Department of Computer Science is identified | Pass |
+| FT-09 | FR-05 | Locate departmental overview | A concise overview paragraph is present | Pass |
+| FT-10 | FR-05 | Inspect overview placement | Overview appears within main content | Pass |
 
 ### 3.3 Navigation and Dropdown Menus
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| FT-11 | FR-03 | Open homepage | Primary navigation is visible | Not Tested |
-| FT-12 | FR-03 | Click navigation links | Links open or scroll to intended destinations | Not Tested |
-| FT-13 | FR-04 | Hover over a dropdown parent | Corresponding submenu becomes visible | Not Tested |
-| FT-14 | FR-04 | Move pointer away from submenu | Dropdown closes as designed | Not Tested |
-| FT-15 | FR-04 | Inspect CSS dropdown implementation | Dropdown visibility is controlled using CSS :hover | Not Tested |
-| FT-16 | FR-10 | Click an internal section link | Browser moves to the correct section | Not Tested |
-| FT-17 | FR-10 | Inspect href and id values | Every internal target exists and matches its link | Not Tested |
+| FT-11 | FR-03 | Open homepage | Primary navigation is visible | Pass |
+| FT-12 | FR-03 | Click navigation links | Links open or scroll to intended destinations | Pass |
+| FT-13 | FR-04 | Hover over a dropdown parent | Corresponding submenu becomes visible | Pass |
+| FT-14 | FR-04 | Move pointer away from submenu | Dropdown closes as designed | Pass |
+| FT-15 | FR-04 | Inspect CSS dropdown implementation | Dropdown visibility is controlled using CSS :hover | Pass |
+| FT-16 | FR-10 | Click an internal section link | Browser moves to the correct section | Pass |
+| FT-17 | FR-10 | Inspect href and id values | Every internal target exists and matches its link | Pass |
 
 ### 3.4 Department Gallery
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| FT-18 | FR-06 | Open Gallery section | Two department-related images appear | Not Tested |
-| FT-19 | FR-06 | Inspect gallery layout | Images are displayed side by side | Not Tested |
-| FT-20 | FR-06 | Inspect gallery CSS | Flexbox or Grid is used | Not Tested |
-| FT-21 | FR-06 | Inspect image sources | Both image files load successfully | Not Tested |
+| FT-18 | FR-06 | Open Gallery section | Two department-related images appear | Pass |
+| FT-19 | FR-06 | Inspect gallery layout | Images are displayed side by side | Pass |
+| FT-20 | FR-06 | Inspect gallery CSS | Flexbox or Grid is used | Pass |
+| FT-21 | FR-06 | Inspect image sources | Both image files load successfully | Pass |
 
 ### 3.5 Faculty Directory
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| FT-22 | FR-07 | Open Faculty section | Faculty profiles are visible | Not Tested |
-| FT-23 | FR-07 | Inspect faculty markup | Faculty details use ul or dl elements | Not Tested |
-| FT-24 | FR-07 | Inspect faculty profiles | Every profile includes a faculty name | Not Tested |
-| FT-25 | FR-07 | Inspect faculty profiles | Every profile includes a designation | Not Tested |
-| FT-26 | FR-07 | Inspect faculty profiles | Every profile includes a date of joining | Not Tested |
+| FT-22 | FR-07 | Open Faculty section | Faculty profiles are visible | Pass |
+| FT-23 | FR-07 | Inspect faculty markup | Faculty details use ul or dl elements | Pass |
+| FT-24 | FR-07 | Inspect faculty profiles | Every profile includes a faculty name | Pass |
+| FT-25 | FR-07 | Inspect faculty profiles | Every profile includes a designation | Pass |
+| FT-26 | FR-07 | Inspect faculty profiles | Every profile includes a date of joining | Pass |
 
 ### 3.6 Footer and Responsive Functionality
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| FT-27 | FR-09 | Scroll to bottom of homepage | Footer is visible | Not Tested |
-| FT-28 | FR-09 | Inspect footer content | Appropriate concluding information is present | Not Tested |
-| FT-29 | FR-08 | Resize homepage to tablet width | Content remains readable and usable | Not Tested |
-| FT-30 | FR-08 | Resize homepage to mobile width | Content and navigation remain usable | Not Tested |
+| FT-27 | FR-09 | Scroll to bottom of homepage | Footer is visible | Pass |
+| FT-28 | FR-09 | Inspect footer content | Appropriate concluding information is present | Pass |
+| FT-29 | FR-08 | Resize homepage to tablet width | Content remains readable and usable | Pass |
+| FT-30 | FR-08 | Resize homepage to mobile width | Content and navigation remain usable | Pass |
 
 ---
 
@@ -179,14 +179,14 @@ The following widths are representative testing targets defined in the SRS.
 
 | Test ID | SRS Reference | Viewport | Expected Result | Status |
 |---|---|---|---|---|
-| RD-01 | NFR-01 | 1440px | Desktop layout displays correctly | Not Tested |
-| RD-02 | NFR-01 | 1024px | Content remains readable and aligned | Not Tested |
-| RD-03 | NFR-01 | 768px | Layout adapts to tablet width | Not Tested |
-| RD-04 | NFR-01 | 600px | Mobile layout rules apply appropriately | Not Tested |
-| RD-05 | NFR-01 | 375px | No unintended horizontal page overflow occurs | Not Tested |
-| RD-06 | FR-06, NFR-01 | 375px | Both gallery images remain side by side and visible | Not Tested |
-| RD-07 | FR-07, NFR-01 | 375px | Faculty profiles remain readable | Not Tested |
-| RD-08 | FR-04, FR-08 | 375px | Navigation and dropdown links remain usable | Not Tested |
+| RD-01 | NFR-01 | 1440px | Desktop layout displays correctly | Pass |
+| RD-02 | NFR-01 | 1024px | Content remains readable and aligned | Pass |
+| RD-03 | NFR-01 | 768px | Layout adapts to tablet width | Pass |
+| RD-04 | NFR-01 | 600px | Mobile layout rules apply appropriately | Pass |
+| RD-05 | NFR-01 | 375px | No unintended horizontal page overflow occurs | Pass |
+| RD-06 | FR-06, NFR-01 | 375px | Both gallery images remain side by side and visible | Pass |
+| RD-07 | FR-07, NFR-01 | 375px | Faculty profiles remain readable | Pass |
+| RD-08 | FR-04, FR-08 | 375px | Navigation and dropdown links remain usable | Pass |
 
 ---
 
@@ -497,14 +497,12 @@ Record issues discovered during testing.
 
 | Result | Count |
 |---|---:|
-| Passed | 2 |
+| Passed | 40 |
 | Failed | 0 |
 | Blocked | 0 |
 | Not Applicable | 0 |
-| Not Tested | 101 |
+| Not Tested | 63 |
 | **Total** | **103** |
-
-The results must be updated after actual manual test execution.
 
 ---
 

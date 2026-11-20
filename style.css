@@ -1601,3 +1601,46 @@ main h2 {
 .gallery-fade-controls button:hover {
   background-color: #234f7b;
 }
+
+
+/* Clickable Dropdown Buttons */
+
+.dropdown-toggle {
+  display: block;
+  padding: 18px 22px;
+  border: 0;
+  background: transparent;
+  color: white;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus-visible {
+  background-color: #14345a;
+}
+
+/* Show dropdown when clicked */
+
+.dropdown.is-open > .dropdown-menu {
+  display: block;
+}
+
+/* Mobile dropdown button styling */
+
+@media (max-width: 600px) {
+  .dropdown-toggle {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+}
+
+/* Show navigation dropdown on hover or focus */
+
+.dropdown:hover > .dropdown-menu,
+.dropdown:focus-within > .dropdown-menu,
+.dropdown.is-open > .dropdown-menu {
+  display: block;
+}

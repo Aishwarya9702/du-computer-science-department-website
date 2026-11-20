@@ -321,3 +321,44 @@ updateDigitalClock();
 if (document.getElementById("digital-clock")) {
   setInterval(updateDigitalClock, 1000);
 }
+
+
+/* Click-to-open navigation dropdowns */
+
+document.querySelectorAll(".dropdown-toggle").forEach((button) => {
+  button.addEventListener("click", () => {
+    const dropdown = button.closest(".dropdown");
+    const isOpen = dropdown.classList.contains("is-open");
+
+    document.querySelectorAll(".dropdown").forEach((item) => {
+      item.classList.remove("is-open");
+
+      const toggle = item.querySelector(".dropdown-toggle");
+
+      if (toggle) {
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    if (!isOpen) {
+      dropdown.classList.add("is-open");
+      button.setAttribute("aria-expanded", "true");
+    }
+  });
+});
+
+/* Close dropdowns when clicking outside */
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".dropdown")) {
+    document.querySelectorAll(".dropdown").forEach((item) => {
+      item.classList.remove("is-open");
+
+      const toggle = item.querySelector(".dropdown-toggle");
+
+      if (toggle) {
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+});
