@@ -13,7 +13,7 @@
 | Reference Document | SRS.md, Version 1.0 |
 | Testing Approach | AI-Assisted Test Planning and Manual Verification |
 | Technologies | HTML5, CSS3 |
-| Test Execution Status | Not Started |
+| Test Execution Status | In Progress |
 
 ---
 
@@ -218,7 +218,7 @@ The following widths are representative testing targets defined in the SRS.
 | HV-03 | NFR-03 | Inspect HTML tag names | Element names are lowercase | Not Tested |
 | HV-04 | NFR-03 | Inspect HTML attribute names | Attribute names are lowercase | Not Tested |
 | HV-05 | NFR-03 | Inspect attribute values | Values are enclosed in double quotes | Not Tested |
-| HV-06 | NFR-03 | Submit HTML to W3C validator | No HTML validation errors are reported | Not Tested |
+| HV-06 | NFR-03 | Submit HTML to W3C validator | No HTML validation errors are reported | Pass |
 | HV-07 | NFR-03 | Inspect HTML nesting | Elements are nested correctly | Not Tested |
 | HV-08 | NFR-05 | Inspect link to stylesheet | External CSS file is linked correctly | Not Tested |
 
@@ -230,7 +230,7 @@ The following widths are representative testing targets defined in the SRS.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| CV-01 | NFR-04 | Submit style.css to CSS validator | No CSS validation errors are reported | Not Tested |
+| CV-01 | NFR-04 | Submit style.css to CSS validator | No CSS validation errors are reported | Pass |
 | CV-02 | NFR-04 | Inspect CSS declarations | Properties and values use valid syntax | Not Tested |
 | CV-03 | NFR-04 | Inspect CSS braces | Rules are properly enclosed | Not Tested |
 | CV-04 | NFR-04 | Inspect CSS property names | Properties are written in lowercase | Not Tested |
@@ -453,20 +453,27 @@ Record issues discovered during testing.
 | Field | Result |
 |---|---|
 | Validator | W3C Nu HTML Checker |
-| Validation Date | Not Tested |
-| Number of Errors | Not Tested |
-| Number of Warnings | Not Tested |
-| Final Status | Not Tested |
+| Validation Date | 20 November 2026 |
+| Number of Errors | 0 |
+| Number of Warnings | 0 |
+| Final Status | Pass |
 
 ### 17.2 CSS Validation
 
 | Field | Result |
 |---|---|
 | Validator | W3C CSS Validation Service |
-| Validation Date | Not Tested |
-| Number of Errors | Not Tested |
-| Number of Warnings | Not Tested |
-| Final Status | Not Tested |
+| Validation Date | 20 November 2026 |
+| Number of Errors | 0 |
+| Number of Warnings | Not confirmed from screenshot |
+| Final Status | Pass |
+
+### 17.3 Validation Evidence
+
+| Validation | Evidence | Result |
+|---|---|---|
+| HTML | screenshots/html-validation.png | Pass |
+| CSS | screenshots/css-validation.png | Pass |
 
 ---
 
@@ -490,11 +497,11 @@ Record issues discovered during testing.
 
 | Result | Count |
 |---|---:|
-| Passed | 0 |
+| Passed | 2 |
 | Failed | 0 |
 | Blocked | 0 |
 | Not Applicable | 0 |
-| Not Tested | 103 |
+| Not Tested | 101 |
 | **Total** | **103** |
 
 The results must be updated after actual manual test execution.
@@ -511,4 +518,4 @@ The plan also includes checks for the AI-assisted development workflow and final
 
 The next development activity is to review and refine the existing HTML/CSS code against the SRS and Google HTML/CSS Style Guide.
 
-**Document Status:** Test plan prepared; test execution and validation pending.
+**Document Status:** HTML and CSS validation completed successfully. Manual functional, responsive, accessibility, and cross-browser testing is in progress.
