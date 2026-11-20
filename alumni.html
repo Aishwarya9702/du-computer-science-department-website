@@ -1,247 +1,204 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        Alumni Registration | Department of Computer Science
-    </title>
+  <title>
+    Alumni Registration | Department of Computer Science
+  </title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Page Header -->
-    <header class="alumni-header">
-        <h1>University of Delhi</h1>
-        <h2>Department of Computer Science</h2>
-        <p>Alumni Registration Portal</p>
-    </header>
+  <!-- Page Header -->
+  <header class="alumni-header">
+    <h1>University of Delhi</h1>
+    <h2>Department of Computer Science</h2>
+    <p>Alumni Registration Portal</p>
+  </header>
 
-    <!-- Navigation -->
-    <nav class="alumni-nav" aria-label="Alumni navigation">
-        <a href="index.html">Home</a>
-        <a href="alumni.html" aria-current="page">
-            Alumni Registration
-        </a>
-        <a href="timetable.html">Timetable</a>
+  <!-- Navigation -->
+  <nav class="alumni-nav" aria-label="Alumni navigation">
+    <a href="index.html">Home</a>
+    <a href="alumni.html" aria-current="page">
+      Alumni Registration
+    </a>
+    <a href="timetable.html">Timetable</a>
 
-    </nav>
+  </nav>
 
-    <main>
+  <main>
 
-        <section class="alumni-section">
+    <section class="alumni-section">
 
-            <h2>Alumni Registration Form</h2>
+      <h2>Alumni Registration Form</h2>
 
-            <p>
-                We invite our alumni to stay connected
-                with the Department of Computer Science.
-                Please complete the registration form below.
-            </p>
-
-            
-<form class="alumni-form"
-      id="alumni-form"
-      novalidate>
+      <p>
+        We invite our alumni to stay connected
+        with the Department of Computer Science.
+        Please complete the registration form below.
+      </p>
 
 
-                <!-- Full Name -->
-                <div class="form-group">
-                    <label for="full-name">Full Name</label>
-                    <input type="text"
-                           id="full-name"
-                           name="full_name"
-                           placeholder="Enter your full name"
-                           required>
-                </div>
-
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email"
-                           id="email"
-                           name="email"
-                           placeholder="Enter your email"
-                           required>
-                </div>
-
-                <!-- Phone Number -->
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel"
-                           id="phone"
-                           name="phone"
-                           pattern="[0-9]{10}"
-                           title="Enter a 10-digit phone number"
-                           placeholder="10-digit mobile number">
-                </div>
+      <form class="alumni-form" id="alumni-form" novalidate>
 
 
-<!-- Date of Birth -->
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" name="full_name" placeholder="Enter your full name" required>
+        </div>
 
-<div class="form-group">
-    <label for="dob">Date of Birth</label>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
 
-    <input type="date"
-           id="dob"
-           name="dob"
-           required>
-</div>
-
-
-                <!-- Graduation Batch -->
-                <div class="form-group">
-                    <label for="batch">Graduation Batch</label>
-                    <input type="number"
-                           id="batch"
-                           name="batch"
-                           min="1980"
-                           max="2035"
-                           placeholder="e.g. 2024"
-                           required>
-                </div>
-
-                <!-- Degree -->
-                <div class="form-group">
-                    <label for="degree">Degree</label>
-
-                    <select id="degree"
-                            name="degree"
-                            required>
-
-                        <option value="">
-                            Select your degree
-                        </option>
-
-                        <option value="bsc">
-                            B.Sc. (Hons.) Computer Science
-                        </option>
-
-                        <option value="msc">
-                            M.Sc. Computer Science
-                        </option>
-
-                        <option value="mca">
-                            Master of Computer Applications
-                        </option>
-
-                        <option value="phd">
-                            Ph.D. Computer Science
-                        </option>
-
-                        <option value="other">
-                            Other
-                        </option>
-
-                    </select>
-                </div>
-
-                <!-- Current Designation -->
-                <div class="form-group">
-                    <label for="designation">
-                        Current Designation
-                    </label>
-
-                    <input type="text"
-                           id="designation"
-                           name="designation"
-                           placeholder="e.g. Software Engineer">
-                </div>
-
-                <!-- Organization -->
-                <div class="form-group">
-                    <label for="organization">
-                        Organization
-                    </label>
-
-                    <input type="text"
-                           id="organization"
-                           name="organization"
-                           placeholder="Enter organization name">
-                </div>
-
-                <!-- About Yourself -->
-                <div class="form-group">
-                    <label for="about-yourself">
-                        About Yourself
-                    </label>
-
-                    <textarea id="about-yourself"
-                              name="about_yourself"
-                              rows="4"
-                              placeholder="Share your professional journey"></textarea>
-                </div>
+        <!-- Phone Number -->
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Enter a 10-digit phone number"
+            placeholder="10-digit mobile number">
+        </div>
 
 
-<!-- Alumni Feedback -->
+        <!-- Date of Birth -->
 
-<div class="form-group">
-    <label for="feedback">Alumni Feedback</label>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
 
-    <textarea id="feedback"
-              name="feedback"
-              rows="4"
-              maxlength="300"
-              minlength="10"
-              placeholder="Share your feedback about the department"
-              required></textarea>
+          <input type="date" id="dob" name="dob" required>
+        </div>
 
-    <p id="character-count" class="character-count"
-       aria-live="polite">
-        0 / 300 characters
+
+        <!-- Graduation Batch -->
+        <div class="form-group">
+          <label for="batch">Graduation Batch</label>
+          <input type="number" id="batch" name="batch" min="1980" max="2035" placeholder="e.g. 2024" required>
+        </div>
+
+        <!-- Degree -->
+        <div class="form-group">
+          <label for="degree">Degree</label>
+
+          <select id="degree" name="degree" required>
+
+            <option value="">
+              Select your degree
+            </option>
+
+            <option value="bsc">
+              B.Sc. (Hons.) Computer Science
+            </option>
+
+            <option value="msc">
+              M.Sc. Computer Science
+            </option>
+
+            <option value="mca">
+              Master of Computer Applications
+            </option>
+
+            <option value="phd">
+              Ph.D. Computer Science
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
+          </select>
+        </div>
+
+        <!-- Current Designation -->
+        <div class="form-group">
+          <label for="designation">
+            Current Designation
+          </label>
+
+          <input type="text" id="designation" name="designation" placeholder="e.g. Software Engineer">
+        </div>
+
+        <!-- Organization -->
+        <div class="form-group">
+          <label for="organization">
+            Organization
+          </label>
+
+          <input type="text" id="organization" name="organization" placeholder="Enter organization name">
+        </div>
+
+        <!-- About Yourself -->
+        <div class="form-group">
+          <label for="about-yourself">
+            About Yourself
+          </label>
+
+          <textarea id="about-yourself" name="about_yourself" rows="4"
+            placeholder="Share your professional journey"></textarea>
+        </div>
+
+
+        <!-- Alumni Feedback -->
+
+        <div class="form-group">
+          <label for="feedback">Alumni Feedback</label>
+
+          <textarea id="feedback" name="feedback" rows="4" maxlength="300" minlength="10"
+            placeholder="Share your feedback about the department" required></textarea>
+
+          <p id="character-count" class="character-count" aria-live="polite">
+            0 / 300 characters
+          </p>
+        </div>
+
+
+
+        <!-- Form Validation Message -->
+
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+
+
+        <!-- Form Buttons -->
+        <div class="form-buttons">
+          <button type="submit">
+            Register
+          </button>
+
+          <button type="reset">
+            Reset
+          </button>
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>
+      &copy; 2026 Department of Computer Science |
+      University of Delhi
     </p>
-</div>
 
+    <p class="footer-note">
+      Academic Web Development Project
+    </p>
 
-                
-<!-- Form Validation Message -->
+    <p class="footer-disclaimer">
+      Independently developed for educational purposes.
+      Not an official University of Delhi website.
+    </p>
+  </footer>
 
-<p id="form-message"
-   class="form-message"
-   role="status"
-   aria-live="polite"></p>
-
-
-                <!-- Form Buttons -->
-                <div class="form-buttons">
-                    <button type="submit">
-                        Register
-                    </button>
-
-                    <button type="reset">
-                        Reset
-                    </button>
-                </div>
-
-            </form>
-
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <p>
-            &copy; 2026 Department of Computer Science |
-            University of Delhi
-        </p>
-
-        <p class="footer-note">
-            Academic Web Development Project
-        </p>
-
-        <p class="footer-disclaimer">
-            Independently developed for educational purposes.
-            Not an official University of Delhi website.
-        </p>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
