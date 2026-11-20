@@ -536,3 +536,103 @@ main h2 {
         padding: 20px;
     }
 }
+
+
+/* Academic Programmes Section */
+
+.programmes-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-bottom: 1px solid #dce3eb;
+}
+
+.programmes-section h2 {
+    color: #14345A;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.programmes-intro {
+    color: #24364b;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* Three Column Layout */
+
+.programmes-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Programme Cards */
+
+.programme-card {
+    background-color: #f7f9fc;
+    border: 1px solid #dce3eb;
+    border-radius: 8px;
+    padding: 25px;
+    min-width: 0;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.programme-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.programme-card h3 {
+    color: #14345A;
+    font-size: 21px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.programme-card h4 {
+    color: #234F7B;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.programme-card p {
+    color: #34495e;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.programmes-link {
+    margin-top: 25px;
+}
+
+.programmes-link a {
+    color: #234F7B;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Responsive Programme Cards */
+
+@media (max-width: 900px) {
+    .programmes-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .programmes-section {
+        padding: 25px 20px;
+    }
+
+    .programmes-container {
+        grid-template-columns: 1fr;
+    }
+
+    .programme-card {
+        padding: 20px;
+    }
+}
