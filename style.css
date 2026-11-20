@@ -189,3 +189,158 @@
 .dropdown-menu li a:focus-visible {
     background-color: #14345A;
 }
+
+
+/* Faculty Section */
+
+.faculty-section {
+    padding: 30px;
+    margin-top: 30px;
+    background-color: #ffffff;
+}
+
+.faculty-section h2 {
+    color: #14345A;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.faculty-note {
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* Faculty List Layout */
+
+.faculty-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+/* Faculty Cards */
+
+.faculty-card {
+    background-color: #f7f9fc;
+    border: 1px solid #dce3eb;
+    border-left: 4px solid #234F7B;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.faculty-card h3 {
+    color: #14345A;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.faculty-card ul {
+    padding-left: 20px;
+}
+
+.faculty-card li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* Responsive Faculty Layout */
+
+@media (max-width: 600px) {
+    .faculty-list {
+        grid-template-columns: 1fr;
+    }
+
+    .faculty-section {
+        padding: 15px;
+    }
+}
+
+
+/* Welcome Section */
+
+.welcome-section {
+    background: linear-gradient(
+        135deg,
+        #eaf2fb,
+        #ffffff
+    );
+
+    padding: 55px 40px;
+    border-bottom: 2px solid #dce3eb;
+}
+
+.welcome-label {
+    color: #234F7B;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.welcome-section h2 {
+    color: #14345A;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.welcome-description {
+    color: #34495e;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+/* Welcome Buttons */
+
+.welcome-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.welcome-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.primary-btn {
+    background-color: #234F7B;
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #14345A;
+}
+
+.secondary-btn {
+    background-color: white;
+    color: #234F7B;
+    border: 1px solid #234F7B;
+}
+
+.secondary-btn:hover {
+    background-color: #e1ebf5;
+}
+
+/* Responsive Welcome Section */
+
+@media (max-width: 600px) {
+    .welcome-section {
+        padding: 30px 20px;
+    }
+
+    .welcome-section h2 {
+        font-size: 24px;
+    }
+
+    .welcome-description {
+        font-size: 16px;
+    }
+}
