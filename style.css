@@ -931,3 +931,214 @@ main h2 {
         padding: 25px 15px;
     }
 }
+
+
+
+/* ==================================
+   Alumni Registration Page
+================================== */
+
+/* Alumni Header */
+
+.alumni-header {
+    background-color: #14345A;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.alumni-header h1 {
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: white;
+}
+
+.alumni-header h2 {
+    font-size: 30px;
+    margin: 0 0 12px;
+    color: white;
+}
+
+.alumni-header p {
+    font-size: 16px;
+    color: #dce3eb;
+    margin: 0;
+}
+
+/* Alumni Navigation */
+
+.alumni-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background-color: #234F7B;
+    padding: 15px 20px;
+}
+
+.alumni-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.alumni-nav a:hover,
+.alumni-nav a:focus-visible {
+    color: #dce3eb;
+    text-decoration: underline;
+}
+
+/* Alumni Section */
+
+.alumni-section {
+    background-color: #f4f6f9;
+    padding: 45px 20px;
+}
+
+.alumni-section > h2 {
+    color: #14345A;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.alumni-section > p {
+    color: #34495e;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+/* Form Container */
+
+.alumni-form {
+    background-color: white;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 35px;
+    border: 1px solid #dce3eb;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    box-sizing: border-box;
+}
+
+/* Form Groups */
+
+.alumni-form .form-group {
+    margin-bottom: 22px;
+}
+
+.alumni-form label {
+    display: block;
+    color: #14345A;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 9px;
+}
+
+/* Input, Select and Textarea */
+
+.alumni-form input,
+.alumni-form select,
+.alumni-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #24364b;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.alumni-form textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+/* Input Focus Effects */
+
+.alumni-form input:focus,
+.alumni-form select:focus,
+.alumni-form textarea:focus {
+    outline: none;
+    border-color: #234F7B;
+    box-shadow: 0 0 0 3px rgba(35, 79, 123, 0.15);
+}
+
+/* Form Buttons */
+
+.alumni-form .form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.alumni-form button {
+    padding: 13px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease,
+                transform 0.3s ease;
+}
+
+/* Register Button */
+
+.alumni-form button[type="submit"] {
+    background-color: #14345A;
+    color: white;
+}
+
+.alumni-form button[type="submit"]:hover {
+    background-color: #234F7B;
+    transform: translateY(-2px);
+}
+
+/* Reset Button */
+
+.alumni-form button[type="reset"] {
+    background-color: #e2e8f0;
+    color: #24364b;
+}
+
+.alumni-form button[type="reset"]:hover {
+    background-color: #cbd5e1;
+    transform: translateY(-2px);
+}
+
+/* Responsive Alumni Form */
+
+@media (max-width: 600px) {
+    .alumni-header h2 {
+        font-size: 24px;
+    }
+
+    .alumni-nav {
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .alumni-section {
+        padding: 30px 15px;
+    }
+
+    .alumni-form {
+        padding: 22px 18px;
+    }
+
+    .alumni-form .form-buttons {
+        flex-direction: column;
+    }
+
+    .alumni-form button {
+        width: 100%;
+    }
+}
