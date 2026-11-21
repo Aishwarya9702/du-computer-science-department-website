@@ -78,7 +78,7 @@ The objectives are to:
 | CSS Validator | W3C CSS Validation Service |
 | Reference Specification | SRS.md |
 | Operating System | Windows 11 |
-| Test Date | 21-22 November 2026 |
+| Test Date | 20-21 November 2026 |
 
 ### 2.1 Test Status Definitions
 
@@ -308,7 +308,7 @@ Browser compatibility is a recommended quality requirement in the SRS.
 | AI-T07 | AI-05 | Review code walkthrough | HTML/CSS functionality is explained | Pass |
 | AI-T08 | AI-06 | Inspect manual testing records | Actual test results are documented | Pass |
 | AI-T09 | AI-06 | Inspect W3C validation evidence | HTML and CSS validation results are documented | Pass |
-| AI-T10 | AI-07 | Inspect ZIP archive | Required source files and image assets are included | Not Tested |
+| AI-T10 | AI-07 | Inspect ZIP archive | Required source files and image assets are included | Pass |
 | AI-T11 | AI-07 | Open public AI chat link | Shared conversation is accessible | Pass |
 
 ### Manual Testing Documentation Clarification
@@ -512,11 +512,11 @@ Record issues discovered during testing.
 
 | Result | Count |
 |---|---:|
-| Passed | 102 |
+| Passed | 103 |
 | Failed | 0 |
 | Blocked | 0 |
 | Not Applicable | 0 |
-| Not Tested | 1 |
+| Not Tested | 0 |
 | **Total** | **103** |
 
 ---
@@ -525,10 +525,12 @@ Record issues discovered during testing.
 
 The assignment-specific homepage implementation and testing have been completed successfully. All 92 non-AI test cases have been recorded as Pass, covering functional requirements, UI/UX, responsive design, accessibility, HTML and CSS validation, coding style, cross-browser compatibility, and code documentation.
 
-Additionally, 10 AI-assisted workflow and deliverable test cases have been marked as Pass, bringing the total to **102 passed test cases out of 103**.
+Additionally, all 11 AI-assisted workflow and deliverable test cases have been marked as Pass, bringing the total to **103 passed test cases out of 103**, with zero failed, blocked, or untested cases.
 
 The homepage passed W3C HTML validation with zero errors and zero warnings, and W3C CSS validation with zero reported errors.
 
-The only remaining test is **AI-T10 — Final ZIP Verification**, which will be completed after creating and inspecting the submission archive.
+The final submission ZIP archive has been inspected and verified to contain the required HTML, CSS, JavaScript, image assets, project documentation, and validation evidence. The `.git` folder and unnecessary duplicate files have been excluded.
 
-The project demonstrates AI-assisted development through requirements engineering, test planning, iterative implementation, requirements conformance auditing, code walkthrough, manual testing, and standards validation.
+The project demonstrates AI-assisted development through requirements engineering, test planning, iterative implementation, requirements conformance auditing, code walkthrough, manual testing, standards validation, and final submission verification.
+
+All test cases defined in the assignment-specific test plan have been completed successfully, and the project is ready for final submission, subject to confirmation that the rebuilt ZIP contains these latest documentation updates.
