@@ -290,26 +290,28 @@ The implementation uses jQuery's `fadeTo()` method to animate image opacity whil
 
 ```text
 du-computer-science-department-website/
-│
 ├── index.html
 ├── alumni.html
 ├── timetable.html
-│
 ├── style.css
 ├── script.js
 ├── jquery-script.js
-│
 ├── README.md
 ├── TESTING.md
-│
-└── images/
-    ├── University of Delhi logo.jpg
-    ├── Department of Computer Science.jpg
-    │
-    └── events/
-        ├── event1.jpg
-        ├── event2.jpg
-        └── event3.jpg
+├── SRS.md
+├── ASSIGNMENT_TEST_PLAN.md
+├── CONFORMANCE_AUDIT.md
+├── CODE_WALKTHROUGH.md
+├── images/
+│   ├── university-of-delhi-logo.jpg
+│   ├── department-of-computer-science.jpg
+│   └── events/
+│       ├── event1.jpg
+│       ├── event2.jpeg
+│       └── event3.jpeg
+└── screenshots/
+    ├── html-validation.png
+    └── css-validation.png
 ```
 
 ### File Descriptions
@@ -436,7 +438,11 @@ Testing areas include:
 - Gallery fade-out animation
 - Preservation of gallery layout
 
-Detailed test cases and their recorded results are maintained in [TESTING.md](TESTING.md).
+Assignment-specific test cases, execution results, and W3C validation records are maintained in [`ASSIGNMENT_TEST_PLAN.md`](ASSIGNMENT_TEST_PLAN.md).
+
+Additional manual test cases for the complete multi-page website are documented in [`TESTING.md`](TESTING.md) as a supplementary, unexecuted testing checklist.
+
+The formal Software Requirements Specification, conformance audit, and HTML/CSS code walkthrough are available in `SRS.md`, `CONFORMANCE_AUDIT.md`, and `CODE_WALKTHROUGH.md`, respectively.
 
 ---
 

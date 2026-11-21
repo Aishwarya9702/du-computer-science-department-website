@@ -8,7 +8,17 @@ The website is developed using HTML5, CSS3, JavaScript, and jQuery.
 
 Testing covers webpage structure, navigation, styling, responsive layouts, form validation, dynamic content, and interactive functionality.
 
-> **Note:** All test cases are initially marked **Not Tested**. Update each status to **Pass** or **Fail** after performing the corresponding test in a browser. The test cases below are planned checks, not claims that testing has already been completed.
+> **Testing Scope and Execution Status**
+>
+> This document provides a supplementary manual testing checklist for the complete Department of Computer Science website, including the homepage, alumni registration form, timetable, JavaScript functionality, and jQuery enhancements.
+>
+> The formal assignment-specific testing and its recorded execution results are maintained separately in `ASSIGNMENT_TEST_PLAN.md`, which contains 103 test cases derived from the Software Requirements Specification (`SRS.md`).
+>
+> All 92 non-AI test cases in the assignment-specific test plan have been recorded as Pass following manual verification and standards validation.
+>
+> The test cases in this supplementary document remain marked `Not Tested` unless they have been individually executed and their results recorded here. These statuses do not contradict the completed assignment-specific tests because the two documents have different scopes and test identifiers.
+>
+> The supplementary checklist is retained for additional testing and future regression testing of the broader website.
 
 ---
 

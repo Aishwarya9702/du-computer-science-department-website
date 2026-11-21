@@ -110,3 +110,59 @@ The homepage substantially implements the mandatory functional requirements iden
 The source code demonstrates semantic HTML5, CSS hover-based navigation, a two-image Flexbox gallery, a structured faculty directory, and responsive styling.
 
 Final acceptance remains conditional on completing browser testing, W3C validation, accessibility checks, and documentation of actual test results.
+
+## 8. Post-Audit Verification Update
+
+**Date:** 21 November 2026
+
+Following the initial AI-assisted requirements conformance audit, additional implementation refinements, functional testing, and standards validation activities were carried out.
+
+### 8.1 Verification Progress
+
+| Original Finding | Subsequent Action | Current Status | Evidence |
+|---|---|---|---|
+| F-01: Generic gallery image descriptions | Updated image descriptions to reflect actual content | Resolved | `index.html` |
+| F-02: Repeated navigation destinations | Reviewed navigation destinations and confirmed intended behaviour | Reviewed; duplicate destinations retained | `index.html` |
+| F-03: Responsive behavior not verified | Completed RD-01 through RD-08 | Resolved | `ASSIGNMENT_TEST_PLAN.md` |
+| F-04: Standards validation pending | Completed W3C HTML and CSS validation | Resolved | `screenshots/html-validation.png`, `screenshots/css-validation.png` |
+| F-05: Browser compatibility pending | Completed CB-01 through CB-03 | Resolved | `ASSIGNMENT_TEST_PLAN.md` |
+
+The original findings are retained to preserve the audit history. A finding is considered resolved only when its corresponding test results have been recorded as passed.
+
+### 8.2 Dropdown Navigation Enhancement
+
+The original FR-04 requirement specifies CSS-based dropdown navigation using the `:hover` pseudo-class.
+
+The implementation was subsequently enhanced to support JavaScript click-based dropdown interaction.
+
+Dropdown parent controls use HTML `<button>` elements instead of navigation links. JavaScript manages the `is-open` class and updates the `aria-expanded` attribute. Clicking outside an open dropdown closes it.
+
+CSS-based hover and keyboard-focus interactions remain supported.
+
+This enhancement preserves the original CSS hover requirement while improving interaction options.
+
+### 8.3 Development and Testing Evidence
+
+The project's Git history demonstrates incremental development and refinement, including:
+
+- Initial HTML structure and navigation
+- CSS hover dropdown implementation
+- Responsive layout improvements
+- HTML and CSS coding-style refinement
+- AI-assisted requirements and testing documentation
+- W3C validation evidence
+- Functional testing documentation
+
+Relevant Git commits include:
+
+- `1846e2e` — Add CSS hover dropdown navigation menus
+- `b75fd93` — Refine homepage HTML and CSS to follow Google Style Guide
+- `e52ad7d` — Add AI-assisted requirements conformance audit
+- `4365e5f` — Add W3C HTML and CSS validation evidence
+- `da9210a` — Functional Testing Done
+
+### 8.4 Final Verification Note
+
+The initial audit represents the implementation status at the time of review. Subsequent testing and development activities provide additional evidence of requirements conformance.
+
+The final status of each requirement should be determined using the completed test records and supporting validation evidence rather than the initial audit findings alone.

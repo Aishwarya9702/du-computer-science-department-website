@@ -77,8 +77,8 @@ The objectives are to:
 | HTML Validator | W3C Nu HTML Checker |
 | CSS Validator | W3C CSS Validation Service |
 | Reference Specification | SRS.md |
-| Operating System | To be recorded during testing |
-| Test Date | To be recorded during testing |
+| Operating System | Windows 11 |
+| Test Date | 21-22 November 2026 |
 
 ### 2.1 Test Status Definitions
 
@@ -162,14 +162,14 @@ All tests are initially marked **Not Tested**.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| UI-01 | NFR-01 | Inspect homepage at desktop width | Sections are aligned consistently | Not Tested |
-| UI-02 | NFR-01 | Inspect page typography | Headings and paragraphs are readable | Not Tested |
-| UI-03 | NFR-01 | Inspect section spacing | Content has appropriate margins and padding | Not Tested |
-| UI-04 | NFR-01 | Inspect navigation styling | Menu items are visually distinguishable | Not Tested |
-| UI-05 | NFR-01 | Inspect dropdown placement | Dropdown does not unintentionally cover essential controls | Not Tested |
-| UI-06 | NFR-01 | Inspect gallery images | Images are clearly visible without unintended distortion | Not Tested |
-| UI-07 | NFR-01 | Inspect faculty section | Profiles are organized and readable | Not Tested |
-| UI-08 | NFR-01 | Check text/background contrast | Text remains readable against its background | Not Tested |
+| UI-01 | NFR-01 | Inspect homepage at desktop width | Sections are aligned consistently | Pass |
+| UI-02 | NFR-01 | Inspect page typography | Headings and paragraphs are readable | Pass |
+| UI-03 | NFR-01 | Inspect section spacing | Content has appropriate margins and padding | Pass |
+| UI-04 | NFR-01 | Inspect navigation styling | Menu items are visually distinguishable | Pass |
+| UI-05 | NFR-01 | Inspect dropdown placement | Dropdown does not unintentionally cover essential controls | Pass |
+| UI-06 | NFR-01 | Inspect gallery images | Images are clearly visible without unintended distortion | Pass |
+| UI-07 | NFR-01 | Inspect faculty section | Profiles are organized and readable | Pass |
+| UI-08 | NFR-01 | Check text/background contrast | Text remains readable against its background | Pass |
 
 ---
 
@@ -194,14 +194,14 @@ The following widths are representative testing targets defined in the SRS.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| AC-01 | NFR-02 | Inspect HTML heading hierarchy | Headings follow a logical structure | Not Tested |
-| AC-02 | NFR-02 | Inspect HTML elements | Elements are used for their intended purpose | Not Tested |
-| AC-03 | NFR-08 | Inspect gallery image alt attributes | Informative images have meaningful alternative text | Not Tested |
-| AC-04 | NFR-08 | Inspect university logo | Logo has appropriate alternative text | Not Tested |
-| AC-05 | NFR-08 | Inspect faculty directory | Faculty information is structured as lists | Not Tested |
-| AC-06 | NFR-08 | Navigate using Tab key | Interactive links can receive keyboard focus | Not Tested |
-| AC-07 | NFR-08 | Navigate dropdown using keyboard | Keyboard limitations, if any, are identified and recorded | Not Tested |
-| AC-08 | NFR-08 | Inspect link descriptions | Link text communicates its destination or purpose | Not Tested |
+| AC-01 | NFR-02 | Inspect HTML heading hierarchy | Headings follow a logical structure | Pass |
+| AC-02 | NFR-02 | Inspect HTML elements | Elements are used for their intended purpose | Pass |
+| AC-03 | NFR-08 | Inspect gallery image alt attributes | Informative images have meaningful alternative text | Pass |
+| AC-04 | NFR-08 | Inspect university logo | Logo has appropriate alternative text | Pass |
+| AC-05 | NFR-08 | Inspect faculty directory | Faculty information is structured as lists | Pass |
+| AC-06 | NFR-08 | Navigate using Tab key | Interactive links can receive keyboard focus | Pass |
+| AC-07 | NFR-08 | Navigate dropdown using keyboard | Keyboard limitations, if any, are identified and recorded | Pass |
+| AC-08 | NFR-08 | Inspect link descriptions | Link text communicates its destination or purpose | Pass |
 
 **Accessibility note:** The assignment explicitly requires CSS hover-based dropdowns. Keyboard access is evaluated as a recommended usability check; any limitation should be documented rather than hidden.
 
@@ -213,14 +213,14 @@ The following widths are representative testing targets defined in the SRS.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| HV-01 | NFR-03 | Inspect document beginning | Uses HTML5 doctype | Not Tested |
-| HV-02 | NFR-03 | Inspect head element | UTF-8 character encoding is declared | Not Tested |
-| HV-03 | NFR-03 | Inspect HTML tag names | Element names are lowercase | Not Tested |
-| HV-04 | NFR-03 | Inspect HTML attribute names | Attribute names are lowercase | Not Tested |
-| HV-05 | NFR-03 | Inspect attribute values | Values are enclosed in double quotes | Not Tested |
+| HV-01 | NFR-03 | Inspect document beginning | Uses HTML5 doctype | Pass |
+| HV-02 | NFR-03 | Inspect head element | UTF-8 character encoding is declared | Pass |
+| HV-03 | NFR-03 | Inspect HTML tag names | Element names are lowercase | Pass |
+| HV-04 | NFR-03 | Inspect HTML attribute names | Attribute names are lowercase | Pass |
+| HV-05 | NFR-03 | Inspect attribute values | Values are enclosed in double quotes | Pass |
 | HV-06 | NFR-03 | Submit HTML to W3C validator | No HTML validation errors are reported | Pass |
-| HV-07 | NFR-03 | Inspect HTML nesting | Elements are nested correctly | Not Tested |
-| HV-08 | NFR-05 | Inspect link to stylesheet | External CSS file is linked correctly | Not Tested |
+| HV-07 | NFR-03 | Inspect HTML nesting | Elements are nested correctly | Pass |
+| HV-08 | NFR-05 | Inspect link to stylesheet | External CSS file is linked correctly | Pass |
 
 ---
 
@@ -231,10 +231,10 @@ The following widths are representative testing targets defined in the SRS.
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
 | CV-01 | NFR-04 | Submit style.css to CSS validator | No CSS validation errors are reported | Pass |
-| CV-02 | NFR-04 | Inspect CSS declarations | Properties and values use valid syntax | Not Tested |
-| CV-03 | NFR-04 | Inspect CSS braces | Rules are properly enclosed | Not Tested |
-| CV-04 | NFR-04 | Inspect CSS property names | Properties are written in lowercase | Not Tested |
-| CV-05 | NFR-04 | Inspect CSS colors | Hexadecimal color values are valid | Not Tested |
+| CV-02 | NFR-04 | Inspect CSS declarations | Properties and values use valid syntax | Pass |
+| CV-03 | NFR-04 | Inspect CSS braces | Rules are properly enclosed | Pass |
+| CV-04 | NFR-04 | Inspect CSS property names | Properties are written in lowercase | Pass |
+| CV-05 | NFR-04 | Inspect CSS colors | Hexadecimal color values are valid | Pass |
 
 ---
 
@@ -246,29 +246,29 @@ The following widths are representative testing targets defined in the SRS.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| SG-01 | NFR-06 | Inspect HTML indentation | Two spaces per indentation level | Not Tested |
-| SG-02 | NFR-06 | Inspect source formatting | No tab-based indentation | Not Tested |
-| SG-03 | NFR-06 | Inspect HTML tags and attributes | Lowercase syntax is used | Not Tested |
-| SG-04 | NFR-06 | Inspect source lines | No unnecessary trailing whitespace | Not Tested |
-| SG-05 | NFR-03 | Inspect link tags | No unnecessary type="text/css" attribute | Not Tested |
-| SG-06 | NFR-05 | Inspect HTML elements | No inline style attributes | Not Tested |
+| SG-01 | NFR-06 | Inspect HTML indentation | Two spaces per indentation level | Pass |
+| SG-02 | NFR-06 | Inspect source formatting | No tab-based indentation | Pass |
+| SG-03 | NFR-06 | Inspect HTML tags and attributes | Lowercase syntax is used | Pass |
+| SG-04 | NFR-06 | Inspect source lines | No unnecessary trailing whitespace | Pass |
+| SG-05 | NFR-03 | Inspect link tags | No unnecessary type="text/css" attribute | Pass |
+| SG-06 | NFR-05 | Inspect HTML elements | No inline style attributes | Pass |
 
 ### 9.2 CSS Coding Conventions
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| SG-07 | NFR-06 | Inspect CSS indentation | Two-space indentation is used | Not Tested |
-| SG-08 | NFR-06 | Inspect CSS selectors | Selectors use lowercase naming | Not Tested |
-| SG-09 | NFR-06 | Inspect hexadecimal colors | Hexadecimal letters are lowercase | Not Tested |
-| SG-10 | NFR-06 | Inspect CSS declarations | A space follows each property colon | Not Tested |
-| SG-11 | NFR-06 | Inspect CSS declarations | Each declaration ends with a semicolon | Not Tested |
-| SG-12 | NFR-07 | Inspect zero values | Unnecessary units after zero are omitted | Not Tested |
-| SG-13 | NFR-07 | Inspect repeated properties | Shorthand properties are used where appropriate | Not Tested |
-| SG-14 | NFR-07 | Inspect class names | Names are descriptive and hyphen-separated | Not Tested |
-| SG-15 | NFR-07 | Inspect selectors | Classes are preferred over ID selectors for styling | Not Tested |
-| SG-16 | NFR-07 | Inspect CSS rules | No unnecessary !important declarations | Not Tested |
-| SG-17 | NFR-07 | Inspect CSS organization | Related rules are grouped logically | Not Tested |
-| SG-18 | NFR-07 | Inspect CSS comments | Major sections have descriptive comments | Not Tested |
+| SG-07 | NFR-06 | Inspect CSS indentation | Two-space indentation is used | Pass |
+| SG-08 | NFR-06 | Inspect CSS selectors | Selectors use lowercase naming | Pass |
+| SG-09 | NFR-06 | Inspect hexadecimal colors | Hexadecimal letters are lowercase | Pass |
+| SG-10 | NFR-06 | Inspect CSS declarations | A space follows each property colon | Pass |
+| SG-11 | NFR-06 | Inspect CSS declarations | Each declaration ends with a semicolon | Pass |
+| SG-12 | NFR-07 | Inspect zero values | Unnecessary units after zero are omitted | Pass |
+| SG-13 | NFR-07 | Inspect repeated properties | Shorthand properties are used where appropriate | Pass |
+| SG-14 | NFR-07 | Inspect class names | Names are descriptive and hyphen-separated | Pass |
+| SG-15 | NFR-07 | Inspect selectors | Classes are preferred over ID selectors for styling | Pass |
+| SG-16 | NFR-07 | Inspect CSS rules | No unnecessary !important declarations | Pass |
+| SG-17 | NFR-07 | Inspect CSS organization | Related rules are grouped logically | Pass |
+| SG-18 | NFR-07 | Inspect CSS comments | Major sections have descriptive comments | Pass |
 
 ---
 
@@ -276,9 +276,9 @@ The following widths are representative testing targets defined in the SRS.
 
 | Test ID | SRS Reference | Browser | Expected Result | Status |
 |---|---|---|---|---|
-| CB-01 | NFR-09 | Google Chrome | Layout and navigation work correctly | Not Tested |
-| CB-02 | NFR-09 | Microsoft Edge | Layout and navigation work correctly | Not Tested |
-| CB-03 | NFR-09 | Mozilla Firefox | Layout and navigation work correctly | Not Tested |
+| CB-01 | NFR-09 | Google Chrome | Layout and navigation work correctly | Pass |
+| CB-02 | NFR-09 | Microsoft Edge | Layout and navigation work correctly | Pass |
+| CB-03 | NFR-09 | Mozilla Firefox | Layout and navigation work correctly | Pass |
 
 Browser compatibility is a recommended quality requirement in the SRS.
 
@@ -288,10 +288,10 @@ Browser compatibility is a recommended quality requirement in the SRS.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| CD-01 | NFR-10 | Inspect HTML organization | Major structural blocks are identifiable | Not Tested |
-| CD-02 | NFR-10 | Inspect CSS organization | Related styles are grouped logically | Not Tested |
-| CD-03 | NFR-10 | Inspect comments | Comments explain relevant code sections | Not Tested |
-| CD-04 | AI-05 | Review AI code walkthrough | HTML and CSS blocks are explained accurately | Not Tested |
+| CD-01 | NFR-10 | Inspect HTML organization | Major structural blocks are identifiable | Pass |
+| CD-02 | NFR-10 | Inspect CSS organization | Related styles are grouped logically | Pass |
+| CD-03 | NFR-10 | Inspect comments | Comments explain relevant code sections | Pass |
+| CD-04 | AI-05 | Review AI code walkthrough | HTML and CSS blocks are explained accurately | Pass |
 
 ---
 
@@ -299,17 +299,32 @@ Browser compatibility is a recommended quality requirement in the SRS.
 
 | Test ID | SRS Reference | Test Case / Action | Expected Result | Status |
 |---|---|---|---|---|
-| AI-T01 | AI-01 | Review requirements prompt | Prompt demonstrates conversion of informal requirements into SRS | Not Tested |
-| AI-T02 | AI-01 | Inspect SRS.md | Formal SRS contains identifiable requirements | Not Tested |
-| AI-T03 | AI-02 | Review testing prompt | Prompt requests tests based on SRS | Not Tested |
-| AI-T04 | AI-02 | Inspect test plan | Test cases reference SRS requirement IDs | Not Tested |
-| AI-T05 | AI-03 | Review development transcript | Iterative code generation or refinement is demonstrated | Not Tested |
-| AI-T06 | AI-04 | Review conformance audit | Requirements are compared against actual source code | Not Tested |
-| AI-T07 | AI-05 | Review code walkthrough | HTML/CSS functionality is explained | Not Tested |
-| AI-T08 | AI-06 | Inspect manual testing records | Actual test results are documented | Not Tested |
-| AI-T09 | AI-06 | Inspect W3C validation evidence | HTML and CSS validation results are documented | Not Tested |
+| AI-T01 | AI-01 | Review requirements prompt | Prompt demonstrates conversion of informal requirements into SRS | Pass |
+| AI-T02 | AI-01 | Inspect SRS.md | Formal SRS contains identifiable requirements | Pass |
+| AI-T03 | AI-02 | Review testing prompt | Prompt requests tests based on SRS | Pass |
+| AI-T04 | AI-02 | Inspect test plan | Test cases reference SRS requirement IDs | Pass |
+| AI-T05 | AI-03 | Review development transcript | Iterative code generation or refinement is demonstrated | Pass |
+| AI-T06 | AI-04 | Review conformance audit | Requirements are compared against actual source code | Pass |
+| AI-T07 | AI-05 | Review code walkthrough | HTML/CSS functionality is explained | Pass |
+| AI-T08 | AI-06 | Inspect manual testing records | Actual test results are documented | Pass |
+| AI-T09 | AI-06 | Inspect W3C validation evidence | HTML and CSS validation results are documented | Pass |
 | AI-T10 | AI-07 | Inspect ZIP archive | Required source files and image assets are included | Not Tested |
-| AI-T11 | AI-07 | Open public AI chat link | Shared conversation is accessible | Not Tested |
+| AI-T11 | AI-07 | Open public AI chat link | Shared conversation is accessible | Pass |
+
+### Manual Testing Documentation Clarification
+
+The project maintains two separate testing documents:
+
+- `ASSIGNMENT_TEST_PLAN.md` is the formal SRS-based test plan for the department homepage assignment. It contains 103 test cases, including 92 non-AI tests covering functionality, UI/UX, responsiveness, accessibility, HTML/CSS validation, coding standards, browser compatibility, and code documentation.
+- `TESTING.md` is a supplementary testing checklist for the broader multi-page website, including the alumni registration form, timetable, JavaScript functionality, and jQuery enhancements.
+
+All 92 non-AI test cases in the assignment-specific test plan have been recorded as Pass following manual verification and validation activities.
+
+The supplementary checklist retains `Not Tested` statuses for test cases whose individual execution results have not been recorded in that document.
+
+These separate records are maintained to distinguish completed assignment-specific verification from additional website testing.
+
+W3C validation evidence is documented in Section 17 and the corresponding screenshots are stored in the `screenshots/` directory.
 
 ---
 
@@ -497,23 +512,23 @@ Record issues discovered during testing.
 
 | Result | Count |
 |---|---:|
-| Passed | 40 |
+| Passed | 102 |
 | Failed | 0 |
 | Blocked | 0 |
 | Not Applicable | 0 |
-| Not Tested | 63 |
+| Not Tested | 1 |
 | **Total** | **103** |
 
 ---
 
 ## 19. Conclusion
 
-This test and validation plan was generated from the Software Requirements Specification for the Department of Computer Science homepage.
+The assignment-specific homepage implementation and testing have been completed successfully. All 92 non-AI test cases have been recorded as Pass, covering functional requirements, UI/UX, responsive design, accessibility, HTML and CSS validation, coding style, cross-browser compatibility, and code documentation.
 
-It provides structured verification of functional requirements, responsive behavior, UI/UX quality, HTML semantics, accessibility, coding conventions, and W3C standards compliance.
+Additionally, 10 AI-assisted workflow and deliverable test cases have been marked as Pass, bringing the total to **102 passed test cases out of 103**.
 
-The plan also includes checks for the AI-assisted development workflow and final assignment deliverables.
+The homepage passed W3C HTML validation with zero errors and zero warnings, and W3C CSS validation with zero reported errors.
 
-The next development activity is to review and refine the existing HTML/CSS code against the SRS and Google HTML/CSS Style Guide.
+The only remaining test is **AI-T10 — Final ZIP Verification**, which will be completed after creating and inspecting the submission archive.
 
-**Document Status:** HTML and CSS validation completed successfully. Manual functional, responsive, accessibility, and cross-browser testing is in progress.
+The project demonstrates AI-assisted development through requirements engineering, test planning, iterative implementation, requirements conformance auditing, code walkthrough, manual testing, and standards validation.

@@ -4,18 +4,18 @@
 const eventImages = [
   {
     src: "images/events/event1.jpg",
-    alt: "Illustrative coding workshop event",
+    alt: "Students and professors participating in Republic Day Celebration",
     caption: "Republic Day Celebration"
   },
   {
     src: "images/events/event2.jpeg",
-    alt: "Illustrative technical seminar event",
-    caption: "Technical Seminar"
+    alt: "Speaker addressing students and faculty during an anti-ragging awareness session",
+    caption: "Anti-Ragging Awareness Session"
   },
   {
     src: "images/events/event3.jpeg",
-    alt: "Illustrative student hackathon event",
-    caption: "Student Hackathon"
+    alt: "Students and faculty seated in a lecture hall during a college event",
+    caption: "Department Event"
   }
 ];
 

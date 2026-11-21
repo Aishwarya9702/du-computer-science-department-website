@@ -62,7 +62,7 @@ Separating HTML and CSS improves readability and maintainability.
 <header class="site-header">
   <div class="header-container">
     <img
-      src="images/University of Delhi logo.jpg"
+      src="images/university-of-delhi-logo.jpg"
       alt="University of Delhi Logo"
       class="du-logo"
     >
@@ -108,9 +108,15 @@ The homepage includes links for Home, About Us, Academics, Faculty, Updates, Alu
 
 ### 4.2 Dropdown Structure
 
+The primary navigation contains four dropdown menus: About Us, Academics, Faculty, and Updates.
+
+Each dropdown uses a `<button>` element as its parent control and an unordered list for submenu links.
+
 ```html
 <li class="dropdown">
-  <a href="#about">About Us</a>
+  <button type="button" class="dropdown-toggle" aria-expanded="false">
+    About Us <span aria-hidden="true">▾</span>
+  </button>
   <ul class="dropdown-menu">
     <li><a href="#about">Department Overview</a></li>
     <li><a href="#gallery">Department Gallery</a></li>
@@ -118,28 +124,25 @@ The homepage includes links for Home, About Us, Academics, Faculty, Updates, Alu
 </li>
 ```
 
-The nested list represents a submenu within a primary navigation item.
+The `type="button"` attribute prevents unintended form submission. The `aria-expanded` attribute communicates the dropdown's expanded or collapsed state to assistive technologies.
 
-The `href` values refer to matching section IDs in the HTML document.
+### 4.3 CSS and JavaScript Dropdown Behavior
 
-### 4.3 CSS Dropdown Behavior
+The dropdown menu is initially hidden using `display: none`.
+
+CSS displays the submenu when the user hovers over the dropdown, moves keyboard focus into it, or when the parent has the `is-open` class.
 
 ```css
 .dropdown:hover > .dropdown-menu,
-.dropdown:focus-within > .dropdown-menu {
+.dropdown:focus-within > .dropdown-menu,
+.dropdown.is-open > .dropdown-menu {
   display: block;
 }
 ```
 
-The dropdown is hidden by default using `display: none`.
+JavaScript handles click-based interaction with the dropdown buttons. Clicking a dropdown button toggles its open state through the `is-open` class, while the `aria-expanded` attribute should reflect whether the menu is expanded.
 
-The `:hover` pseudo-class reveals the submenu when the pointer moves over its parent.
-
-The `:focus-within` pseudo-class also reveals the submenu when keyboard focus is within the dropdown.
-
-The stylesheet uses absolute positioning and `z-index` to place the dropdown above nearby page content.
-
-The navigation list uses Flexbox with wrapping enabled to accommodate narrower screens.
+The implementation supports mouse hover, keyboard focus, and click-based interaction. CSS positioning and `z-index` allow the submenu to appear above nearby content.
 
 **SRS Mapping:** FR-03, FR-04, FR-10, NFR-08.
 
@@ -187,12 +190,12 @@ Using an ID for navigation and a class for styling separates navigation behavior
   <h2>Department Gallery</h2>
   <div class="image-container">
     <img
-      src="images/University of Delhi logo.jpg"
+      src="images/university-of-delhi-logo.jpg"
       alt="University of Delhi"
       class="gallery-fade-image"
     >
     <img
-      src="images/Department of Computer Science.jpg"
+      src="images/department-of-computer-science.jpg"
       alt="Department of Computer Science"
       class="gallery-fade-image"
     >
@@ -358,7 +361,7 @@ The image has an ID that allows JavaScript to locate and update it.
 
 ### 10.2 Digital Clock
 
-The Digital Clock section includes a `<time>` element with the ID `digital-clock` and a separate element for the current date.
+The Digital Clock section includes a `<span>` element with the ID `digital-clock` and a separate element for the current date.
 
 These elements provide display targets for the existing JavaScript.
 
@@ -458,7 +461,7 @@ Final standards compliance requires HTML and CSS validation.
 | FR-01 | Semantic document structure |
 | FR-02 | University header |
 | FR-03 | Primary navigation |
-| FR-04 | CSS dropdown menus |
+| FR-04 | CSS and JavaScript dropdown menus |
 | FR-05 | Department overview |
 | FR-06 | Flexbox image gallery |
 | FR-07 | Faculty directory |
