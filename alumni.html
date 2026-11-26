@@ -46,118 +46,130 @@
 
       <form class="alumni-form" id="alumni-form" novalidate>
 
+        <fieldset>
+          <legend>Personal Information</legend>
 
-        <!-- Full Name -->
-        <div class="form-group">
-          <label for="full-name">Full Name</label>
-          <input type="text" id="full-name" name="full_name" placeholder="Enter your full name" required>
-        </div>
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full_name" placeholder="Enter your full name" required>
+          </div>
 
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        </div>
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          </div>
 
-        <!-- Phone Number -->
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Enter a 10-digit phone number"
-            placeholder="10-digit mobile number">
-        </div>
-
-
-        <!-- Date of Birth -->
-
-        <div class="form-group">
-          <label for="dob">Date of Birth</label>
-
-          <input type="date" id="dob" name="dob" required>
-        </div>
+          <!-- Phone Number -->
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Enter a 10-digit phone number"
+              placeholder="10-digit mobile number">
+          </div>
 
 
-        <!-- Graduation Batch -->
-        <div class="form-group">
-          <label for="batch">Graduation Batch</label>
-          <input type="number" id="batch" name="batch" min="1980" max="2035" placeholder="e.g. 2024" required>
-        </div>
+          <!-- Date of Birth -->
 
-        <!-- Degree -->
-        <div class="form-group">
-          <label for="degree">Degree</label>
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
 
-          <select id="degree" name="degree" required>
+            <input type="date" id="dob" name="dob" required>
+          </div>
+        </fieldset>
 
-            <option value="">
-              Select your degree
-            </option>
+        <fieldset>
+          <legend>Academic Information</legend>
 
-            <option value="bsc">
-              B.Sc. (Hons.) Computer Science
-            </option>
+          <!-- Graduation Batch -->
+          <div class="form-group">
+            <label for="batch">Graduation Batch</label>
+            <input type="number" id="batch" name="batch" min="1980" max="2035" placeholder="e.g. 2024" required>
+          </div>
 
-            <option value="msc">
-              M.Sc. Computer Science
-            </option>
+          <!-- Degree -->
+          <div class="form-group">
+            <label for="degree">Degree</label>
 
-            <option value="mca">
-              Master of Computer Applications
-            </option>
+            <select id="degree" name="degree" required>
 
-            <option value="phd">
-              Ph.D. Computer Science
-            </option>
+              <option value="">
+                Select your degree
+              </option>
 
-            <option value="other">
-              Other
-            </option>
+              <option value="bsc">
+                B.Sc. (Hons.) Computer Science
+              </option>
 
-          </select>
-        </div>
+              <option value="msc">
+                M.Sc. Computer Science
+              </option>
 
-        <!-- Current Designation -->
-        <div class="form-group">
-          <label for="designation">
-            Current Designation
-          </label>
+              <option value="mca">
+                Master of Computer Applications
+              </option>
 
-          <input type="text" id="designation" name="designation" placeholder="e.g. Software Engineer">
-        </div>
+              <option value="phd">
+                Ph.D. Computer Science
+              </option>
 
-        <!-- Organization -->
-        <div class="form-group">
-          <label for="organization">
-            Organization
-          </label>
+              <option value="other">
+                Other
+              </option>
 
-          <input type="text" id="organization" name="organization" placeholder="Enter organization name">
-        </div>
+            </select>
+          </div>
+        </fieldset>
 
-        <!-- About Yourself -->
-        <div class="form-group">
-          <label for="about-yourself">
-            About Yourself
-          </label>
+        <fieldset>
+          <legend>Professional Information</legend>
 
-          <textarea id="about-yourself" name="about_yourself" rows="4"
-            placeholder="Share your professional journey"></textarea>
-        </div>
+          <!-- Current Designation -->
+          <div class="form-group">
+            <label for="designation">
+              Current Designation
+            </label>
+
+            <input type="text" id="designation" name="designation" placeholder="e.g. Software Engineer">
+          </div>
+
+          <!-- Organization -->
+          <div class="form-group">
+            <label for="organization">
+              Organization
+            </label>
+
+            <input type="text" id="organization" name="organization" placeholder="Enter organization name">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Additional Information and Feedback</legend>
+
+          <!-- About Yourself -->
+          <div class="form-group">
+            <label for="about-yourself">
+              About Yourself
+            </label>
+
+            <textarea id="about-yourself" name="about_yourself" rows="4"
+              placeholder="Share your professional journey"></textarea>
+          </div>
 
 
-        <!-- Alumni Feedback -->
+          <!-- Alumni Feedback -->
 
-        <div class="form-group">
-          <label for="feedback">Alumni Feedback</label>
+          <div class="form-group">
+            <label for="feedback">Alumni Feedback</label>
 
-          <textarea id="feedback" name="feedback" rows="4" maxlength="300" minlength="10"
-            placeholder="Share your feedback about the department" required></textarea>
+            <textarea id="feedback" name="feedback" rows="4" maxlength="300" minlength="10"
+              placeholder="Share your feedback about the department" required></textarea>
 
-          <p id="character-count" class="character-count" aria-live="polite">
-            0 / 300 characters
-          </p>
-        </div>
-
-
+            <p id="character-count" class="character-count" aria-live="polite">
+              0 / 300 characters
+            </p>
+          </div>
+        </fieldset>
 
         <!-- Form Validation Message -->
 
