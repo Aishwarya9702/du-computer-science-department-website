@@ -986,21 +986,22 @@ main h2 {
   text-decoration: underline;
 }
 
+
 /* Alumni Section */
 
 .alumni-section {
   background-color: #f4f6f9;
-  padding: 45px 20px;
+  padding: 48px 24px;
 }
 
-.alumni-section>h2 {
+.alumni-section > h2 {
   color: #14345a;
   font-size: 28px;
   text-align: center;
   margin-bottom: 15px;
 }
 
-.alumni-section>p {
+.alumni-section > p {
   color: #34495e;
   font-size: 16px;
   line-height: 1.8;
@@ -1012,107 +1013,222 @@ main h2 {
 /* Form Container */
 
 .alumni-form {
-  background-color: white;
-  max-width: 700px;
+  width: 100%;
+  max-width: 760px;
+  min-width: 0;
   margin: 0 auto;
-  padding: 35px;
+  padding: 32px;
+  background-color: #ffffff;
   border: 1px solid #dce3eb;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
 }
 
-/* Form Groups */
+/* Semantic Fieldsets and Legends */
+
+.alumni-form fieldset {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0 0 26px;
+  padding: 24px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.alumni-form legend {
+  max-width: 100%;
+  padding: 0 8px;
+  color: #14345a;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+/* Form Groups and Labels */
 
 .alumni-form .form-group {
+  min-width: 0;
   margin-bottom: 22px;
+}
+
+.alumni-form .form-group:last-child {
+  margin-bottom: 0;
 }
 
 .alumni-form label {
   display: block;
+  margin-bottom: 8px;
   color: #14345a;
   font-size: 15px;
   font-weight: 600;
-  margin-bottom: 9px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-/* Input, Select and Textarea */
+/* Input, Select and Textarea Controls */
 
 .alumni-form input,
 .alumni-form select,
 .alumni-form textarea {
+  display: block;
   width: 100%;
-  padding: 12px 14px;
-  font-size: 15px;
-  font-family: Arial, Helvetica, sans-serif;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 46px;
+  padding: 12px;
   color: #24364b;
   background-color: #ffffff;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #8494a7;
   border-radius: 6px;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
   box-sizing: border-box;
-  transition: border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.alumni-form input::placeholder,
+.alumni-form textarea::placeholder {
+  color: #64748b;
+  opacity: 1;
 }
 
 .alumni-form textarea {
-  resize: vertical;
   min-height: 110px;
+  resize: vertical;
 }
 
-/* Input Focus Effects */
+/* Persistent Field Instructions */
+
+.alumni-form .form-group > p {
+  margin: 7px 0 0;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Input Hover States */
+
+.alumni-form input:hover,
+.alumni-form select:hover,
+.alumni-form textarea:hover {
+  border-color: #234f7b;
+}
+
+/* Visible Focus Indicators */
 
 .alumni-form input:focus,
 .alumni-form select:focus,
 .alumni-form textarea:focus {
-  outline: none;
   border-color: #234f7b;
-  box-shadow: 0 0 0 3px rgba(35, 79, 123, 0.15);
+  outline: 2px solid #234f7b;
+  outline-offset: 2px;
 }
 
 /* Form Buttons */
 
 .alumni-form .form-buttons {
   display: flex;
-  gap: 15px;
-  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
 }
 
 .alumni-form button {
-  padding: 13px 25px;
+  flex: 1 1 140px;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px 24px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-family: inherit;
   font-size: 16px;
   font-weight: 600;
-  border: none;
-  border-radius: 6px;
+  line-height: 1.5;
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s ease,
-    transform 0.3s ease;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 /* Register Button */
 
 .alumni-form button[type="submit"] {
   background-color: #14345a;
-  color: white;
+  border-color: #14345a;
+  color: #ffffff;
 }
 
-.alumni-form button[type="submit"]:hover {
+.alumni-form button[type="submit"]:not(:disabled):hover {
   background-color: #234f7b;
-  transform: translateY(-2px);
+  border-color: #234f7b;
+}
+
+.alumni-form button[type="submit"]:not(:disabled):active {
+  background-color: #102846;
+  border-color: #102846;
 }
 
 /* Reset Button */
 
 .alumni-form button[type="reset"] {
   background-color: #e2e8f0;
+  border-color: #8494a7;
   color: #24364b;
 }
 
-.alumni-form button[type="reset"]:hover {
+.alumni-form button[type="reset"]:not(:disabled):hover {
   background-color: #cbd5e1;
-  transform: translateY(-2px);
+  border-color: #64748b;
 }
 
-/* Responsive Alumni Form */
+.alumni-form button[type="reset"]:not(:disabled):active {
+  background-color: #b8c5d4;
+}
+
+/* Button Keyboard Focus */
+
+.alumni-form button:focus-visible {
+  outline: 2px solid #234f7b;
+  outline-offset: 3px;
+}
+
+/* Disabled Button State */
+
+.alumni-form button[type="submit"]:disabled,
+.alumni-form button[type="reset"]:disabled {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #475569;
+  cursor: not-allowed;
+}
+
+/* Responsive Alumni Form: Tablet */
+
+@media (max-width: 768px) {
+  .alumni-section {
+    padding: 36px 20px;
+  }
+
+  .alumni-form {
+    padding: 26px;
+  }
+
+  .alumni-form fieldset {
+    padding: 20px;
+  }
+}
+
+/* Responsive Alumni Form: Mobile */
 
 @media (max-width: 600px) {
   .alumni-header h2 {
@@ -1125,19 +1241,75 @@ main h2 {
   }
 
   .alumni-section {
-    padding: 30px 15px;
+    padding: 28px 12px;
+  }
+
+  .alumni-section > h2 {
+    font-size: 24px;
+  }
+
+  .alumni-section > p {
+    font-size: 15px;
+    margin-bottom: 24px;
   }
 
   .alumni-form {
-    padding: 22px 18px;
+    padding: 18px 14px;
+  }
+
+  .alumni-form fieldset {
+    margin-bottom: 22px;
+    padding: 16px 12px;
+  }
+
+  .alumni-form legend {
+    padding: 0 6px;
+    font-size: 16px;
+  }
+
+  .alumni-form .form-group {
+    margin-bottom: 18px;
+  }
+
+  .alumni-form .form-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .alumni-form input,
+  .alumni-form select,
+  .alumni-form textarea {
+    padding: 10px;
   }
 
   .alumni-form .form-buttons {
     flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
   }
 
   .alumni-form button {
+    flex: 0 1 auto;
     width: 100%;
+  }
+}
+
+/* Responsive Alumni Form: Narrow Mobile */
+
+@media (max-width: 375px) {
+  .alumni-section {
+    padding: 24px 10px;
+  }
+
+  .alumni-form {
+    padding: 14px 10px;
+  }
+
+  .alumni-form fieldset {
+    padding: 14px 10px;
+  }
+
+  .alumni-form legend {
+    font-size: 15px;
   }
 }
 
@@ -1348,34 +1520,77 @@ main h2 {
 }
 
 
-/* Practical 11: Feedback and Validation */
+
+/* Alumni Feedback and Validation Presentation */
+
+/* Feedback Character Counter */
 
 .alumni-form .character-count {
+  margin: 8px 0 0;
+  color: #475569;
   font-size: 13px;
-  color: #667085;
+  font-weight: 500;
+  line-height: 1.6;
   text-align: right;
-  margin-top: 8px;
-  margin-bottom: 0;
+  overflow-wrap: anywhere;
 }
 
+/* Explicit Invalid Field States */
+
+/* Validation states will be assigned by JavaScript. */
+
+.alumni-form input[aria-invalid="true"],
+.alumni-form select[aria-invalid="true"],
+.alumni-form textarea[aria-invalid="true"] {
+  border-color: #b42318;
+  background-color: #fff8f7;
+  box-shadow: inset 3px 0 0 #b42318;
+}
+
+/* Field-Specific Validation Messages */
+
+/* Reserved for the subsequent error-handling stage. */
+
+.alumni-form .form-group > .field-error {
+  margin: 7px 0 0;
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Form-Level Validation Message */
+
 .alumni-form .form-message {
+  margin: 16px 0 0;
+  color: #24364b;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.6;
-  margin: 15px 0;
+  overflow-wrap: anywhere;
 }
+
+/* Form-Level Error Message */
 
 .alumni-form .form-message.error {
+  padding: 12px 14px;
   color: #b42318;
+  background-color: #fef3f2;
+  border: 1px solid #b42318;
+  border-left-width: 4px;
+  border-radius: 6px;
 }
+
+/* Form-Level Success Message */
 
 .alumni-form .form-message.success {
-  color: #167347;
-}
-
-.alumni-form input:invalid,
-.alumni-form textarea:invalid {
-  border-color: #cbd5e1;
+  padding: 12px 14px;
+  color: #166534;
+  background-color: #f0fdf4;
+  border: 1px solid #166534;
+  border-left-width: 4px;
+  border-radius: 6px;
 }
 
 
