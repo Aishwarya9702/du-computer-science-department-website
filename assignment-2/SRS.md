@@ -19,7 +19,7 @@
 | Assignment | Assignment 2 |
 | Document Version | 1.0 |
 | Date | 26 November 2026 |
-| Document Status | Reviewed and Finamlized |
+| Document Status | Reviewed and Finalized |
 | Development Methodology | Incremental AI-Assisted Software Development |
 | Technologies | HTML5, CSS3, JavaScript |
 | Application Type | Frontend Web Application |
