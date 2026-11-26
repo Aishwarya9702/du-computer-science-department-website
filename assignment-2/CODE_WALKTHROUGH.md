@@ -183,8 +183,8 @@ The shared body rule (C389–395) sets Arial/Helvetica/sans-serif, pale backgrou
 |---|---|
 | Default | Centered max-760px form; buttons share a row where space permits. |
 | <=768px (C1217–1229) | Reduced section, form and fieldset padding. |
-| <=600px (C1233–1301) | Smaller heading/legend, wrapping alumni navigation, reduced padding, stacked full-width buttons. |
-| <=375px (C1305–1325) | Further reduced padding and 15px legend. |
+| <=600px (C1233–1294) | Smaller heading/legend, wrapping alumni navigation, reduced padding, stacked full-width buttons. |
+| <=375px (C1298–1315) | Further reduced padding and 15px legend. |
 
 The rules cascade: at 320px all three narrower conditions apply. This is responsive CSS, not device detection. Native date/select widgets and zoom can behave differently across browsers. Formal tests cover 1440, 1280, 1024, 768, 425, 375 and 320px; preliminary responsive success is developer-reported.
 
