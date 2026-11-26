@@ -560,7 +560,7 @@ The following table is generated from the actual SRS identifiers and the test pl
 | Visual and responsive design | NFR-09–22 | TC-ERR-001, TC-ERR-005, TC-UI-001, TC-RES-001–007 |
 | Keyboard and accessibility | NFR-23–27, NFR-33–37 | TC-FUN-001, TC-ERR-001, TC-ACC-001–002, TC-ACC-004 |
 | Privacy and fail-safe | FR-45, NFR-55–63, SC-04, AC-41 | TC-FUN-003–004, TC-PRIV-001–006 |
-| Shared features | FR-67–75 |  |
+| Shared features | FR-67–75 | TC-REG-001–012 |
 | Maintainability and compatibility | NFR-42–54 | TC-VAL-097, TC-RES-001–007, TC-COMP-001–003, TC-STD-003–004, TC-DOC-003 |
 | Standards | NFR-64–68 | TC-STD-001–004 |
 | Walkthrough | AI-23–28, DR-07, AC-49 | TC-DOC-005 |
