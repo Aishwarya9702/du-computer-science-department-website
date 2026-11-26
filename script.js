@@ -59,6 +59,11 @@ function calculateFacultyExperience() {
 
     const dateString = member.dataset.joiningDate;
 
+    if (!dateString || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(dateString)) {
+      member.textContent = "Invalid joining date";
+      return;
+    }
+
     const [year, month, day] = dateString
       .split("-")
       .map(Number);
@@ -100,42 +105,23 @@ calculateFacultyExperience();
 
 /* Practical 11: Alumni Form Validation */
 
-const alumniForm = document.getElementById("alumni-form");
-const feedback = document.getElementById("feedback");
-const characterCount = document.getElementById("character-count");
-const formMessage = document.getElementById("form-message");
-
-
-/* Live Character Counter */
-
-function updateFeedbackCounter() {
-  if (!feedback || !characterCount) {
+function initializeAlumniForm() {
+  const alumniForm = document.getElementById("alumni-form");
+  if (!(alumniForm instanceof HTMLFormElement)) {
     return;
   }
 
-  const maxLength = feedback.maxLength;
-  const enteredCharacters = feedback.value.length;
-  const remainingCharacters = Math.max(
-    0,
-    maxLength - enteredCharacters
-  );
+  const registerButton = alumniForm.querySelector("#register-button");
+  if (!(registerButton instanceof HTMLButtonElement)) {
+    return;
+  }
+  registerButton.disabled = true;
 
-  characterCount.textContent =
-    `${enteredCharacters} characters entered | ` +
-    `${remainingCharacters} characters remaining`;
-}
+  const feedback = alumniForm.querySelector("#feedback");
+  const characterCount = alumniForm.querySelector("#character-count");
+  const formMessage = alumniForm.querySelector("#form-message");
+  let ready = false;
 
-if (feedback && characterCount) {
-  // Initialize the counter using the current textarea value.
-  updateFeedbackCounter();
-
-  // Update the counter whenever the feedback value changes through user input.
-  feedback.addEventListener("input", updateFeedbackCounter);
-}
-
-/* Form Validation */
-
-if (alumniForm) {
   const minimumBirthDate = "1900-01-01";
   const minimumGraduationYear = 1980;
   const maximumFeedbackLength = 300;
@@ -149,18 +135,58 @@ if (alumniForm) {
   ];
 
   const fields = {
-    "full-name": document.getElementById("full-name"),
-    "email": document.getElementById("email"),
-    "phone": document.getElementById("phone"),
-    "dob": document.getElementById("dob"),
-    "batch": document.getElementById("batch"),
-    "degree": document.getElementById("degree"),
-    "designation": document.getElementById("designation"),
-    "organization": document.getElementById("organization"),
-    "location": document.getElementById("location"),
-    "about-yourself": document.getElementById("about-yourself"),
+    "full-name": alumniForm.querySelector("#full-name"),
+    "email": alumniForm.querySelector("#email"),
+    "phone": alumniForm.querySelector("#phone"),
+    "dob": alumniForm.querySelector("#dob"),
+    "batch": alumniForm.querySelector("#batch"),
+    "degree": alumniForm.querySelector("#degree"),
+    "designation": alumniForm.querySelector("#designation"),
+    "organization": alumniForm.querySelector("#organization"),
+    "location": alumniForm.querySelector("#location"),
+    "about-yourself": alumniForm.querySelector("#about-yourself"),
     "feedback": feedback
   };
+
+  const fieldIds = Object.keys(fields);
+  const errorContainers = {};
+  fieldIds.forEach(function (fieldId) {
+    errorContainers[fieldId] = alumniForm.querySelector(`#${fieldId}-error`);
+  });
+
+  const controlsValid = fieldIds.every(function (fieldId) {
+    const field = fields[fieldId];
+    const expectedType = fieldId === "degree" ? HTMLSelectElement :
+      fieldId === "feedback" || fieldId === "about-yourself" ?
+        HTMLTextAreaElement : HTMLInputElement;
+    return field instanceof expectedType && field.form === alumniForm &&
+      errorContainers[fieldId] instanceof HTMLElement;
+  });
+
+  if (!controlsValid || !(characterCount instanceof HTMLElement) ||
+      !(formMessage instanceof HTMLElement) ||
+      registerButton.form !== alumniForm || registerButton.type !== "submit") {
+    return;
+  }
+
+  /* Live Character Counter */
+
+  function updateFeedbackCounter() {
+    if (!feedback || !characterCount) {
+      return;
+    }
+
+    const maxLength = feedback.maxLength;
+    const enteredCharacters = feedback.value.length;
+    const remainingCharacters = Math.max(
+      0,
+      maxLength - enteredCharacters
+    );
+
+    characterCount.textContent =
+      `${enteredCharacters} characters entered | ` +
+      `${remainingCharacters} characters remaining`;
+  }
 
   /* Local Date and Year Constraints */
 
@@ -438,15 +464,6 @@ if (alumniForm) {
 
   /* Accessible Field-Specific Error Handling */
 
-  const fieldIds = Object.keys(fields);
-
-  const errorContainers = {};
-
-  fieldIds.forEach(function (fieldId) {
-    errorContainers[fieldId] =
-      document.getElementById(`${fieldId}-error`);
-  });
-
   // Preserve instructional descriptions when adding or removing errors.
   function updateErrorAssociation(field, errorId, hasError) {
     const descriptions = new Set(
@@ -574,6 +591,9 @@ if (alumniForm) {
 
   alumniForm.addEventListener("submit", function (event) {
     event.preventDefault();
+    if (!ready) {
+      return;
+    }
 
     const today = new Date();
 
@@ -607,6 +627,9 @@ if (alumniForm) {
   /* Revalidate Previously Invalid Fields */
 
   function handleFieldModification(event) {
+    if (!ready) {
+      return;
+    }
     const field = event.target;
     const fieldId = field.id;
 
@@ -650,12 +673,31 @@ if (alumniForm) {
   /* Reset Form Validation States and Counter */
 
   alumniForm.addEventListener("reset", function () {
+    if (!ready) {
+      return;
+    }
     clearAllFieldErrors();
     clearFormMessage();
 
     // Update the counter after the native form reset completes.
     setTimeout(updateFeedbackCounter, 0);
   });
+
+  updateFeedbackCounter();
+  feedback.addEventListener("input", updateFeedbackCounter);
+  // Enable registration only after all initialization steps succeed.
+  ready = true;
+  registerButton.disabled = false;
+}
+
+try {
+  initializeAlumniForm();
+} catch (error) {
+  // Do not log registration data or interrupt unrelated page features.
+  const registerButton = document.getElementById("register-button");
+  if (registerButton instanceof HTMLButtonElement) {
+    registerButton.disabled = true;
+  }
 }
 
 
@@ -732,6 +774,9 @@ if (document.getElementById("digital-clock")) {
 document.querySelectorAll(".dropdown-toggle").forEach((button) => {
   button.addEventListener("click", () => {
     const dropdown = button.closest(".dropdown");
+    if (!dropdown) {
+      return;
+    }
     const isOpen = dropdown.classList.contains("is-open");
 
     document.querySelectorAll(".dropdown").forEach((item) => {

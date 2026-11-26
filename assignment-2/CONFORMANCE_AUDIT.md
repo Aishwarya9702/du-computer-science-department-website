@@ -376,3 +376,103 @@ Random image J 2–45 guards both nodes; asset paths and image/caption matching 
 No browser, screen reader, actual network/storage observation, official validator, full repository or candidate commit verification. Execute TC-RES-001–007 at 100% and supplementary 200% zoom; TC-COMP-001–003; TC-ACC-001–004; TC-PRIV-001–006; all functional/validation/counter/error cases and regression cases. Record actual OS/browser/version, viewport, zoom, candidate hash, fixtures, screenshots and retest results. W3C HTML/CSS zero-error requirement remains unverified. Do not mark any case passed based on this audit.
 ## 19. Overall conclusion
 The normal initialized form has substantial source-level coverage of registration, validation, feedback, accessibility and reset requirements. The unsafe native submission path is a release-blocking discrepancy, and incomplete DOM guards require correction. Formal acceptance remains pending. This report is a static audit of the supplied snapshot, not a claim of production readiness.
+
+## 20. Post-Audit Verification Update
+
+**Date:** 26 November 2026  
+**Stage:** Post-audit corrective implementation verification  
+**Status:** Targeted source corrections verified; user-reported preliminary checks successful; formal execution pending.
+
+### 20.1 Purpose and preservation of baseline
+
+This supplementary review re-evaluates F-01–F-09 from Section 15 against the corrected candidate. Sections 1–19, their historical findings, original line references, baseline hashes and conformance totals (150 Compliant, 19 Partially Compliant, 7 Non-Compliant, 96 Not Verifiable, 0 Not Applicable; total 272) remain unchanged. This is not a replacement full conformance audit. No source, SRS or test-plan modifications were made.
+
+### 20.2 Reviewed evidence and methodology
+
+| Alias | Corrected upload | SHA-256 |
+|---|---|---|
+| H2 | `alumni(20261126-141709).html` | `a10c22dc0f01e38bba775b1c15ad3fa8abc70e080fb1823e3567cb110738bd84` |
+| J2 | `script(20261126-141709).js` | `72455bd123d54064b93cf630e7c21930cc39ad8ab8faba5812befa33878597d0` |
+| C2 | `style(20261126-141710).css` | `a83fa826271b915e58e5b0fe9e4d8ece63b81b20e1afabd962840784764da8bf` |
+
+References: original `CONFORMANCE_AUDIT(6).md` (Sections 1–19); finalized `SRS(20261126-135807).md`; `ASSIGNMENT_TEST_PLAN(20261126-135806).md`; previously supplied `index(10).html` and `timetable(4).html` for contextual regression review only. Updated line references below are one-based and apply to the corrected uploads, not the historical audit snapshot.
+
+Methods: direct file inspection, line-by-line comparison against the pre-correction source, HTML parsing using BeautifulSoup, identifier/control counting, whitespace inspection, and `node --check` (exit 0). The HTML parser is not a standards validator. No browser, network, screen-reader or W3C execution was performed by the reviewer.
+
+### 20.3 Corrective-action verification
+
+**F-01 — Critical: Unsafe native form submission.** H2:7 declares CSP `form-action 'none'`; H2:53–55 supplies a semantic `noscript` notice; H2:57–58 retains the form and `novalidate`; H2:215–217 makes the default submit button disabled. J2:108–123 establishes guarded initialization and readiness; J2:588–595 initializes constraints and prevents default submission before checking readiness; J2:670–690 installs modification/reset/counter listeners before enabling Register; J2:693–701 catches initialization exceptions and disables the button. Ordinary click and implicit Enter submission are designed to fail closed before readiness; CSP provides a separate native-submission restriction, including if the submit button is missing. Normal validation remains local. The original unsafe enabled-button path is corrected at source level. Actual browser enforcement, URL/network observations and disabled-script behavior require formal evidence. A blocked external script need not activate `noscript`. CSP form-action is not a general network or storage restriction, and frontend controls cannot protect against deliberate DOM/script manipulation or browser extensions. Use fictional data only.
+
+**F-02 — High: Incomplete DOM initialization guards.** J2:108–170 verifies form and button types, collects all eleven editable controls and eleven error containers within the form, checks expected element classes, control ownership, counter/status presence and submit-button ownership/type. The 26 required references (including form) are accounted for before field dereferencing. J2:201–203 and 588 initialize bounds after guards. J2:592–625, 629–671 and 675–690 preserve submit, modification, reset and counter behavior. One registration each for form submit/input/change/reset and feedback input occurs in the single normal initialization call (J2:694). J2:693–701 isolates initialization exceptions from subsequent clock/dropdown code. The original missing-element risk is corrected for initial DOM inspection. The function is not explicitly idempotent if manually invoked repeatedly; arbitrary DOM mutation after initialization is outside the verified scope. Fault-injection and browser checks remain pending formally.
+
+**F-03 — Medium: Faculty joining-date risk.** J2:60–69 checks attribute presence and exact YYYY-MM-DD shape before splitting. J2:71–85 retains calendar round-trip and future-date checks; J2:87–103 retains completed-year calculation and invocation. Previously supplied homepage lines 486, 508, 530, 552 and 574 contain five valid date strings. Missing/malformed values now return from the affected iteration with `Invalid joining date`, allowing remaining records to be processed. The original conditional null-reference risk is corrected. Current homepage deployment and runtime fault injection are not independently verified.
+
+**F-04 — Low: Dropdown parent guard.** J2:774–780 checks the result of `closest('.dropdown')` before reading its class list. J2:782–813 retains close/open and outside-click handling and aria-expanded updates. C2:180–189 retains hover/focus selectors. Previously supplied homepage lines 43, 55, 67 and 79 contain dropdown buttons within dropdown groups. The original orphan-toggle risk is corrected. Full keyboard, tap, hover/focus and ARIA state synchronization remain runtime verification items.
+
+**F-05 — Low: Persistent demonstration notice.** H2:48–52 explicitly identifies the academic frontend demonstration, states no application submission/storage and requests fictional sample information. H2:57–58 associates the notice with the form; C2:1004–1011 supplies existing paragraph styling. J2:620–624 retains the original successful validation message. The original missing pre-entry notice is corrected. Visibility, readability and assistive-technology behavior require runtime evidence.
+
+**F-06 — Low: Coding convention deviations.** H2:181 is now a clean blank line following the About Yourself group. C2:102 and 180–181 normalize child combinator spacing without changing selector behavior. Comparison confirms these three selector lines are the only CSS changes. No trailing whitespace detected in H2, J2 or C2. The specifically identified deviations are corrected; this does not establish complete style-guide or W3C compliance.
+
+**F-07 — Informational: Navigation refinement.** C2:968–987 and 1233–1242 retain the original alumni navigation and mobile wrapping. No unnecessary redesign was introduced. The user previously reported preliminary responsive success; formal viewport and keyboard verification remains pending. Retained advisory, not a newly closed defect.
+
+**F-08 — Informational: Formal evidence pending.** The finalized plan retains its historical execution status and stale header context (T:14–17). No formal per-case results, screenshots, browser/version records or W3C reports were supplied for this update. Record the corrected candidate and actual execution details in the testing report without changing historical baseline evidence. Finding remains open.
+
+**F-09 — Informational: Revalidation policy.** J2:629–667 clears stale success on modification and revalidates currently invalid fields; J2:566–584 summarizes displayed errors. A corrected field made invalid again may not show a new error until submission. J2:598–618 still validates every field before success. Existing policy is retained as directed; no continuous revalidation redesign is required by the identified FR-52/53 wording. Regression verification remains pending.
+
+### 20.4 Preservation of approved functionality
+
+HTML parsing found 11 editable controls, 10 required controls, 11 field-error containers, four fieldsets and 34 unique IDs (no duplicates); every editable control has an associated label. The original controls, field constraints and validation function bodies are retained in the source comparison.
+
+| Functionality | Corrected evidence | SRS references | Existing planned cases |
+|---|---|---|---|
+| Semantic structure, labels, groups | H2:18–224 | FR-01–08 | TC-FUN-001–002, TC-ACC-002 |
+| Full name, trimmed minimum 3 | H2:63–69; J2:208–218,341–349 | FR-09, FR-35–37, VR-01–03 | TC-VAL-001–002, TC-VAL-018–023 |
+| Email, trimmed native syntax, one @, dotted domain, no internal whitespace | H2:71–76; J2:222–255,342,351–355 | FR-10, FR-38, VR-04 | TC-VAL-003–004, TC-VAL-024–036 |
+| Contact, exactly ten ASCII digits, leading zero retained | H2:78–89; J2:259–261,343,357–364 | FR-11, FR-39, VR-05 | TC-VAL-005–006, TC-VAL-037–045 |
+| DOB, Gregorian validity and 1900 to local today | H2:91–97; J2:193–204,265–304,366–373 | FR-12, FR-40, VR-06–09 | TC-VAL-007, TC-VAL-046–054, TC-VAL-065 |
+| Graduation year, four digits, 1980 to local current year | H2:103–112; J2:201–204,308–319,377–391 | FR-13, FR-41, VR-10–11 | TC-VAL-008, TC-VAL-055–065 |
+| Course, placeholder and five approved options | H2:114–125; J2:129–135,323–325,393–397 | FR-14–16, VR-12 | TC-VAL-009, TC-VAL-066–067 |
+| Designation, organization and location, trimmed minimum 2; alternatives retained | H2:131–164; J2:401–426 | FR-17–20, FR-43, VR-13–15 | TC-FUN-005, TC-VAL-010–015, TC-VAL-068–084 |
+| Optional About Yourself, trimmed minimum 10 when nonempty | H2:170–180; J2:430–438 | FR-21–23, VR-16 | TC-VAL-085–091 |
+| Feedback required, trimmed minimum 10, raw maximum 300 UTF-16 units | H2:184–204; J2:127,442–459 | FR-24–25, FR-32–33, FR-42, VR-17–18, VR-20 | TC-VAL-016–017, TC-VAL-092–097, TC-CNT-010–013 |
+| Live entered/remaining counter, zero clamp, initial and reset update | H2:199–203; J2:174–189,675–687; C2:1528–1538 | FR-26–31, NFR-28, NFR-32, NFR-38 | TC-CNT-001–014 |
+| Field errors, ARIA associations, summary, focus, value retention | H2:63–210; J2:468–584,603–618; C2:1542–1595 | FR-46–54, NFR-29–31, NFR-37 | TC-ERR-001–005, TC-ACC-001–004 |
+| Success, no application submission, stale success cleared | J2:592–625,641–644 | FR-55–59, VR-19 | TC-FUN-004, TC-PRIV-001, TC-ERR-003–004 |
+| Native reset, clear errors/status, counter refresh, placeholder restoration | H2:117,219–221; J2:511–525,544–553,675–684 | FR-60–66 | TC-CNT-014, TC-ERR-005 |
+| Existing responsive styling and disabled state | C2:1015–1133,1207–1213,1233–1325 | NFR-12–22, NFR-27 | TC-RES-001–007, TC-ACC-001 |
+| Shared homepage features | J2:2–45,48–103,704–813; C2:3–19,180–189 | FR-67–74 | TC-REG-001–012 |
+
+The shared script still implements random event image/caption, faculty experience, clock and dropdown functionality. Gallery CSS is unchanged apart from the specified navigation selector formatting. Current repository, assets, separate jQuery script and timetable behavior are not independently verified by this targeted review.
+
+### 20.5 Updated corrective-action status and traceability
+
+| Finding | Original severity | Affected SRS IDs | Existing retest IDs | Current status |
+|---|---|---|---|---|
+| F-01 | Critical | FR-45, NFR-40, NFR-55, NFR-63, SC-04, AC-41 | TC-FUN-003, TC-FUN-004, TC-PRIV-001, TC-PRIV-003–006 | Source correction verified; formal retest pending |
+| F-02 | High | NFR-48, NFR-63, NFR-68, AC-39 | TC-FUN-003, TC-PRIV-005–006, TC-COMP-001–003 | Source correction verified; formal retest pending |
+| F-03 | Medium | FR-70, NFR-68 | TC-REG-003, TC-REG-005, TC-REG-006 | Source correction verified; formal retest pending |
+| F-04 | Low | FR-72, NFR-68 | TC-REG-006 | Source correction verified; formal retest pending |
+| F-05 | Low | NFR-62, AC-40 | TC-PRIV-001, TC-FUN-004 | Source correction verified; formal retest pending |
+| F-06 | Low | NFR-67, SC-10 | TC-STD-003 | Targeted formatting verified; formal review pending |
+| F-07 | Informational | NFR-22, NFR-27 | TC-RES-004, TC-RES-007, TC-ACC-001 | Advisory retained; no redesign |
+| F-08 | Informational | AI-29–35, DR-03, DR-08, SC-11 | TC-STD-001, TC-STD-002, TC-DOC-006 | Open; formal evidence pending |
+| F-09 | Informational | FR-52, FR-53 | TC-ERR-003, TC-ERR-004 | Existing policy retained; formal regression pending |
+
+Ranges abbreviate existing identifiers; no new formal test IDs or results are assigned. Six source corrections verified, two informational advisories retained, one informational evidence finding open. These are finding-level dispositions, not revised requirement-level totals or formal defect closure.
+
+### 20.6 Preliminary testing and formal execution distinction
+
+The developer reports that targeted post-correction manual checks were completed successfully. Individual screenshots are unavailable. This is recorded as user-reported preliminary evidence only; no individual case result, browser/version, viewport, timestamp, network trace or fault-injection observation is inferred from the aggregate report. Earlier preliminary responsive success is likewise user-reported. The reviewer independently performed static checks and JavaScript syntax checking only. All 168 formal cases retain their existing Not Tested status in the supplied plan. No W3C HTML/CSS pass is claimed.
+
+### 20.7 Remaining limitations and formal verification priorities
+
+- TC-FUN-003 and TC-PRIV-003–006: verify initial disabled state, JS disabled/blocked/delayed, failed initialization, missing controls/errors/counter/status/button, and ordinary click/Enter behavior. Check CSP enforcement in Chrome, Edge and Firefox, including reload/restored disabled state. Use disposable local fault-injection copies and fictional data.
+- TC-PRIV-001–006: inspect URL, request payloads, network and application storage during valid/invalid submission, reset and failure scenarios. Source contains no explicit fetch/XHR/sendBeacon/storage/cookie/console calls identified by targeted scan; this is not network observation. Browser autofill and extensions are outside application control.
+- TC-VAL-001–097, TC-CNT-001–014, TC-ERR-001–005 and TC-FUN-001–005: execute complete field, boundary, UTF-16 counter, error and reset checks. Native date/number sanitization may differ by browser.
+- TC-ACC-001–004, TC-RES-001–007, TC-COMP-001–003: verify keyboard, assistive technology, contrast, all approved widths and browser behavior; supplementary 200% zoom as previously recommended.
+- TC-REG-001–012: verify full Assignment 1 functionality, assets, jQuery, timetable, navigation and baseline tag/repository preservation.
+- TC-STD-001–004 and TC-DOC-006: obtain official validator reports, review warnings and conventions, and record candidate revision and actual evidence. No validator execution was performed here.
+
+### 20.8 Post-audit conclusion
+
+The corrected candidate addresses the original source-level causes of F-01 through F-06 while retaining the approved registration controls, validation rules, feedback counter, accessible errors and reset logic. The original critical unsafe submission path and high-severity incomplete initialization guards have been remediated in the inspected source; their formal runtime acceptance remains pending. F-07 and F-09 are retained advisories, and F-08 remains open. The user-reported successful preliminary checks support progression in the academic development workflow but do not replace documented formal testing. No original audit result, baseline count, SRS requirement or test-plan status has been retrospectively changed. Final release/submission acceptance remains dependent on formal execution and standards evidence.
