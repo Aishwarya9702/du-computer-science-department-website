@@ -435,6 +435,137 @@ if (alumniForm) {
     return errors;
   }
 
+
+  /* Accessible Field-Specific Error Handling */
+
+  const fieldIds = Object.keys(fields);
+
+  const errorContainers = {};
+
+  fieldIds.forEach(function (fieldId) {
+    errorContainers[fieldId] =
+      document.getElementById(`${fieldId}-error`);
+  });
+
+  // Preserve instructional descriptions when adding or removing errors.
+  function updateErrorAssociation(field, errorId, hasError) {
+    const descriptions = new Set(
+      (field.getAttribute("aria-describedby") || "")
+        .split(/\s+/)
+        .filter(Boolean)
+    );
+
+    if (hasError) {
+      descriptions.add(errorId);
+    } else {
+      descriptions.delete(errorId);
+    }
+
+    if (descriptions.size > 0) {
+      field.setAttribute(
+        "aria-describedby",
+        Array.from(descriptions).join(" ")
+      );
+    } else {
+      field.removeAttribute("aria-describedby");
+    }
+  }
+
+  /* Display an Individual Field Error */
+
+  function showFieldError(fieldId, message) {
+    const field = fields[fieldId];
+    const errorContainer = errorContainers[fieldId];
+
+    errorContainer.textContent = message;
+    errorContainer.hidden = false;
+
+    field.setAttribute("aria-invalid", "true");
+
+    updateErrorAssociation(
+      field,
+      errorContainer.id,
+      true
+    );
+  }
+
+  /* Clear an Individual Field Error */
+
+  function clearFieldError(fieldId) {
+    const field = fields[fieldId];
+    const errorContainer = errorContainers[fieldId];
+
+    errorContainer.textContent = "";
+    errorContainer.hidden = true;
+
+    field.removeAttribute("aria-invalid");
+
+    updateErrorAssociation(
+      field,
+      errorContainer.id,
+      false
+    );
+  }
+
+  /* Display All Validation Results */
+
+  function displayValidationErrors(validationErrors) {
+    fieldIds.forEach(function (fieldId) {
+      if (validationErrors[fieldId]) {
+        showFieldError(
+          fieldId,
+          validationErrors[fieldId]
+        );
+      } else {
+        clearFieldError(fieldId);
+      }
+    });
+  }
+
+  /* Clear All Field Errors */
+
+  function clearAllFieldErrors() {
+    fieldIds.forEach(clearFieldError);
+  }
+
+  /* Form-Level Message Management */
+
+  function clearFormMessage() {
+    formMessage.textContent = "";
+    formMessage.className = "form-message";
+  }
+
+  function showFormMessage(message, messageType) {
+    formMessage.className =
+      `form-message ${messageType}`;
+
+    if (formMessage.textContent !== message) {
+      formMessage.textContent = message;
+    }
+  }
+
+  /* Form-Level Validation Summary */
+
+  function updateValidationSummary() {
+    const invalidFieldIds = fieldIds.filter(function (fieldId) {
+      return fields[fieldId].getAttribute("aria-invalid") === "true";
+    });
+
+    const errorCount = invalidFieldIds.length;
+
+    if (errorCount === 0) {
+      clearFormMessage();
+      return;
+    }
+
+    const message = errorCount === 1
+      ? "Please correct the highlighted field before registering."
+      : `Please correct the ${errorCount} highlighted fields ` +
+        "before registering.";
+
+    showFormMessage(message, "error");
+  }
+
   /* Initialize Dynamic HTML Constraints */
 
   updateDateAndYearConstraints(new Date());
@@ -446,35 +577,81 @@ if (alumniForm) {
 
     const today = new Date();
 
-    // Refresh the bounds in case the local date or year has changed.
+    // Refresh the permitted date and year before validation.
     updateDateAndYearConstraints(today);
 
     const validationErrors = validateAlumniForm(today);
-    const invalidFieldIds = Object.keys(validationErrors);
 
-    /* Temporary Form-Level Validation Presentation */
+    displayValidationErrors(validationErrors);
+
+    const invalidFieldIds = fieldIds.filter(function (fieldId) {
+      return Boolean(validationErrors[fieldId]);
+    });
 
     if (invalidFieldIds.length > 0) {
-      const firstInvalidFieldId = invalidFieldIds[0];
+      updateValidationSummary();
 
-      formMessage.textContent =
-        validationErrors[firstInvalidFieldId];
+      // Focus the first invalid field in form order.
+      fields[invalidFieldIds[0]].focus();
 
-      formMessage.className = "form-message error";
-    } else {
-      formMessage.textContent =
-        "Form validated successfully! " +
-        "This is a demonstration; no data has been submitted or stored.";
-
-      formMessage.className = "form-message success";
+      return;
     }
+
+    showFormMessage(
+      "Form validated successfully! " +
+      "This is a demonstration; no data has been submitted or stored.",
+      "success"
+    );
   });
 
-  /* Reset Form Message and Counter */
+  /* Revalidate Previously Invalid Fields */
+
+  function handleFieldModification(event) {
+    const field = event.target;
+    const fieldId = field.id;
+
+    // Ignore events originating outside the registration controls.
+    if (!fieldIds.includes(fieldId) || fields[fieldId] !== field) {
+      return;
+    }
+
+    // A previous success result is no longer current after an edit.
+    if (formMessage.classList.contains("success")) {
+      clearFormMessage();
+    }
+
+    // Avoid premature validation of untouched or unvalidated fields.
+    if (field.getAttribute("aria-invalid") !== "true") {
+      return;
+    }
+
+    const today = new Date();
+
+    updateDateAndYearConstraints(today);
+
+    const validationErrors = validateAlumniForm(today);
+
+    if (validationErrors[fieldId]) {
+      showFieldError(
+        fieldId,
+        validationErrors[fieldId]
+      );
+    } else {
+      clearFieldError(fieldId);
+    }
+
+    updateValidationSummary();
+  }
+
+  // Delegate modification handling to the form.
+  alumniForm.addEventListener("input", handleFieldModification);
+  alumniForm.addEventListener("change", handleFieldModification);
+
+  /* Reset Form Validation States and Counter */
 
   alumniForm.addEventListener("reset", function () {
-    formMessage.textContent = "";
-    formMessage.className = "form-message";
+    clearAllFieldErrors();
+    clearFormMessage();
 
     // Update the counter after the native form reset completes.
     setTimeout(updateFeedbackCounter, 0);

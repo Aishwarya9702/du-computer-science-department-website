@@ -1547,9 +1547,8 @@ main h2 {
   box-shadow: inset 3px 0 0 #b42318;
 }
 
-/* Field-Specific Validation Messages */
 
-/* Reserved for the subsequent error-handling stage. */
+/* Field-Specific Validation Messages */
 
 .alumni-form .form-group > .field-error {
   margin: 7px 0 0;
@@ -1560,7 +1559,12 @@ main h2 {
   overflow-wrap: anywhere;
 }
 
+.alumni-form .form-group > .field-error[hidden] {
+  display: none;
+}
+
 /* Form-Level Validation Message */
+
 
 .alumni-form .form-message {
   margin: 16px 0 0;
@@ -1569,6 +1573,10 @@ main h2 {
   font-weight: 600;
   line-height: 1.6;
   overflow-wrap: anywhere;
+}
+
+.alumni-form .form-message:empty {
+  margin: 0;
 }
 
 /* Form-Level Error Message */

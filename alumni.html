@@ -54,12 +54,14 @@
             <input type="text" id="full-name" name="full_name"
               placeholder="Enter your full name" autocomplete="name"
               minlength="3" required>
+            <p id="full-name-error" class="field-error" hidden></p>
           </div>
 
           <div class="form-group">
             <label for="email">Email Address (required)</label>
             <input type="email" id="email" name="email"
               placeholder="Enter your email" autocomplete="email" required>
+            <p id="email-error" class="field-error" hidden></p>
           </div>
 
           <div class="form-group">
@@ -72,6 +74,7 @@
               Enter exactly 10 digits (0–9), without a country code,
               internal spaces or symbols. Leading zeroes are allowed.
             </p>
+            <p id="phone-error" class="field-error" hidden></p>
           </div>
 
           <div class="form-group">
@@ -79,6 +82,7 @@
             <!-- JavaScript will initialize the maximum to the local date. -->
             <input type="date" id="dob" name="dob" min="1900-01-01"
               autocomplete="bday" required>
+            <p id="dob-error" class="field-error" hidden></p>
           </div>
         </fieldset>
 
@@ -93,6 +97,7 @@
             <p id="batch-hint">
               Enter a four-digit year from 1980 to the current year.
             </p>
+            <p id="batch-error" class="field-error" hidden></p>
           </div>
 
           <div class="form-group">
@@ -105,6 +110,7 @@
               <option value="phd">Ph.D. Computer Science</option>
               <option value="other">Other</option>
             </select>
+            <p id="degree-error" class="field-error" hidden></p>
           </div>
         </fieldset>
 
@@ -120,6 +126,7 @@
               You may enter Student, Unemployed, Retired or Self-employed
               if applicable.
             </p>
+            <p id="designation-error" class="field-error" hidden></p>
           </div>
 
           <div class="form-group">
@@ -131,6 +138,7 @@
               If you do not have an organization, enter Not applicable,
               Independent or Self-employed, as appropriate.
             </p>
+            <p id="organization-error" class="field-error" hidden></p>
           </div>
 
           <div class="form-group">
@@ -141,6 +149,7 @@
             <p id="location-hint">
               Enter your city or city and country, not your full address.
             </p>
+            <p id="location-error" class="field-error" hidden></p>
           </div>
         </fieldset>
 
@@ -156,6 +165,7 @@
               Leave blank or enter at least 10 characters after trimming
               leading and trailing whitespace.
             </p>
+            <p id="about-yourself-error" class="field-error" hidden></p>
           </div>
           
           <!-- Alumni Feedback -->
@@ -179,12 +189,14 @@
               aria-live="polite" aria-atomic="true">
               0 characters entered | 300 characters remaining
             </p>
+            <p id="feedback-error" class="field-error" hidden></p>
           </div>
         </fieldset>
 
         <!-- Form Validation Message -->
 
-        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+        <p id="form-message" class="form-message"
+          role="status" aria-live="polite" aria-atomic="true"></p>
 
 
         <!-- Form Buttons -->
