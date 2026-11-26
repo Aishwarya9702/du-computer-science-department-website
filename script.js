@@ -133,111 +133,343 @@ if (feedback && characterCount) {
   feedback.addEventListener("input", updateFeedbackCounter);
 }
 
-
 /* Form Validation */
 
 if (alumniForm) {
+  const minimumBirthDate = "1900-01-01";
+  const minimumGraduationYear = 1980;
+  const maximumFeedbackLength = 300;
 
-  alumniForm.addEventListener("submit", function (event) {
+  const approvedCourses = [
+    "bsc",
+    "msc",
+    "mca",
+    "phd",
+    "other"
+  ];
 
-    event.preventDefault();
+  const fields = {
+    "full-name": document.getElementById("full-name"),
+    "email": document.getElementById("email"),
+    "phone": document.getElementById("phone"),
+    "dob": document.getElementById("dob"),
+    "batch": document.getElementById("batch"),
+    "degree": document.getElementById("degree"),
+    "designation": document.getElementById("designation"),
+    "organization": document.getElementById("organization"),
+    "location": document.getElementById("location"),
+    "about-yourself": document.getElementById("about-yourself"),
+    "feedback": feedback
+  };
 
-    const fullName = document.getElementById("full-name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const dob = document.getElementById("dob").value;
-    const batch = document.getElementById("batch").value;
-    const degree = document.getElementById("degree").value;
-    const designation = document.getElementById("designation").value.trim();
-    const organization = document.getElementById("organization").value.trim();
-    const about = document.getElementById("about-yourself").value.trim();
-    const feedbackText = feedback.value.trim();
+  /* Local Date and Year Constraints */
 
-    let error = "";
+  function getLocalDateString(date) {
+    const year = String(date.getFullYear()).padStart(4, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
 
-    /* Empty Field Validation */
+    return `${year}-${month}-${day}`;
+  }
+
+  function updateDateAndYearConstraints(today) {
+    fields.dob.max = getLocalDateString(today);
+    fields.batch.max = String(today.getFullYear());
+  }
+
+  /* Required Text and Minimum Length Validation */
+
+  function validateRequiredText(value, label, minimumLength = 1) {
+    if (value.length === 0) {
+      return `${label} is required.`;
+    }
+
+    if (value.length < minimumLength) {
+      return `${label} must contain at least ${minimumLength} characters.`;
+    }
+
+    return "";
+  }
+
+  /* Email Address Validation */
+
+  function isValidEmail(value) {
+    if (/\s/.test(value)) {
+      return false;
+    }
+
+    const emailParts = value.split("@");
 
     if (
-      !fullName || !email || !phone ||
-      !dob || !batch || !degree ||
-      !designation || !organization ||
-      !about || !feedbackText
+      emailParts.length !== 2 ||
+      !emailParts[0] ||
+      !emailParts[1]
     ) {
-      error = "Please fill in all fields.";
+      return false;
     }
 
-    /* Minimum Length Validation */
+    const domainParts = emailParts[1].split(".");
 
-    else if (fullName.length < 3) {
-      error = "Full Name must contain at least 3 characters.";
-    }
-
-    else if (designation.length < 2) {
-      error = "Designation must contain at least 2 characters.";
-    }
-
-    else if (organization.length < 2) {
-      error = "Organization must contain at least 2 characters.";
-    }
-
-    else if (about.length < 10) {
-      error = "About Yourself must contain at least 10 characters.";
-    }
-
-    else if (feedbackText.length < 10) {
-      error = "Feedback must contain at least 10 characters.";
-    }
-
-    else if (feedback.value.length > 300) {
-      error = "Feedback cannot exceed 300 characters.";
-    }
-
-    /* Email Validation */
-
-    else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    if (
+      domainParts.length < 2 ||
+      domainParts.some(function (part) {
+        return part.length === 0;
+      })
     ) {
-      error = "Please enter a valid email address.";
+      return false;
     }
 
-    /* Phone Validation */
+    // Apply the native HTML email syntax to the trimmed value.
+    const emailValidator = document.createElement("input");
+    emailValidator.type = "email";
+    emailValidator.required = true;
+    emailValidator.value = value;
 
-    else if (!/^[0-9]{10}$/.test(phone)) {
-      error = "Please enter a valid 10-digit phone number.";
+    return emailValidator.validity.valid;
+  }
+
+  /* Contact Number Validation */
+
+  function isValidContactNumber(value) {
+    return /^[0-9]{10}$/.test(value);
+  }
+
+  /* Date of Birth Validation */
+
+  function isValidDOB(value, today) {
+    if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value)) {
+      return false;
     }
 
-    /* Date of Birth Validation */
-
-    else if (!isValidDOB(dob)) {
-      error = "Please enter a valid date of birth.";
-    }
-
-    /* Graduation Batch Validation */
-
-    else if (
-      !/^\d{4}$/.test(batch) ||
-      Number(batch) < 1980 ||
-      Number(batch) > new Date().getFullYear()
+    if (
+      value < minimumBirthDate ||
+      value > getLocalDateString(today)
     ) {
-      error = "Please enter a valid graduation year.";
+      return false;
     }
 
-    /* Display Result */
+    const [year, month, day] = value.split("-").map(Number);
 
-    if (error) {
-      formMessage.textContent = error;
+    const isLeapYear =
+      year % 400 === 0 ||
+      (year % 4 === 0 && year % 100 !== 0);
+
+    const daysInMonth = [
+      31,
+      isLeapYear ? 29 : 28,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31
+    ];
+
+    return (
+      month >= 1 &&
+      month <= 12 &&
+      day >= 1 &&
+      day <= daysInMonth[month - 1]
+    );
+  }
+
+  /* Graduation Year Validation */
+
+  function isValidGraduationYear(value, today) {
+    if (!/^[0-9]{4}$/.test(value)) {
+      return false;
+    }
+
+    const year = Number(value);
+
+    return (
+      year >= minimumGraduationYear &&
+      year <= today.getFullYear()
+    );
+  }
+
+  /* Course / Department Validation */
+
+  function isValidCourse(value) {
+    return approvedCourses.includes(value);
+  }
+
+  /* Comprehensive Field Validation */
+
+  function validateAlumniForm(today) {
+    const errors = {};
+
+    // Store one validation message per invalid field.
+    function addError(fieldId, message) {
+      if (message) {
+        errors[fieldId] = message;
+      }
+    }
+
+    /* Personal Information */
+
+    const fullName = fields["full-name"].value.trim();
+    const email = fields.email.value.trim();
+    const phone = fields.phone.value.trim();
+    const dob = fields.dob.value;
+
+    addError(
+      "full-name",
+      validateRequiredText(fullName, "Full Name", 3)
+    );
+
+    if (!email) {
+      addError("email", "Email Address is required.");
+    } else if (!isValidEmail(email)) {
+      addError("email", "Please enter a valid email address.");
+    }
+
+    if (!phone) {
+      addError("phone", "Contact Number is required.");
+    } else if (!isValidContactNumber(phone)) {
+      addError(
+        "phone",
+        "Contact Number must contain exactly 10 digits (0–9)."
+      );
+    }
+
+    if (!dob) {
+      addError("dob", "Date of Birth is required.");
+    } else if (!isValidDOB(dob, today)) {
+      addError(
+        "dob",
+        "Enter a valid date of birth from 1900-01-01 to today."
+      );
+    }
+
+    /* Academic Information */
+
+    const batch = fields.batch.value;
+    const degree = fields.degree.value;
+
+    if (!batch) {
+      addError(
+        "batch",
+        "Academic Batch / Year of Passing is required."
+      );
+    } else if (!isValidGraduationYear(batch, today)) {
+      addError(
+        "batch",
+        `Enter a four-digit year from ${minimumGraduationYear} ` +
+        `to ${today.getFullYear()}.`
+      );
+    }
+
+    if (!degree) {
+      addError("degree", "Please select your Course / Department.");
+    } else if (!isValidCourse(degree)) {
+      addError("degree", "Please select an approved course.");
+    }
+
+    /* Professional Information */
+
+    const designation = fields.designation.value.trim();
+    const organization = fields.organization.value.trim();
+    const location = fields.location.value.trim();
+
+    addError(
+      "designation",
+      validateRequiredText(
+        designation,
+        "Current Designation",
+        2
+      )
+    );
+
+    addError(
+      "organization",
+      validateRequiredText(
+        organization,
+        "Organization / Company Name",
+        2
+      )
+    );
+
+    addError(
+      "location",
+      validateRequiredText(location, "Current Location", 2)
+    );
+
+    /* Optional About Yourself */
+
+    const about = fields["about-yourself"].value.trim();
+
+    if (about && about.length < 10) {
+      addError(
+        "about-yourself",
+        "About Yourself must contain at least 10 characters " +
+        "when provided."
+      );
+    }
+
+    /* Alumni Feedback */
+
+    const rawFeedback = fields.feedback.value;
+    const trimmedFeedback = rawFeedback.trim();
+
+    if (rawFeedback.length > maximumFeedbackLength) {
+      addError(
+        "feedback",
+        `Alumni Feedback cannot exceed ${maximumFeedbackLength} characters.`
+      );
+    } else {
+      addError(
+        "feedback",
+        validateRequiredText(
+          trimmedFeedback,
+          "Alumni Feedback",
+          10
+        )
+      );
+    }
+
+    return errors;
+  }
+
+  /* Initialize Dynamic HTML Constraints */
+
+  updateDateAndYearConstraints(new Date());
+
+  /* Form Submission */
+
+  alumniForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const today = new Date();
+
+    // Refresh the bounds in case the local date or year has changed.
+    updateDateAndYearConstraints(today);
+
+    const validationErrors = validateAlumniForm(today);
+    const invalidFieldIds = Object.keys(validationErrors);
+
+    /* Temporary Form-Level Validation Presentation */
+
+    if (invalidFieldIds.length > 0) {
+      const firstInvalidFieldId = invalidFieldIds[0];
+
+      formMessage.textContent =
+        validationErrors[firstInvalidFieldId];
+
       formMessage.className = "form-message error";
     } else {
       formMessage.textContent =
         "Form validated successfully! " +
-        "This is a demonstration; no data has been submitted.";
+        "This is a demonstration; no data has been submitted or stored.";
 
       formMessage.className = "form-message success";
     }
-
   });
 
-  
   /* Reset Form Message and Counter */
 
   alumniForm.addEventListener("reset", function () {
@@ -247,30 +479,6 @@ if (alumniForm) {
     // Update the counter after the native form reset completes.
     setTimeout(updateFeedbackCounter, 0);
   });
-}
-
-/* Validate Date of Birth */
-
-function isValidDOB(dateString) {
-
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
-    return false;
-  }
-
-  const [year, month, day] = dateString
-    .split("-")
-    .map(Number);
-
-  const date = new Date(year, month - 1, day);
-  const today = new Date();
-
-  return (
-    date.getFullYear() === year &&
-    date.getMonth() === month - 1 &&
-    date.getDate() === day &&
-    date <= today &&
-    year >= 1900
-  );
 }
 
 
