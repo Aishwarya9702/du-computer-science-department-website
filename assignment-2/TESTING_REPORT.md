@@ -9,16 +9,16 @@
 
 | Attribute | Value |
 |---|---|
-| Version | 1.0 — execution consolidation |
+| Version | 1.1 — final deliverable verification update |
 | Date | 26 November 2026 |
 | Intended location | `assignment-2/TESTING_REPORT.md` |
 | Requirements baseline | Finalized SRS v1.0 |
 | Test baseline | Finalized test plan v1.0; original statuses unchanged |
-| Candidate | Reported HEAD `99926ab`; exact association of every run/upload with this commit not established |
+| Candidate | Earlier recorded HEAD `99926ab`; subsequent submission candidate verified by user, exact newer hash not supplied; exact association of every run/upload with a commit not established |
 | Assignment 1 baseline | `assignment-1-final`, `cf70e4aeb29beb4d259ed4f92733dcce213c7992` (previously recorded; short hash visible in supplied log) |
-| Status | 164 Pass, 0 Fail, 4 Pending — final deliverables not yet verified |
+| Status | 168 Pass, 0 Fail, 0 Pending — 100% recorded pass rate |
 
-The report consolidates the user's explicit manual confirmations for Batches 1–8, validator screenshots, prior source/document reviews, user-confirmed walkthrough corrections and supplied Git log. Pass means a reported or reviewed pass, not necessarily independently witnessed execution. No final release certification is claimed. The four outstanding deliverable cases remain Pending. Pending is a report-level designation for uncompleted verification, corresponding to Not Tested or an incomplete prerequisite in the original plan. The approved plan is not edited.
+The report consolidates the user's explicit manual confirmations for Batches 1–8, validator screenshots, prior source/document reviews, user-confirmed walkthrough corrections and supplied Git log. Pass means a reported or reviewed pass, not necessarily independently witnessed execution. No final release certification is claimed. The user subsequently confirmed manual verification and passing results for TC-DOC-006 through TC-DOC-009 for the submission candidate. All 168 cases are now recorded as Pass. The updated documentation requires ZIP and Git revision reverification before submission. The approved plan is not edited.
 
 ## 2. Scope, methodology and environment
 
@@ -48,6 +48,7 @@ Baseline B (fictional): Sample Alumni; alumni@example.com; 0123456789; 1999-06-1
 | E12 | SRS, test plan, audit, walkthrough and development conversation | Document review; latest corrected walkthrough not re-uploaded |
 | E13 | User-pasted Git log | 13 incremental commits, local and remote-tracking refs; no independent live remote query |
 | E14 | User confirmation of walkthrough reference corrections | Correction reported, not independently inspected |
+| E15 | User confirmation of final manual deliverable verification | Report/evidence checked, ZIP created and tested after extraction, public conversation links verified, candidate Git revision verified; no new archive, links, hash, timestamp or independent inspection supplied |
 
 ### 3.1 Source snapshot fingerprints
 
@@ -69,7 +70,7 @@ These SHA-256 values identify the supplied bytes, not a proven Git checkout or v
 
 ### 3.2 Evidence limitations
 
-The original plan requests per-subrun records, attempted and actual DOM values, precise environment, revision and evidence filenames. The user elected simplified Pass/Fail/Pending reporting. Those missing details cannot be reconstructed; the report retains the exact planned actions and expected results, but labels actual results as user-reported aggregate confirmations where applicable. Native control sanitization, dynamic year-boundary simulation, fail-safe interruption and multi-value cases have no independent per-subrun logs. No screenshot is claimed for an individual manual case. The report is not a substitute for missing evidence; TC-DOC-006 remains pending until reviewed and evidence sufficiency assessed. No original plan statuses or historical audit counts are overwritten.
+The original plan requests per-subrun records, attempted and actual DOM values, precise environment, revision and evidence filenames. The user elected simplified Pass/Fail/Pending reporting. Those missing details cannot be reconstructed; the report retains the exact planned actions and expected results, but labels actual results as user-reported aggregate confirmations where applicable. Native control sanitization, dynamic year-boundary simulation, fail-safe interruption and multi-value cases have no independent per-subrun logs. No screenshot is claimed for an individual manual case. The report is not a substitute for missing evidence; TC-DOC-006 is now user-confirmed Pass following report and evidence review; the historical evidence limitations remain. No original plan statuses or historical audit counts are overwritten.
 
 ## 4. Execution summary
 
@@ -87,10 +88,10 @@ The original plan requests per-subrun records, attempted and actual DOM values, 
 | PRIV | 6 | 6 | 0 | 0 |
 | REG | 12 | 12 | 0 | 0 |
 | STD | 4 | 4 | 0 | 0 |
-| DOC | 9 | 5 | 0 | 4 |
-| **Total** | **168** | **164** | **0** | **4** |
+| DOC | 9 | 9 | 0 | 0 |
+| **Total** | **168** | **168** | **0** | **0** |
 
-Pass proportion: 164/168 = 97.62%; pending: 2.38%. Zero reported failures does not establish absence of defects.
+Recorded pass rate: 168/168 = 100%; pending: 0%. Zero reported failures does not establish absence of defects.
 
 | Batch | Scope | Pass | Pending |
 |---|---|---:|---:|
@@ -102,7 +103,7 @@ Pass proportion: 164/168 = 97.62%; pending: 2.38%. Zero reported failures does n
 | 6 | ACC, PERF | 5 | 0 |
 | 7 | COMP | 3 | 0 |
 | 8 | REG | 12 | 0 |
-| 9 | STD, DOC | 9 | 4 |
+| 9 | STD, DOC | 13 | 0 |
 
 ## 5. Individual execution records and requirements traceability
 
@@ -336,10 +337,290 @@ Each row reproduces the original test ID, SRS mapping, objective, preconditions,
 | TC-DOC-003 | AI-11, AI-12, AI-13, AI-14, AI-15, NFR-54, DR-09, AC-48 | Incremental workflow | Fresh page; JavaScript enabled; fictional data only. | Review transcript and Git commits for staged prompts, reuse, review before incorporation and iterative debugging. | Stages and refinements traceable; incremental commits identifiable. | 13 post-baseline commits in supplied log and staged development conversation support incremental workflow. Evidence: E12–E13 | Pass |
 | TC-DOC-004 | AI-16, AI-17, AI-18, AI-19, AI-20, AI-21, AI-22, DR-06, AC-48 | Conformance audit | Fresh page; JavaScript enabled; fictional data only. | Inspect CONFORMANCE_AUDIT.md and transcript; verify updated source, SRS and plan supplied; review coverage, gaps, counter, validation, accessibility, responsive and standards findings; inspect defect status. | Audit distinguishes static findings from browser evidence and documents missing/partial requirements and resolutions. | Original audit and appended section 20 present; prior review accepted. Evidence: E12 | Pass |
 | TC-DOC-005 | AI-23, AI-24, AI-25, AI-26, AI-27, AI-28, DR-07, AC-49 | Code walkthrough | Fresh page; JavaScript enabled; fictional data only. | Inspect CODE_WALKTHROUGH.md and transcript for HTML controls, CSS selectors/responsiveness, JS events, validation, counter, success/reset and no actual submission. | All topics explained accurately. | Walkthrough topics reviewed; user confirms correction of two CSS line references. Supplied copy still has old references; corrected copy not independently inspected. Evidence: E12, E14 | Pass |
-| TC-DOC-006 | AI-29, AI-30, AI-31, AI-32, AI-33, AI-34, AI-35, AI-36, DR-03, DR-08, SC-11, AC-50 | Manual evidence and report | Fresh page; JavaScript enabled; fictional data only. | Inspect TESTING_REPORT.md, screenshots, browser/viewport records, actual results, defects and retests; match evidence to candidate commit and cases. | Executed results supported by evidence; W3C results and regression recorded; no AI-only claims as manual passes. | This report prepared; user review, evidence linkage and sufficiency verification outstanding. Evidence: E01–E14 | Pending |
-| TC-DOC-007 | DR-01, AC-51 | Final ZIP | Fresh page; JavaScript enabled; fictional data only. | Extract final archive into clean folder; compare manifest to candidate; open website and check assets and core workflow. | Complete updated source/assets; works after extraction; no confidential data. | Final archive and extraction test not independently supplied or verified. Evidence: Not supplied | Pending |
-| TC-DOC-008 | DR-02, AC-51 | Public transcript | Fresh page; JavaScript enabled; fictional data only. | Open share link in signed-out/private browser; review completeness and privacy. | Accessible complete AI workflow; no secrets or real alumni data. | Public link and signed-out accessibility/privacy verification not supplied. Evidence: Not supplied | Pending |
-| TC-DOC-009 | DR-11, AC-46 | Final revision | Fresh page; JavaScript enabled; fictional data only. | Record final candidate commit and remote availability; if optional assignment-2-final tag used verify target. | Final revision reproducible; optional tag not required. | Reported HEAD and origin/main at 99926ab; final post-report commit and live remote verification outstanding. Evidence: E13 | Pending |
+| TC-DOC-006 | AI-29, AI-30, AI-31, AI-32, AI-33, AI-34, AI-35, AI-36, DR-03, DR-08, SC-11, AC-50 | Manual evidence and report | Fresh page; JavaScript enabled; fictional data only. | Inspect TESTING_REPORT.md, screenshots, browser/viewport records, actual results, defects and retests; match evidence to candidate commit and cases. | Executed results supported by evidence; W3C results and regression recorded; no AI-only claims as manual passes. | User confirmed manual review of the testing report and supporting evidence; case passed for the verified candidate. Historical evidence limitations remain. Evidence: E01–E15 | Pass |
+| TC-DOC-007 | DR-01, AC-51 | Final ZIP | Fresh page; JavaScript enabled; fictional data only. | Extract final archive into clean folder; compare manifest to candidate; open website and check assets and core workflow. | Complete updated source/assets; works after extraction; no confidential data. | User confirmed final ZIP creation and successful testing after extraction; case passed for the verified candidate. Archive and manifest not independently inspected. Evidence: E15 | Pass |
+| TC-DOC-008 | DR-02, AC-51 | Public transcript | Fresh page; JavaScript enabled; fictional data only. | Open share link in signed-out/private browser; review completeness and privacy. | Accessible complete AI workflow; no secrets or real alumni data. | User confirmed manual verification of public AI conversation links and passing the case. Links and individual verification observations not independently supplied. Evidence: E15 | Pass |
+| TC-DOC-009 | DR-11, AC-46 | Final revision | Fresh page; JavaScript enabled; fictional data only. | Record final candidate commit and remote availability; if optional assignment-2-final tag used verify target. | Final revision reproducible; optional tag not required. | User confirmed manual verification of the candidate Git revision and passing the case. New candidate hash and live remote query not independently supplied. Evidence: E13, E15 | Pass |
+
+### 5.14 Requirements traceability — execution status
+
+The following reverse execution matrix is derived from the unchanged SRS mappings in the 168 individual records above. Pass indicates recorded test outcomes, not independent certification of each requirement. The original test plan RTM remains unchanged.
+
+| Requirement | Linked test cases | Recorded status |
+|---|---|---|
+| AC-01 | TC-FUN-001 | All linked cases Pass |
+| AC-02 | TC-FUN-001 | All linked cases Pass |
+| AC-03 | TC-FUN-002 | All linked cases Pass |
+| AC-04 | TC-FUN-002, TC-VAL-066, TC-VAL-067 | All linked cases Pass |
+| AC-05 | TC-FUN-005 | All linked cases Pass |
+| AC-06 | TC-FUN-002, TC-VAL-085, TC-VAL-086, TC-VAL-087, TC-VAL-088, TC-VAL-089, TC-VAL-090, TC-VAL-091 | All linked cases Pass |
+| AC-07 | TC-VAL-001, TC-VAL-002, TC-VAL-003, TC-VAL-004, TC-VAL-005, TC-VAL-006, TC-VAL-007, TC-VAL-008, TC-VAL-009, TC-VAL-010, TC-VAL-011, TC-VAL-012, TC-VAL-013, TC-VAL-014, TC-VAL-015, TC-VAL-016, TC-VAL-017 | All linked cases Pass |
+| AC-08 | TC-VAL-018, TC-VAL-019, TC-VAL-020, TC-VAL-021, TC-VAL-022, TC-VAL-023 | All linked cases Pass |
+| AC-09 | TC-VAL-024, TC-VAL-025, TC-VAL-026, TC-VAL-027, TC-VAL-028, TC-VAL-029, TC-VAL-030, TC-VAL-031, TC-VAL-032, TC-VAL-033, TC-VAL-034, TC-VAL-035, TC-VAL-036 | All linked cases Pass |
+| AC-10 | TC-VAL-037, TC-VAL-038, TC-VAL-039, TC-VAL-040, TC-VAL-041, TC-VAL-042, TC-VAL-043, TC-VAL-044, TC-VAL-045 | All linked cases Pass |
+| AC-11 | TC-VAL-046, TC-VAL-047, TC-VAL-048, TC-VAL-049, TC-VAL-050, TC-VAL-051, TC-VAL-052, TC-VAL-053, TC-VAL-054 | All linked cases Pass |
+| AC-12 | TC-VAL-046, TC-VAL-047, TC-VAL-048, TC-VAL-049, TC-VAL-050, TC-VAL-051, TC-VAL-052, TC-VAL-053, TC-VAL-054 | All linked cases Pass |
+| AC-13 | TC-VAL-055, TC-VAL-056, TC-VAL-057, TC-VAL-058, TC-VAL-059, TC-VAL-060, TC-VAL-061, TC-VAL-062, TC-VAL-063, TC-VAL-064 | All linked cases Pass |
+| AC-14 | TC-VAL-055, TC-VAL-056, TC-VAL-057, TC-VAL-058, TC-VAL-059, TC-VAL-060, TC-VAL-061, TC-VAL-062, TC-VAL-063, TC-VAL-064 | All linked cases Pass |
+| AC-15 | TC-VAL-068, TC-VAL-069, TC-VAL-070, TC-VAL-071, TC-VAL-072, TC-VAL-073, TC-VAL-074, TC-VAL-075, TC-VAL-076, TC-VAL-077 | All linked cases Pass |
+| AC-16 | TC-VAL-078, TC-VAL-079, TC-VAL-080, TC-VAL-081, TC-VAL-082, TC-VAL-083, TC-VAL-084 | All linked cases Pass |
+| AC-17 | TC-VAL-018, TC-VAL-019, TC-VAL-020, TC-VAL-021, TC-VAL-022, TC-VAL-023, TC-VAL-065, TC-VAL-097 | All linked cases Pass |
+| AC-18 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| AC-19 | TC-FUN-003, TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| AC-20 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008, TC-CNT-009 | All linked cases Pass |
+| AC-21 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| AC-22 | TC-CNT-010, TC-CNT-011, TC-CNT-013 | All linked cases Pass |
+| AC-23 | TC-VAL-092, TC-VAL-093, TC-VAL-094, TC-VAL-095, TC-VAL-096, TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| AC-24 | TC-CNT-011, TC-CNT-012, TC-CNT-013 | All linked cases Pass |
+| AC-25 | TC-ERR-001, TC-ERR-005 | All linked cases Pass |
+| AC-26 | TC-ERR-001 | All linked cases Pass |
+| AC-27 | TC-ERR-002 | All linked cases Pass |
+| AC-28 | TC-ERR-001, TC-ERR-002 | All linked cases Pass |
+| AC-29 | TC-FUN-004 | All linked cases Pass |
+| AC-30 | TC-ERR-003 | All linked cases Pass |
+| AC-31 | TC-CNT-014, TC-ERR-004 | All linked cases Pass |
+| AC-32 | TC-UI-001 | All linked cases Pass |
+| AC-33 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007 | All linked cases Pass |
+| AC-34 | TC-ACC-001, TC-ACC-002 | All linked cases Pass |
+| AC-35 | TC-ACC-003 | All linked cases Pass |
+| AC-36 | TC-ACC-002, TC-ACC-004 | All linked cases Pass |
+| AC-37 | TC-PERF-001 | All linked cases Pass |
+| AC-38 | TC-COMP-001, TC-COMP-002, TC-COMP-003 | All linked cases Pass |
+| AC-39 | TC-STD-003, TC-STD-004 | All linked cases Pass |
+| AC-40 | TC-PRIV-001, TC-PRIV-002 | All linked cases Pass |
+| AC-41 | TC-FUN-003, TC-PRIV-003, TC-PRIV-004, TC-PRIV-005, TC-PRIV-006 | All linked cases Pass |
+| AC-42 | TC-STD-001 | All linked cases Pass |
+| AC-43 | TC-STD-002 | All linked cases Pass |
+| AC-44 | TC-STD-001, TC-STD-002, TC-STD-003, TC-STD-004 | All linked cases Pass |
+| AC-45 | TC-REG-001, TC-REG-002, TC-REG-003, TC-REG-004, TC-REG-005, TC-REG-006, TC-REG-007, TC-REG-008, TC-REG-009, TC-REG-010, TC-REG-011 | All linked cases Pass |
+| AC-46 | TC-REG-012, TC-DOC-009 | All linked cases Pass |
+| AC-47 | TC-DOC-001, TC-DOC-002 | All linked cases Pass |
+| AC-48 | TC-DOC-003, TC-DOC-004 | All linked cases Pass |
+| AC-49 | TC-DOC-005 | All linked cases Pass |
+| AC-50 | TC-DOC-006 | All linked cases Pass |
+| AC-51 | TC-DOC-007, TC-DOC-008 | All linked cases Pass |
+| AI-01 | TC-DOC-001 | All linked cases Pass |
+| AI-02 | TC-DOC-001 | All linked cases Pass |
+| AI-03 | TC-DOC-001 | All linked cases Pass |
+| AI-04 | TC-DOC-001 | All linked cases Pass |
+| AI-05 | TC-DOC-002 | All linked cases Pass |
+| AI-06 | TC-DOC-002 | All linked cases Pass |
+| AI-07 | TC-DOC-002 | All linked cases Pass |
+| AI-08 | TC-DOC-002 | All linked cases Pass |
+| AI-09 | TC-DOC-002 | All linked cases Pass |
+| AI-10 | TC-DOC-002 | All linked cases Pass |
+| AI-11 | TC-DOC-003 | All linked cases Pass |
+| AI-12 | TC-DOC-003 | All linked cases Pass |
+| AI-13 | TC-DOC-003 | All linked cases Pass |
+| AI-14 | TC-DOC-003 | All linked cases Pass |
+| AI-15 | TC-DOC-003 | All linked cases Pass |
+| AI-16 | TC-DOC-004 | All linked cases Pass |
+| AI-17 | TC-DOC-004 | All linked cases Pass |
+| AI-18 | TC-DOC-004 | All linked cases Pass |
+| AI-19 | TC-DOC-004 | All linked cases Pass |
+| AI-20 | TC-DOC-004 | All linked cases Pass |
+| AI-21 | TC-DOC-004 | All linked cases Pass |
+| AI-22 | TC-DOC-004 | All linked cases Pass |
+| AI-23 | TC-DOC-005 | All linked cases Pass |
+| AI-24 | TC-DOC-005 | All linked cases Pass |
+| AI-25 | TC-DOC-005 | All linked cases Pass |
+| AI-26 | TC-DOC-005 | All linked cases Pass |
+| AI-27 | TC-DOC-005 | All linked cases Pass |
+| AI-28 | TC-DOC-005 | All linked cases Pass |
+| AI-29 | TC-DOC-006 | All linked cases Pass |
+| AI-30 | TC-DOC-006 | All linked cases Pass |
+| AI-31 | TC-DOC-006 | All linked cases Pass |
+| AI-32 | TC-STD-001, TC-DOC-006 | All linked cases Pass |
+| AI-33 | TC-STD-002, TC-DOC-006 | All linked cases Pass |
+| AI-34 | TC-STD-001, TC-STD-002, TC-DOC-006 | All linked cases Pass |
+| AI-35 | TC-REG-001, TC-REG-002, TC-REG-003, TC-REG-004, TC-REG-005, TC-REG-006, TC-REG-007, TC-REG-008, TC-REG-009, TC-REG-010, TC-REG-011, TC-DOC-006 | All linked cases Pass |
+| AI-36 | TC-DOC-006 | All linked cases Pass |
+| DR-01 | TC-DOC-007 | All linked cases Pass |
+| DR-02 | TC-DOC-008 | All linked cases Pass |
+| DR-03 | TC-DOC-006 | All linked cases Pass |
+| DR-04 | TC-DOC-001 | All linked cases Pass |
+| DR-05 | TC-DOC-002 | All linked cases Pass |
+| DR-06 | TC-DOC-004 | All linked cases Pass |
+| DR-07 | TC-DOC-005 | All linked cases Pass |
+| DR-08 | TC-STD-001, TC-STD-002, TC-DOC-006 | All linked cases Pass |
+| DR-09 | TC-DOC-003 | All linked cases Pass |
+| DR-10 | TC-REG-012 | All linked cases Pass |
+| DR-11 | TC-DOC-009 | All linked cases Pass |
+| FR-01 | TC-FUN-001 | All linked cases Pass |
+| FR-02 | TC-FUN-001 | All linked cases Pass |
+| FR-03 | TC-FUN-001 | All linked cases Pass |
+| FR-04 | TC-FUN-001 | All linked cases Pass |
+| FR-05 | TC-FUN-001, TC-ACC-002 | All linked cases Pass |
+| FR-06 | TC-FUN-001 | All linked cases Pass |
+| FR-07 | TC-FUN-002, TC-ACC-002 | All linked cases Pass |
+| FR-08 | TC-FUN-002, TC-REG-006 | All linked cases Pass |
+| FR-09 | TC-FUN-002, TC-VAL-001, TC-VAL-002, TC-VAL-018, TC-VAL-019, TC-VAL-020, TC-VAL-021, TC-VAL-022, TC-VAL-023 | All linked cases Pass |
+| FR-10 | TC-FUN-002, TC-VAL-003, TC-VAL-004, TC-VAL-024, TC-VAL-025, TC-VAL-026, TC-VAL-027, TC-VAL-028, TC-VAL-029, TC-VAL-030, TC-VAL-031, TC-VAL-032, TC-VAL-033, TC-VAL-034, TC-VAL-035, TC-VAL-036 | All linked cases Pass |
+| FR-11 | TC-FUN-002, TC-VAL-005, TC-VAL-006, TC-VAL-037, TC-VAL-038, TC-VAL-039, TC-VAL-040, TC-VAL-041, TC-VAL-042, TC-VAL-043, TC-VAL-044, TC-VAL-045 | All linked cases Pass |
+| FR-12 | TC-FUN-002, TC-VAL-007, TC-VAL-046, TC-VAL-047, TC-VAL-048, TC-VAL-049, TC-VAL-050, TC-VAL-051, TC-VAL-052, TC-VAL-053, TC-VAL-054 | All linked cases Pass |
+| FR-13 | TC-FUN-002, TC-VAL-008, TC-VAL-055, TC-VAL-056, TC-VAL-057, TC-VAL-058, TC-VAL-059, TC-VAL-060, TC-VAL-061, TC-VAL-062, TC-VAL-063, TC-VAL-064 | All linked cases Pass |
+| FR-14 | TC-FUN-002, TC-VAL-009, TC-VAL-066 | All linked cases Pass |
+| FR-15 | TC-FUN-002, TC-VAL-066 | All linked cases Pass |
+| FR-16 | TC-FUN-002, TC-VAL-009, TC-VAL-066, TC-VAL-067 | All linked cases Pass |
+| FR-17 | TC-FUN-002, TC-VAL-010, TC-VAL-011, TC-VAL-068, TC-VAL-069, TC-VAL-070, TC-VAL-071, TC-VAL-072 | All linked cases Pass |
+| FR-18 | TC-FUN-002, TC-VAL-012, TC-VAL-013, TC-VAL-073, TC-VAL-074, TC-VAL-075, TC-VAL-076, TC-VAL-077 | All linked cases Pass |
+| FR-19 | TC-FUN-002, TC-VAL-014, TC-VAL-015, TC-VAL-078, TC-VAL-079, TC-VAL-080, TC-VAL-081, TC-VAL-082, TC-VAL-083, TC-VAL-084 | All linked cases Pass |
+| FR-20 | TC-FUN-005 | All linked cases Pass |
+| FR-21 | TC-FUN-002, TC-VAL-085, TC-VAL-086, TC-VAL-087, TC-VAL-088, TC-VAL-089, TC-VAL-090, TC-VAL-091 | All linked cases Pass |
+| FR-22 | TC-FUN-002, TC-VAL-085, TC-VAL-086, TC-VAL-087, TC-VAL-088, TC-VAL-089, TC-VAL-090, TC-VAL-091 | All linked cases Pass |
+| FR-23 | TC-VAL-085, TC-VAL-086, TC-VAL-087, TC-VAL-088, TC-VAL-089, TC-VAL-090, TC-VAL-091 | All linked cases Pass |
+| FR-24 | TC-FUN-002, TC-VAL-016, TC-VAL-017 | All linked cases Pass |
+| FR-25 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008, TC-CNT-010, TC-CNT-013 | All linked cases Pass |
+| FR-26 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008, TC-CNT-012 | All linked cases Pass |
+| FR-27 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008, TC-CNT-012 | All linked cases Pass |
+| FR-28 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008, TC-CNT-009, TC-CNT-012 | All linked cases Pass |
+| FR-29 | TC-FUN-003, TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| FR-30 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008, TC-CNT-010 | All linked cases Pass |
+| FR-31 | TC-CNT-014 | All linked cases Pass |
+| FR-32 | TC-CNT-011, TC-CNT-013 | All linked cases Pass |
+| FR-33 | TC-VAL-016, TC-VAL-017, TC-VAL-092, TC-VAL-093, TC-VAL-094, TC-VAL-095, TC-VAL-096, TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| FR-34 | TC-FUN-004 | All linked cases Pass |
+| FR-35 | TC-VAL-001, TC-VAL-003, TC-VAL-005, TC-VAL-007, TC-VAL-008, TC-VAL-009, TC-VAL-010, TC-VAL-012, TC-VAL-014, TC-VAL-016 | All linked cases Pass |
+| FR-36 | TC-VAL-002, TC-VAL-004, TC-VAL-006, TC-VAL-011, TC-VAL-013, TC-VAL-015, TC-VAL-017 | All linked cases Pass |
+| FR-37 | TC-VAL-018, TC-VAL-019, TC-VAL-020, TC-VAL-021, TC-VAL-022, TC-VAL-023, TC-VAL-068, TC-VAL-069, TC-VAL-070, TC-VAL-071, TC-VAL-072, TC-VAL-073, TC-VAL-074, TC-VAL-075, TC-VAL-076, TC-VAL-077, TC-VAL-078, TC-VAL-079, TC-VAL-080, TC-VAL-081, TC-VAL-082 | All linked cases Pass |
+| FR-38 | TC-VAL-024, TC-VAL-025, TC-VAL-026, TC-VAL-027, TC-VAL-028, TC-VAL-029, TC-VAL-030, TC-VAL-031, TC-VAL-032, TC-VAL-033, TC-VAL-034, TC-VAL-035, TC-VAL-036 | All linked cases Pass |
+| FR-39 | TC-VAL-037, TC-VAL-038, TC-VAL-039, TC-VAL-040, TC-VAL-041, TC-VAL-042, TC-VAL-043, TC-VAL-044, TC-VAL-045 | All linked cases Pass |
+| FR-40 | TC-VAL-046, TC-VAL-047, TC-VAL-048, TC-VAL-049, TC-VAL-050, TC-VAL-051, TC-VAL-052, TC-VAL-053, TC-VAL-054, TC-VAL-065 | All linked cases Pass |
+| FR-41 | TC-VAL-055, TC-VAL-056, TC-VAL-057, TC-VAL-058, TC-VAL-059, TC-VAL-060, TC-VAL-061, TC-VAL-062, TC-VAL-063, TC-VAL-064, TC-VAL-065 | All linked cases Pass |
+| FR-42 | TC-VAL-092, TC-VAL-093, TC-VAL-094, TC-VAL-095, TC-VAL-096, TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008, TC-CNT-011, TC-CNT-013 | All linked cases Pass |
+| FR-43 | TC-VAL-014, TC-VAL-015, TC-VAL-078, TC-VAL-079, TC-VAL-080, TC-VAL-081, TC-VAL-082, TC-VAL-083, TC-VAL-084 | All linked cases Pass |
+| FR-44 | TC-VAL-065, TC-VAL-097 | All linked cases Pass |
+| FR-45 | TC-FUN-004, TC-PRIV-001, TC-PRIV-003, TC-PRIV-004, TC-PRIV-005, TC-PRIV-006 | All linked cases Pass |
+| FR-46 | TC-ERR-001 | All linked cases Pass |
+| FR-47 | TC-ERR-001 | All linked cases Pass |
+| FR-48 | TC-ERR-001, TC-ERR-005 | All linked cases Pass |
+| FR-49 | TC-ERR-001, TC-ACC-003 | All linked cases Pass |
+| FR-50 | TC-ERR-001 | All linked cases Pass |
+| FR-51 | TC-ERR-002 | All linked cases Pass |
+| FR-52 | TC-ERR-002, TC-ERR-005 | All linked cases Pass |
+| FR-53 | TC-ERR-001 | All linked cases Pass |
+| FR-54 | TC-ERR-001, TC-ERR-002 | All linked cases Pass |
+| FR-55 | TC-FUN-002, TC-FUN-004 | All linked cases Pass |
+| FR-56 | TC-FUN-004 | All linked cases Pass |
+| FR-57 | TC-FUN-004, TC-PRIV-001 | All linked cases Pass |
+| FR-58 | TC-FUN-004 | All linked cases Pass |
+| FR-59 | TC-ERR-003 | All linked cases Pass |
+| FR-60 | TC-FUN-002, TC-ERR-004 | All linked cases Pass |
+| FR-61 | TC-ERR-004 | All linked cases Pass |
+| FR-62 | TC-CNT-014, TC-ERR-004 | All linked cases Pass |
+| FR-63 | TC-ERR-004 | All linked cases Pass |
+| FR-64 | TC-ERR-004 | All linked cases Pass |
+| FR-65 | TC-FUN-003, TC-ERR-004 | All linked cases Pass |
+| FR-66 | TC-ERR-004, TC-PRIV-001 | All linked cases Pass |
+| FR-67 | TC-REG-006 | All linked cases Pass |
+| FR-68 | TC-REG-001, TC-REG-002, TC-REG-007, TC-REG-011 | All linked cases Pass |
+| FR-69 | TC-REG-004 | All linked cases Pass |
+| FR-70 | TC-REG-003 | All linked cases Pass |
+| FR-71 | TC-REG-005 | All linked cases Pass |
+| FR-72 | TC-REG-006 | All linked cases Pass |
+| FR-73 | TC-REG-009, TC-REG-010 | All linked cases Pass |
+| FR-74 | TC-REG-008, TC-REG-011 | All linked cases Pass |
+| FR-75 | TC-REG-012 | All linked cases Pass |
+| NFR-01 | TC-UI-001 | All linked cases Pass |
+| NFR-02 | TC-FUN-001, TC-UI-001 | All linked cases Pass |
+| NFR-03 | TC-FUN-002, TC-UI-001, TC-ACC-002 | All linked cases Pass |
+| NFR-04 | TC-UI-001 | All linked cases Pass |
+| NFR-05 | TC-UI-001 | All linked cases Pass |
+| NFR-06 | TC-ERR-002 | All linked cases Pass |
+| NFR-07 | TC-ERR-001 | All linked cases Pass |
+| NFR-08 | TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| NFR-09 | TC-UI-001 | All linked cases Pass |
+| NFR-10 | TC-UI-001 | All linked cases Pass |
+| NFR-11 | TC-UI-001 | All linked cases Pass |
+| NFR-12 | TC-UI-001 | All linked cases Pass |
+| NFR-13 | TC-ERR-001, TC-ERR-005, TC-UI-001 | All linked cases Pass |
+| NFR-14 | TC-UI-001 | All linked cases Pass |
+| NFR-15 | TC-UI-001 | All linked cases Pass |
+| NFR-16 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007 | All linked cases Pass |
+| NFR-17 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007 | All linked cases Pass |
+| NFR-18 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007 | All linked cases Pass |
+| NFR-19 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007 | All linked cases Pass |
+| NFR-20 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007 | All linked cases Pass |
+| NFR-21 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007 | All linked cases Pass |
+| NFR-22 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007, TC-REG-011 | All linked cases Pass |
+| NFR-23 | TC-FUN-001 | All linked cases Pass |
+| NFR-24 | TC-FUN-001, TC-ACC-002 | All linked cases Pass |
+| NFR-25 | TC-FUN-001, TC-ACC-002 | All linked cases Pass |
+| NFR-26 | TC-ACC-001 | All linked cases Pass |
+| NFR-27 | TC-ACC-001 | All linked cases Pass |
+| NFR-28 | TC-ACC-003 | All linked cases Pass |
+| NFR-29 | TC-ERR-001, TC-ACC-003 | All linked cases Pass |
+| NFR-30 | TC-ERR-001, TC-ACC-003 | All linked cases Pass |
+| NFR-31 | TC-ACC-003 | All linked cases Pass |
+| NFR-32 | TC-ACC-003 | All linked cases Pass |
+| NFR-33 | TC-ACC-004 | All linked cases Pass |
+| NFR-34 | TC-ACC-002 | All linked cases Pass |
+| NFR-35 | TC-ACC-004 | All linked cases Pass |
+| NFR-36 | TC-ACC-001 | All linked cases Pass |
+| NFR-37 | TC-ERR-001, TC-ACC-001 | All linked cases Pass |
+| NFR-38 | TC-CNT-009, TC-PERF-001 | All linked cases Pass |
+| NFR-39 | TC-FUN-004, TC-PERF-001 | All linked cases Pass |
+| NFR-40 | TC-FUN-004, TC-ERR-004, TC-PERF-001 | All linked cases Pass |
+| NFR-41 | TC-PERF-001 | All linked cases Pass |
+| NFR-42 | TC-COMP-001, TC-COMP-002, TC-COMP-003 | All linked cases Pass |
+| NFR-43 | TC-COMP-001, TC-COMP-002, TC-COMP-003 | All linked cases Pass |
+| NFR-44 | TC-RES-001, TC-RES-002, TC-RES-003, TC-RES-004, TC-RES-005, TC-RES-006, TC-RES-007, TC-COMP-001, TC-COMP-002, TC-COMP-003 | All linked cases Pass |
+| NFR-45 | TC-COMP-001, TC-COMP-002, TC-COMP-003 | All linked cases Pass |
+| NFR-46 | TC-STD-003 | All linked cases Pass |
+| NFR-47 | TC-STD-003 | All linked cases Pass |
+| NFR-48 | TC-STD-004 | All linked cases Pass |
+| NFR-49 | TC-STD-004 | All linked cases Pass |
+| NFR-50 | TC-STD-004 | All linked cases Pass |
+| NFR-51 | TC-VAL-097, TC-STD-004 | All linked cases Pass |
+| NFR-52 | TC-STD-003, TC-STD-004 | All linked cases Pass |
+| NFR-53 | TC-REG-012, TC-STD-004 | All linked cases Pass |
+| NFR-54 | TC-DOC-003 | All linked cases Pass |
+| NFR-55 | TC-PRIV-001 | All linked cases Pass |
+| NFR-56 | TC-PRIV-001 | All linked cases Pass |
+| NFR-57 | TC-PRIV-001 | All linked cases Pass |
+| NFR-58 | TC-PRIV-001 | All linked cases Pass |
+| NFR-59 | TC-PRIV-001 | All linked cases Pass |
+| NFR-60 | TC-PRIV-001 | All linked cases Pass |
+| NFR-61 | TC-PRIV-002 | All linked cases Pass |
+| NFR-62 | TC-PRIV-001 | All linked cases Pass |
+| NFR-63 | TC-FUN-003, TC-PRIV-003, TC-PRIV-004, TC-PRIV-005, TC-PRIV-006 | All linked cases Pass |
+| NFR-64 | TC-STD-001 | All linked cases Pass |
+| NFR-65 | TC-STD-002 | All linked cases Pass |
+| NFR-66 | TC-STD-001, TC-STD-002 | All linked cases Pass |
+| NFR-67 | TC-STD-003 | All linked cases Pass |
+| NFR-68 | TC-STD-004 | All linked cases Pass |
+| SC-01 | TC-STD-003 | All linked cases Pass |
+| SC-02 | TC-PRIV-001 | All linked cases Pass |
+| SC-03 | TC-PRIV-001 | All linked cases Pass |
+| SC-04 | TC-PRIV-001, TC-PRIV-003, TC-PRIV-004, TC-PRIV-005 | All linked cases Pass |
+| SC-05 | TC-CNT-010, TC-CNT-011 | All linked cases Pass |
+| SC-06 | TC-REG-012 | All linked cases Pass |
+| SC-07 | TC-REG-012 | All linked cases Pass |
+| SC-08 | TC-REG-012 | All linked cases Pass |
+| SC-09 | TC-REG-001, TC-REG-002, TC-REG-003, TC-REG-004, TC-REG-005, TC-REG-006, TC-REG-007, TC-REG-008, TC-REG-009, TC-REG-010, TC-REG-011, TC-REG-012 | All linked cases Pass |
+| SC-10 | TC-STD-003, TC-STD-004 | All linked cases Pass |
+| SC-11 | TC-STD-001, TC-STD-002, TC-DOC-006 | All linked cases Pass |
+| VR-01 | TC-VAL-001, TC-VAL-003, TC-VAL-005, TC-VAL-007, TC-VAL-008, TC-VAL-009, TC-VAL-010, TC-VAL-012, TC-VAL-014, TC-VAL-016 | All linked cases Pass |
+| VR-02 | TC-VAL-002, TC-VAL-004, TC-VAL-006, TC-VAL-011, TC-VAL-013, TC-VAL-015, TC-VAL-017 | All linked cases Pass |
+| VR-03 | TC-VAL-001, TC-VAL-002, TC-VAL-018, TC-VAL-019, TC-VAL-020, TC-VAL-021, TC-VAL-022, TC-VAL-023 | All linked cases Pass |
+| VR-04 | TC-VAL-003, TC-VAL-004, TC-VAL-024, TC-VAL-025, TC-VAL-026, TC-VAL-027, TC-VAL-028, TC-VAL-029, TC-VAL-030, TC-VAL-031, TC-VAL-032, TC-VAL-033, TC-VAL-034, TC-VAL-035, TC-VAL-036 | All linked cases Pass |
+| VR-05 | TC-VAL-005, TC-VAL-006, TC-VAL-037, TC-VAL-038, TC-VAL-039, TC-VAL-040, TC-VAL-041, TC-VAL-042, TC-VAL-043, TC-VAL-044, TC-VAL-045 | All linked cases Pass |
+| VR-06 | TC-VAL-007 | All linked cases Pass |
+| VR-07 | TC-VAL-046, TC-VAL-047, TC-VAL-048, TC-VAL-049, TC-VAL-050, TC-VAL-051, TC-VAL-052, TC-VAL-053, TC-VAL-054 | All linked cases Pass |
+| VR-08 | TC-VAL-046, TC-VAL-047, TC-VAL-048, TC-VAL-049, TC-VAL-050, TC-VAL-051, TC-VAL-052, TC-VAL-053, TC-VAL-054, TC-VAL-065 | All linked cases Pass |
+| VR-09 | TC-VAL-046, TC-VAL-047, TC-VAL-048, TC-VAL-049, TC-VAL-050, TC-VAL-051, TC-VAL-052, TC-VAL-053, TC-VAL-054 | All linked cases Pass |
+| VR-10 | TC-VAL-008, TC-VAL-055, TC-VAL-056, TC-VAL-057, TC-VAL-058, TC-VAL-059, TC-VAL-060, TC-VAL-061, TC-VAL-062, TC-VAL-063, TC-VAL-064 | All linked cases Pass |
+| VR-11 | TC-VAL-055, TC-VAL-056, TC-VAL-057, TC-VAL-058, TC-VAL-059, TC-VAL-060, TC-VAL-061, TC-VAL-062, TC-VAL-063, TC-VAL-064, TC-VAL-065 | All linked cases Pass |
+| VR-12 | TC-VAL-009, TC-VAL-066, TC-VAL-067 | All linked cases Pass |
+| VR-13 | TC-VAL-010, TC-VAL-011, TC-VAL-068, TC-VAL-069, TC-VAL-070, TC-VAL-071, TC-VAL-072 | All linked cases Pass |
+| VR-14 | TC-VAL-012, TC-VAL-013, TC-VAL-073, TC-VAL-074, TC-VAL-075, TC-VAL-076, TC-VAL-077 | All linked cases Pass |
+| VR-15 | TC-VAL-014, TC-VAL-015, TC-VAL-078, TC-VAL-079, TC-VAL-080, TC-VAL-081, TC-VAL-082, TC-VAL-083, TC-VAL-084 | All linked cases Pass |
+| VR-16 | TC-VAL-085, TC-VAL-086, TC-VAL-087, TC-VAL-088, TC-VAL-089, TC-VAL-090, TC-VAL-091 | All linked cases Pass |
+| VR-17 | TC-VAL-016, TC-VAL-017, TC-VAL-092, TC-VAL-093, TC-VAL-094, TC-VAL-095, TC-VAL-096, TC-CNT-001, TC-CNT-002, TC-CNT-003, TC-CNT-004, TC-CNT-005, TC-CNT-006, TC-CNT-007, TC-CNT-008 | All linked cases Pass |
+| VR-18 | TC-CNT-011, TC-CNT-013 | All linked cases Pass |
+| VR-19 | TC-FUN-004 | All linked cases Pass |
+| VR-20 | TC-VAL-018, TC-VAL-019, TC-VAL-020, TC-VAL-021, TC-VAL-022, TC-VAL-023, TC-VAL-024, TC-VAL-025, TC-VAL-026, TC-VAL-027, TC-VAL-028, TC-VAL-029, TC-VAL-030, TC-VAL-031, TC-VAL-032, TC-VAL-033, TC-VAL-034, TC-VAL-035, TC-VAL-036, TC-VAL-037, TC-VAL-038, TC-VAL-039, TC-VAL-040, TC-VAL-041, TC-VAL-042, TC-VAL-043, TC-VAL-044, TC-VAL-045, TC-VAL-068, TC-VAL-069, TC-VAL-070, TC-VAL-071, TC-VAL-072, TC-VAL-073, TC-VAL-074, TC-VAL-075, TC-VAL-076, TC-VAL-077, TC-VAL-078, TC-VAL-079, TC-VAL-080, TC-VAL-081, TC-VAL-082, TC-VAL-085, TC-VAL-086, TC-VAL-087, TC-VAL-088, TC-VAL-089, TC-VAL-090, TC-VAL-091, TC-VAL-092, TC-VAL-093, TC-VAL-094, TC-VAL-095, TC-VAL-096, TC-VAL-097, TC-CNT-012 | All linked cases Pass |
+
 
 ## 6. Standards validation and warning disposition
 
@@ -369,7 +650,7 @@ The original audit remains historical: 150 Compliant, 19 Partially Compliant, 7 
 | F-05 | Low | Persistent demonstration notice and no-JS notice | PRIV-001, FUN-004 | Source corrected; retests user-reported Pass |
 | F-06 | Low | Targeted whitespace and selector formatting | STD-003 | Prior static review Pass |
 | F-07 | Informational | Retain existing navigation styling; no redesign | RES-004/007, ACC-001 | Advisory retained; tests reported Pass |
-| F-08 | Informational | Record formal execution and validator evidence separately | STD-001/002, DOC-006 | Partially addressed; report verification pending |
+| F-08 | Informational | Record formal execution and validator evidence separately | STD-001/002, DOC-006 | Formal execution and validator evidence recorded; DOC-006 user-confirmed Pass; historical evidence limitations retained |
 | F-09 | Informational | Retain existing error revalidation policy | ERR-003/004 (audit references); ERR-002/005 also relevant | Advisory retained; tests reported Pass |
 
 Earlier Stage 6 duplicate validation implementation was corrected before the final audit; subsequent validation cases reported Pass. No new failed formal case was reported. Walkthrough line-reference issue: 600px C1233–1301 → C1233–1294; 375px C1305–1325 → C1298–1315. User confirmed correction; revised file not inspected. No website retest required solely for reference edits. No claim of independently observed critical/high defect closure is made.
@@ -394,21 +675,25 @@ Supplied Git log lists 13 commits after `assignment-1-final`:
 | 70d9677 | Code walkthrough |
 | 99926ab | Code walkthrough update |
 
-The supplied log shows HEAD, main, origin/main and origin/HEAD at 99926ab and local baseline tag at cf70e4a. This supports DOC-003 but does not prove live remote state. REG-012 is user-reported Pass, including baseline/ZIP/document preservation; original archive hashes, remote tag query and diff output were not independently supplied. The duplicate walkthrough commit message is not a defect. Final revision remains pending.
+The supplied log shows HEAD, main, origin/main and origin/HEAD at 99926ab and local baseline tag at cf70e4a. This supports DOC-003 but does not prove live remote state. REG-012 is user-reported Pass, including baseline/ZIP/document preservation; original archive hashes, remote tag query and diff output were not independently supplied. The duplicate walkthrough commit message is not a defect. The later submission candidate revision was user-confirmed verified (E15); its exact hash was not supplied. Reverify the revision after this documentation update.
 
-## 9. Outstanding deliverables and exit criteria
+## 9. Final deliverable verification and exit criteria
 
-| Case | Remaining verification | Required evidence |
+| Case | Confirmed manual verification | Recorded status |
 |---|---|---|
-| TC-DOC-006 | Review this report and reconcile missing execution evidence against plan | Reviewed report, evidence mapping, limitations, candidate identity; record any unresolved evidence gaps |
-| TC-DOC-007 | Create final ZIP, extract in clean directory, compare manifest, test assets/core workflow and privacy | Archive manifest and user-confirmed extraction test |
-| TC-DOC-008 | Verify public conversation link in signed-out/private browser | Link and confirmation of completeness/privacy |
-| TC-DOC-009 | Record final candidate and verify remote availability | Full commit hash and remote branch query; optional tag only if used |
+| TC-DOC-006 | Testing report and evidence checked | Pass |
+| TC-DOC-007 | Final ZIP created and tested after extraction | Pass |
+| TC-DOC-008 | Public AI conversation links verified | Pass |
+| TC-DOC-009 | Candidate Git revision verified | Pass |
 
-Suggested sequence: review report and save screenshots; commit/push candidate; verify ZIP and transcript; record final verification in a separate closure record or report revision, clearly identifying which commit the archive represents. If updating the report changes the commit, record both the tested source candidate and submission/documentation revision to avoid circular self-identification. Do not mark deliverables passed until verified. No additional browser test is currently reported failed, but repeat affected tests if source changes or evidence gaps require it.
+All four results are based on the user's explicit confirmation (E15), not independent inspection. No new evidence files, links, timestamps or commit hashes are asserted.
+
+### Post-update submission integrity
+
+These results apply to the previously verified submission candidate. Replacing README.md and TESTING_REPORT.md changes the documentation snapshot. Commit and push the updated documents, record the actual new revision and verify remote availability. Recreate the final ZIP from that revision, extract it into a clean directory, compare its contents and verify the website and updated documentation. Ensure the public conversation links remain accessible. Record the final package/revision verification separately to avoid circular self-identification. These are post-update release checks, not additional test cases or a reversal of the recorded passes. Repeat affected tests if source changes.
 
 ## 10. Conclusion and approval
 
-164 of 168 cases are recorded as Pass on the stated evidence basis, with four Pending and zero reported Fail. Both validators show zero errors; CSS warnings are justified. Source remediation and regression are supported by static evidence and user confirmations, not independently witnessed runtime execution. Final submission readiness is conditional on outstanding deliverable verification and review of evidence limitations. The approved SRS, original test plan, audit and source files remain unchanged by report generation.
+All 168 cases are recorded as Pass on the stated evidence basis, with zero Pending and zero reported Fail (100% recorded pass rate). Both validators show zero errors; CSS warnings are justified. Source remediation and regression are supported by static evidence and user confirmations, not independently witnessed runtime execution. The verified candidate has completed all recorded test cases. Submission of the updated documentation snapshot requires ZIP and Git revision reverification as described in Section 9; evidence limitations remain. The approved SRS, original test plan, audit and source files remain unchanged by report generation.
 
-Student review: Pending. Final approval: Pending. No signature or approval is fabricated.
+Student review: user-confirmed for the verified candidate. Instructor approval and signatures are not asserted.

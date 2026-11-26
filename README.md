@@ -370,7 +370,7 @@ AI assists requirements engineering, implementation, review and documentation. M
 | Code comprehension | [Walkthrough](CODE_WALKTHROUGH.md) | [Walkthrough](assignment-2/CODE_WALKTHROUGH.md) |
 | Testing records | [Supplementary checklist](TESTING.md) | [Testing report](assignment-2/TESTING_REPORT.md) |
 
-The finalized Assignment 2 SRS and test plan remain the requirements and testing baselines. The audit records original findings and subsequent corrective verification. The walkthrough explains HTML, CSS and JavaScript behavior. The testing report contains individual execution records for all 168 cases, evidence limitations and outstanding checks.
+The finalized Assignment 2 SRS and test plan remain the requirements and testing baselines. The audit records original findings and subsequent corrective verification. The walkthrough explains HTML, CSS and JavaScript behavior. The testing report contains individual execution records for all 168 cases, evidence limitations and final deliverable verification.
 
 ---
 
@@ -562,10 +562,10 @@ The recorded results in the finalized execution report are:
 | Privacy and fail-safe behavior | 6 | 6 | 0 | 0 |
 | Regression and baseline preservation | 12 | 12 | 0 | 0 |
 | Standards and code quality | 4 | 4 | 0 | 0 |
-| AI workflow and documentation | 9 | 5 | 0 | 4 |
-| **Total** | **168** | **164** | **0** | **4** |
+| AI workflow and documentation | 9 | 9 | 0 | 0 |
+| **Total** | **168** | **168** | **0** | **0** |
 
-**Recorded pass proportion: 97.62%.** Chrome, Edge and Firefox compatibility, responsive checks and Assignment 1 regression tests were reported passed. Accessibility inspection used Chrome DevTools; no screen-reader execution is claimed. The report distinguishes manual confirmations from static review and validator evidence. Individual sub-run observations and exact browser versions were not collected.
+**Recorded pass rate: 100%.** Chrome, Edge and Firefox compatibility, responsive checks and Assignment 1 regression tests were reported passed. Accessibility inspection used Chrome DevTools; no screen-reader execution is claimed. The report distinguishes manual confirmations from static review and validator evidence. Individual sub-run observations and exact browser versions were not collected.
 
 ### W3C validation
 
@@ -576,18 +576,20 @@ The recorded results in the finalized execution report are:
 
 The three CSS warnings concern identical background and border colors on the Register button in normal, hover and active states (lines 1166, 1172 and 1177 in the validated stylesheet). These are intentional solid-button styling choices, not CSS syntax errors. No changes are required solely to suppress them. Contrast and focus checks were separately reported passed.
 
-The latest HTML revalidation and commit/push of the correction and testing report are developer-reported updates; the new validator screenshot and final remote revision have not been independently verified here. The earlier report remains the recorded execution snapshot.
+The latest HTML revalidation and commit/push of the correction and testing report are developer-reported updates; the new validator screenshot and final remote revision have not been independently verified here. The updated report consolidates the recorded execution results and subsequent user-confirmed deliverable checks.
 
-### Outstanding final deliverable checks
+### Final deliverable verification
 
-| Test ID | Remaining verification | Recorded status |
+| Test ID | Confirmed manual verification | Recorded status |
 |---|---|---|
-| TC-DOC-006 | Testing report review and evidence reconciliation | Pending |
-| TC-DOC-007 | Final ZIP inspection and clean extraction test | Pending |
-| TC-DOC-008 | Public AI conversation link accessibility and privacy verification | Pending |
-| TC-DOC-009 | Final candidate commit and remote availability verification | Pending |
+| TC-DOC-006 | Testing report and supporting evidence checked | Pass |
+| TC-DOC-007 | Final ZIP created and tested after extraction | Pass |
+| TC-DOC-008 | Public AI conversation links verified | Pass |
+| TC-DOC-009 | Candidate Git revision verified | Pass |
 
-Implementation, auditing, corrective development, code comprehension and reported manual testing are complete. The testing report has been prepared and is reported committed and pushed. The four recorded pending cases are retained until their acceptance criteria are verified; zero reported failures is not proof of defect-free software.
+All four results are user-confirmed manual verification for the submission candidate. No new commit hash, evidence filename or independent inspection is asserted. All 168 cases are recorded as passed; zero reported failures is not proof of defect-free software.
+
+After incorporating this README and the updated testing report, commit and push the documentation, verify the actual new Git revision and remote availability, recreate the submission ZIP and test it after clean extraction. These post-update release checks do not change the recorded results for the verified candidate.
 
 ### Version control and Assignment 1 preservation
 
@@ -598,7 +600,7 @@ git show assignment-1-final:README.md
 git log --oneline assignment-1-final..HEAD
 ```
 
-The supplied earlier Git history shows incremental Assignment 2 commits for the SRS, test plan, implementation, audit, corrections and walkthrough. The final revision should be recorded separately after deliverable verification; the earlier report's candidate hash is not assumed to be the latest commit.
+The supplied earlier Git history shows incremental Assignment 2 commits for the SRS, test plan, implementation, audit, corrections and walkthrough. The submission candidate revision was user-confirmed verified. Record and reverify the actual new revision after these documentation updates; the earlier report's candidate hash is not assumed to be the latest commit.
 
 ---
 
@@ -608,7 +610,7 @@ The supplied earlier Git history shows incremental Assignment 2 commits for the 
 - No backend or database is implemented.
 - No authentication, OTP, email/phone ownership verification, server-side validation or administrative registration dashboard is implemented.
 - Local form validation checks format and constraints, not the authenticity of alumni information.
-- Final deliverable verification remains pending in the recorded testing report.
+- Final deliverable checks are user-confirmed passed; the updated ZIP and Git revision require reverification before submission.
 - The alumni form does not store or submit registration information.
 - Faculty joining dates are sample values.
 - Academic announcements and event images are illustrative.
