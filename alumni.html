@@ -49,74 +49,61 @@
         <fieldset>
           <legend>Personal Information</legend>
 
-          <!-- Full Name -->
           <div class="form-group">
-            <label for="full-name">Full Name</label>
-            <input type="text" id="full-name" name="full_name" placeholder="Enter your full name" required>
+            <label for="full-name">Full Name (required)</label>
+            <input type="text" id="full-name" name="full_name"
+              placeholder="Enter your full name" autocomplete="name"
+              minlength="3" required>
           </div>
 
-          <!-- Email -->
           <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <label for="email">Email Address (required)</label>
+            <input type="email" id="email" name="email"
+              placeholder="Enter your email" autocomplete="email" required>
           </div>
 
-          <!-- Phone Number -->
           <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Enter a 10-digit phone number"
-              placeholder="10-digit mobile number">
+            <label for="phone">Contact Number (required)</label>
+            <input type="tel" id="phone" name="phone"
+              pattern="\s*[0-9]{10}\s*" autocomplete="tel-national"
+              inputmode="numeric" aria-describedby="phone-hint"
+              placeholder="10-digit mobile number" required>
+            <p id="phone-hint">
+              Enter exactly 10 digits (0–9), without a country code,
+              internal spaces or symbols. Leading zeroes are allowed.
+            </p>
           </div>
 
-
-          <!-- Date of Birth -->
-
           <div class="form-group">
-            <label for="dob">Date of Birth</label>
-
-            <input type="date" id="dob" name="dob" required>
+            <label for="dob">Date of Birth (required)</label>
+            <!-- JavaScript will initialize the maximum to the local date. -->
+            <input type="date" id="dob" name="dob" min="1900-01-01"
+              autocomplete="bday" required>
           </div>
         </fieldset>
 
         <fieldset>
           <legend>Academic Information</legend>
 
-          <!-- Graduation Batch -->
           <div class="form-group">
-            <label for="batch">Graduation Batch</label>
-            <input type="number" id="batch" name="batch" min="1980" max="2035" placeholder="e.g. 2024" required>
+            <label for="batch">Academic Batch / Year of Passing (required)</label>
+            <!-- JavaScript will initialize the maximum to the local year. -->
+            <input type="number" id="batch" name="batch" min="1980" step="1"
+              placeholder="e.g. 2024" aria-describedby="batch-hint" required>
+            <p id="batch-hint">
+              Enter a four-digit year from 1980 to the current year.
+            </p>
           </div>
 
-          <!-- Degree -->
           <div class="form-group">
-            <label for="degree">Degree</label>
-
+            <label for="degree">Course / Department (required)</label>
             <select id="degree" name="degree" required>
-
-              <option value="">
-                Select your degree
-              </option>
-
-              <option value="bsc">
-                B.Sc. (Hons.) Computer Science
-              </option>
-
-              <option value="msc">
-                M.Sc. Computer Science
-              </option>
-
-              <option value="mca">
-                Master of Computer Applications
-              </option>
-
-              <option value="phd">
-                Ph.D. Computer Science
-              </option>
-
-              <option value="other">
-                Other
-              </option>
-
+              <option value="">Select your degree</option>
+              <option value="bsc">B.Sc. (Hons.) Computer Science</option>
+              <option value="msc">M.Sc. Computer Science</option>
+              <option value="mca">Master of Computer Applications</option>
+              <option value="phd">Ph.D. Computer Science</option>
+              <option value="other">Other</option>
             </select>
           </div>
         </fieldset>
@@ -124,43 +111,57 @@
         <fieldset>
           <legend>Professional Information</legend>
 
-          <!-- Current Designation -->
           <div class="form-group">
-            <label for="designation">
-              Current Designation
-            </label>
-
-            <input type="text" id="designation" name="designation" placeholder="e.g. Software Engineer">
+            <label for="designation">Current Designation (required)</label>
+            <input type="text" id="designation" name="designation"
+              placeholder="e.g. Software Engineer" autocomplete="organization-title"
+              minlength="2" aria-describedby="designation-hint" required>
+            <p id="designation-hint">
+              You may enter Student, Unemployed, Retired or Self-employed
+              if applicable.
+            </p>
           </div>
 
-          <!-- Organization -->
           <div class="form-group">
-            <label for="organization">
-              Organization
-            </label>
+            <label for="organization">Organization / Company Name (required)</label>
+            <input type="text" id="organization" name="organization"
+              placeholder="Enter organization name" autocomplete="organization"
+              minlength="2" aria-describedby="organization-hint" required>
+            <p id="organization-hint">
+              If you do not have an organization, enter Not applicable,
+              Independent or Self-employed, as appropriate.
+            </p>
+          </div>
 
-            <input type="text" id="organization" name="organization" placeholder="Enter organization name">
+          <div class="form-group">
+            <label for="location">Current Location (required)</label>
+            <input type="text" id="location" name="location" minlength="2"
+              placeholder="e.g. Delhi, India" autocomplete="address-level2"
+              aria-describedby="location-hint" required>
+            <p id="location-hint">
+              Enter your city or city and country, not your full address.
+            </p>
           </div>
         </fieldset>
 
         <fieldset>
           <legend>Additional Information and Feedback</legend>
 
-          <!-- About Yourself -->
           <div class="form-group">
-            <label for="about-yourself">
-              About Yourself
-            </label>
-
+            <label for="about-yourself">About Yourself (optional)</label>
             <textarea id="about-yourself" name="about_yourself" rows="4"
+              minlength="10" aria-describedby="about-hint"
               placeholder="Share your professional journey"></textarea>
+            <p id="about-hint">
+              Leave blank or enter at least 10 characters after trimming
+              leading and trailing whitespace.
+            </p>
           </div>
-
 
           <!-- Alumni Feedback -->
 
           <div class="form-group">
-            <label for="feedback">Alumni Feedback</label>
+            <label for="feedback">Alumni Feedback (required)</label>
 
             <textarea id="feedback" name="feedback" rows="4" maxlength="300" minlength="10"
               placeholder="Share your feedback about the department" required></textarea>
