@@ -105,14 +105,34 @@ const feedback = document.getElementById("feedback");
 const characterCount = document.getElementById("character-count");
 const formMessage = document.getElementById("form-message");
 
+
 /* Live Character Counter */
 
-if (feedback && characterCount) {
-  feedback.addEventListener("input", function () {
-    characterCount.textContent =
-      feedback.value.length + " / 300 characters";
-  });
+function updateFeedbackCounter() {
+  if (!feedback || !characterCount) {
+    return;
+  }
+
+  const maxLength = feedback.maxLength;
+  const enteredCharacters = feedback.value.length;
+  const remainingCharacters = Math.max(
+    0,
+    maxLength - enteredCharacters
+  );
+
+  characterCount.textContent =
+    `${enteredCharacters} characters entered | ` +
+    `${remainingCharacters} characters remaining`;
 }
+
+if (feedback && characterCount) {
+  // Initialize the counter using the current textarea value.
+  updateFeedbackCounter();
+
+  // Update the counter whenever the feedback value changes through user input.
+  feedback.addEventListener("input", updateFeedbackCounter);
+}
+
 
 /* Form Validation */
 
@@ -217,16 +237,15 @@ if (alumniForm) {
 
   });
 
+  
   /* Reset Form Message and Counter */
 
   alumniForm.addEventListener("reset", function () {
-
     formMessage.textContent = "";
     formMessage.className = "form-message";
 
-    if (characterCount) {
-      characterCount.textContent = "0 / 300 characters";
-    }
+    // Update the counter after the native form reset completes.
+    setTimeout(updateFeedbackCounter, 0);
   });
 }
 
