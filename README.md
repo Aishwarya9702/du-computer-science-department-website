@@ -11,6 +11,15 @@ The website also demonstrates practical web development concepts such as semanti
 
 ---
 
+## Assignment Overview
+
+| Assignment | Scope | Documentation |
+|---|---|---|
+| Assignment 1 | Original multi-page departmental website and practical exercises | Root-level documents |
+| Assignment 2 | Incremental enhancement and validation of the Alumni Registration Form | `assignment-2/` |
+
+Both assignments share the same website source files. Assignment 2 extends rather than replaces Assignment 1. The Git tag `assignment-1-final` preserves the Assignment 1 baseline at commit `cf70e4a`.
+
 ## Project Objectives
 
 - Develop a multi-page departmental website using semantic HTML5.
@@ -47,7 +56,7 @@ The website also demonstrates practical web development concepts such as semanti
 
 ---
 
-## Website Features
+## Assignment 1 — Website Features (Preserved)
 
 ### 1. Department Homepage
 
@@ -80,7 +89,7 @@ The website includes a horizontal navigation bar with dropdown submenus.
 
 Features include:
 
-- CSS hover-based dropdown menus
+- CSS hover-based dropdown menus, keyboard focus support and JavaScript click/tap handling
 - Internal section navigation
 - Links between multiple webpages
 - Consistent navigation styling
@@ -159,7 +168,7 @@ Features include:
 - DOM manipulation using JavaScript
 - Different event images across repeated page loads
 
-The images represent illustrative activities such as coding workshops, technical seminars, and student hackathons.
+The current script identifies the illustrative images as Republic Day Celebration, Anti-Ragging Awareness Session, and Department Event. Random selection may repeat an image on consecutive loads.
 
 ### 9. Faculty Experience Calculator
 
@@ -177,7 +186,7 @@ Features include:
 
 ### 10. Alumni Registration Form
 
-A separate webpage, `alumni.html`, contains an alumni registration form.
+The original Assignment 1 webpage, `alumni.html`, contained the following alumni registration form features. Assignment 2 enhances this same page; see the dedicated section below.
 
 The form includes:
 
@@ -286,6 +295,85 @@ The implementation uses jQuery's `fadeTo()` method to animate image opacity whil
 
 ---
 
+## Assignment 2 — Enhanced Alumni Registration Form
+
+**Designing and Validating an Alumni Registration Form Using AI-Assisted Development**
+
+Assignment 2 improves the existing `alumni.html` module through semantic grouping, completion of the required registration fields, consistent input validation, accessible feedback, responsive styling and privacy safeguards. It retains the departmental visual identity and existing website functionality.
+
+### Registration fields and validation rules
+
+The form contains nine mandatory registration fields, one optional About Yourself field and mandatory Alumni Feedback. Four `fieldset` and `legend` groups organize the controls. Required fields are explicitly labelled.
+
+| Group | Field | Control | Validation |
+|---|---|---|---|
+| Personal | Full Name | Text | Required; at least 3 characters after trimming |
+| Personal | Email Address | Email | Required; valid HTML email syntax, exactly one `@`, nonempty local and domain parts, dotted domain with no empty components, no embedded whitespace |
+| Personal | Contact Number | Telephone | Required; exactly 10 ASCII digits after trimming; leading zeroes allowed; no country code, internal spaces or symbols |
+| Personal | Date of Birth | Date | Required; valid Gregorian date from 1900-01-01 to the device-local current date, inclusive |
+| Academic | Academic Batch / Year of Passing | Number | Required; exactly four digits, 1980 to the current local year inclusive; decimal and exponent notation rejected |
+| Academic | Course / Department | Select | Required; choose B.Sc. (Hons.) Computer Science, M.Sc. Computer Science, MCA, Ph.D. Computer Science or Other; placeholder is invalid |
+| Professional | Current Designation | Text | Required; at least 2 trimmed characters |
+| Professional | Organization / Company Name | Text | Required; at least 2 trimmed characters |
+| Professional | Current Location | Text | Required; at least 2 trimmed characters; city or city and country, not full address |
+| Additional information and feedback | About Yourself | Textarea | Optional; if nonblank after trimming, at least 10 characters |
+| Additional information and feedback | Alumni Feedback | Textarea | Required; at least 10 trimmed characters and at most 300 raw characters |
+
+Designation accepts alternatives such as Student, Unemployed, Retired and Self-employed. Organization accepts Not applicable, Independent or Self-employed where appropriate. Required text cannot consist solely of whitespace. HTML constraints complement JavaScript validation; the form uses `novalidate` to allow consistent custom error presentation. Date and year maxima are initialized and refreshed at validation time.
+
+### Live feedback counter
+
+- Starts at `0 characters entered | 300 characters remaining`.
+- Updates on input, including typing, deletion and paste, without reloading the page.
+- Uses the textarea's `maxlength` and JavaScript string length (UTF-16 code units); some emoji count as more than one unit.
+- At the limit, displays 300 entered and 0 remaining. Remaining count is never negative.
+- JavaScript independently rejects values exceeding 300 units even if the HTML limit is bypassed.
+- Reset restores the initial counter and form state.
+
+### Accessible validation and responsive design
+
+- Associated labels, meaningful legends, persistent instructions and appropriate autocomplete attributes.
+- Field-specific error text, visual invalid styling, `aria-invalid` and dynamic `aria-describedby` associations that preserve existing hints.
+- Polite live regions for the counter and form-level status; focus moves to the first invalid field on unsuccessful validation.
+- Entered values remain available for correction. Previously invalid fields are rechecked on edits, without premature errors on untouched fields.
+- Successful validation displays a demonstration-only message; subsequent edits clear stale success. Reset clears values, errors, invalid states and status messages.
+- Fluid form width, responsive spacing, wrapping navigation and stacked mobile buttons. Manual responsive tests were reported passed at 1440, 1280, 1024, 768, 425, 375 and 320 px.
+
+### Frontend-only architecture and privacy
+
+`alumni.html` defines the form and semantic controls; `style.css` provides shared and scoped responsive styles; `script.js` initializes the form, validates inputs, updates the counter and manages accessible messages. No additional library is required for alumni validation.
+
+Registration is a local validation demonstration, not an actual registration service. The submit handler prevents default submission, and the page declares a Content Security Policy with `form-action 'none'` as an additional native-submission safeguard. Register is initially disabled and enabled only after successful initialization of required controls and handlers. Missing elements or initialization failures leave registration disabled; a `noscript` notice explains unavailable validation. Messages use safe text updates rather than injecting user-provided HTML.
+
+The application does not intentionally transmit or persist registration values, use browser storage for them, or log them to the console. Use fictional sample data only. Browser-managed autofill and external browser behavior are outside the application's control. Client-side validation and CSP are not substitutes for production server-side validation or a comprehensive security review.
+
+### AI-assisted software development methodology
+
+1. Analyze the assignment specification and existing implementation; finalize the SRS with uniquely identified requirements and acceptance criteria.
+2. Derive a test plan and requirements traceability matrix before implementation.
+3. Develop incrementally: semantic structure, fields and constraints, responsive styling, feedback counter, validation and accessible error handling.
+4. Review AI-generated changes, maintain Git commits and conduct a source-code conformance audit.
+5. Correct audit findings, including fail-safe initialization, missing-element guards, inherited faculty/dropdown guards, the demonstration notice and formatting; preserve historical audit findings and append verification results.
+6. Prepare a code comprehension walkthrough explaining the implementation and execution flow.
+7. Execute manual functional, boundary, accessibility, privacy, compatibility and regression tests; perform W3C validation and consolidate evidence in the testing report.
+8. Complete final deliverable verification before claiming submission readiness.
+
+AI assists requirements engineering, implementation, review and documentation. Manual test confirmations, validator evidence and source inspection are distinguished; AI-generated expected outcomes are not treated as executed tests.
+
+### Assignment documentation
+
+| Document | Assignment 1 | Assignment 2 |
+|---|---|---|
+| Software Requirements Specification | [SRS](SRS.md) | [SRS](assignment-2/SRS.md) |
+| Test and validation plan | [Test plan](ASSIGNMENT_TEST_PLAN.md) | [Test plan](assignment-2/ASSIGNMENT_TEST_PLAN.md) |
+| Conformance audit | [Audit](CONFORMANCE_AUDIT.md) | [Audit and post-audit update](assignment-2/CONFORMANCE_AUDIT.md) |
+| Code comprehension | [Walkthrough](CODE_WALKTHROUGH.md) | [Walkthrough](assignment-2/CODE_WALKTHROUGH.md) |
+| Testing records | [Supplementary checklist](TESTING.md) | [Testing report](assignment-2/TESTING_REPORT.md) |
+
+The finalized Assignment 2 SRS and test plan remain the requirements and testing baselines. The audit records original findings and subsequent corrective verification. The walkthrough explains HTML, CSS and JavaScript behavior. The testing report contains individual execution records for all 168 cases, evidence limitations and outstanding checks.
+
+---
+
 ## Project Structure
 
 ```text
@@ -309,10 +397,19 @@ du-computer-science-department-website/
 │       ├── event1.jpg
 │       ├── event2.jpeg
 │       └── event3.jpeg
-└── screenshots/
-    ├── html-validation.png
-    └── css-validation.png
+├── screenshots/
+│   ├── html-validation.png
+│   └── css-validation.png
+└── assignment-2/
+    ├── SRS.md
+    ├── ASSIGNMENT_TEST_PLAN.md
+    ├── CONFORMANCE_AUDIT.md
+    ├── CODE_WALKTHROUGH.md
+    ├── TESTING_REPORT.md
+    └── screenshots/
 ```
+
+Root-level academic documents and screenshots belong to Assignment 1. Assignment 2 evidence is maintained in its own screenshots directory; individual evidence filenames are recorded in the testing report. This tree reflects the documented repository structure, not an independently retrieved live GitHub manifest.
 
 ### File Descriptions
 
@@ -336,6 +433,7 @@ du-computer-science-department-website/
 
 ```bash
 git clone https://github.com/Aishwarya9702/du-computer-science-department-website.git
+cd du-computer-science-department-website
 ```
 
 ### Step 2: Open the Project
@@ -346,7 +444,7 @@ Open the downloaded project folder in Visual Studio Code.
 
 Open `index.html` in a web browser.
 
-Alternatively, use the Live Server extension in VS Code.
+Alternatively, use the Live Server extension in VS Code: right-click `index.html` and select **Open with Live Server**. Navigate to the alumni page using the website menu. A local URL used during testing was `http://127.0.0.1:5500/alumni.html` (the port may vary). Enable JavaScript for interactive features.
 
 ### Step 4: Explore the Website
 
@@ -400,7 +498,7 @@ No package installation, backend server, or database setup is required.
 
 ---
 
-## Testing
+## Assignment 1 — Testing
 
 The website is tested manually to verify its structure, functionality, and user interactions.
 
@@ -446,10 +544,71 @@ The formal Software Requirements Specification, conformance audit, and HTML/CSS 
 
 ---
 
+## Assignment 2 — Testing and Standards Validation
+
+The recorded results in the finalized execution report are:
+
+| Category | Total | Passed | Failed | Pending |
+|---|---:|---:|---:|---:|
+| Functional | 5 | 5 | 0 | 0 |
+| Field validation | 97 | 97 | 0 | 0 |
+| Character counter | 14 | 14 | 0 | 0 |
+| Error handling and reset | 5 | 5 | 0 | 0 |
+| UI/UX | 1 | 1 | 0 | 0 |
+| Responsive design | 7 | 7 | 0 | 0 |
+| Accessibility | 4 | 4 | 0 | 0 |
+| Cross-browser compatibility | 3 | 3 | 0 | 0 |
+| Performance | 1 | 1 | 0 | 0 |
+| Privacy and fail-safe behavior | 6 | 6 | 0 | 0 |
+| Regression and baseline preservation | 12 | 12 | 0 | 0 |
+| Standards and code quality | 4 | 4 | 0 | 0 |
+| AI workflow and documentation | 9 | 5 | 0 | 4 |
+| **Total** | **168** | **164** | **0** | **4** |
+
+**Recorded pass proportion: 97.62%.** Chrome, Edge and Firefox compatibility, responsive checks and Assignment 1 regression tests were reported passed. Accessibility inspection used Chrome DevTools; no screen-reader execution is claimed. The report distinguishes manual confirmations from static review and validator evidence. Individual sub-run observations and exact browser versions were not collected.
+
+### W3C validation
+
+| File | Validator | Recorded result |
+|---|---|---|
+| `alumni.html` | Nu HTML Checker | Zero errors and zero warnings in the supplied screenshot; subsequent HTML correction and successful revalidation reported by the developer |
+| `style.css` | W3C CSS Validator (CSS Level 3 + SVG) | Zero errors; three reviewed warnings |
+
+The three CSS warnings concern identical background and border colors on the Register button in normal, hover and active states (lines 1166, 1172 and 1177 in the validated stylesheet). These are intentional solid-button styling choices, not CSS syntax errors. No changes are required solely to suppress them. Contrast and focus checks were separately reported passed.
+
+The latest HTML revalidation and commit/push of the correction and testing report are developer-reported updates; the new validator screenshot and final remote revision have not been independently verified here. The earlier report remains the recorded execution snapshot.
+
+### Outstanding final deliverable checks
+
+| Test ID | Remaining verification | Recorded status |
+|---|---|---|
+| TC-DOC-006 | Testing report review and evidence reconciliation | Pending |
+| TC-DOC-007 | Final ZIP inspection and clean extraction test | Pending |
+| TC-DOC-008 | Public AI conversation link accessibility and privacy verification | Pending |
+| TC-DOC-009 | Final candidate commit and remote availability verification | Pending |
+
+Implementation, auditing, corrective development, code comprehension and reported manual testing are complete. The testing report has been prepared and is reported committed and pushed. The four recorded pending cases are retained until their acceptance criteria are verified; zero reported failures is not proof of defect-free software.
+
+### Version control and Assignment 1 preservation
+
+The `assignment-1-final` tag identifies the original Assignment 1 baseline (`cf70e4a`). To inspect it without changing the working tree:
+
+```bash
+git show assignment-1-final:README.md
+git log --oneline assignment-1-final..HEAD
+```
+
+The supplied earlier Git history shows incremental Assignment 2 commits for the SRS, test plan, implementation, audit, corrections and walkthrough. The final revision should be recorded separately after deliverable verification; the earlier report's candidate hash is not assumed to be the latest commit.
+
+---
+
 ## Limitations
 
 - The website is a front-end academic demonstration.
 - No backend or database is implemented.
+- No authentication, OTP, email/phone ownership verification, server-side validation or administrative registration dashboard is implemented.
+- Local form validation checks format and constraints, not the authenticity of alumni information.
+- Final deliverable verification remains pending in the recorded testing report.
 - The alumni form does not store or submit registration information.
 - Faculty joining dates are sample values.
 - Academic announcements and event images are illustrative.
