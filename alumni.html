@@ -157,17 +157,27 @@
               leading and trailing whitespace.
             </p>
           </div>
-
+          
           <!-- Alumni Feedback -->
 
           <div class="form-group">
             <label for="feedback">Alumni Feedback (required)</label>
 
-            <textarea id="feedback" name="feedback" rows="4" maxlength="300" minlength="10"
-              placeholder="Share your feedback about the department" required></textarea>
+            <textarea id="feedback" name="feedback" rows="4"
+              minlength="10" maxlength="300"
+              placeholder="Share your feedback about the department"
+              aria-describedby="feedback-hint character-count"
+              required></textarea>
 
-            <p id="character-count" class="character-count" aria-live="polite">
-              0 / 300 characters
+            <p id="feedback-hint">
+              Enter at least 10 characters after trimming leading and
+              trailing whitespace. Feedback must not exceed 300 characters
+              in total.
+            </p>
+
+            <p id="character-count" class="character-count"
+              aria-live="polite" aria-atomic="true">
+              0 characters entered | 300 characters remaining
             </p>
           </div>
         </fieldset>
