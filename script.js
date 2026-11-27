@@ -285,63 +285,277 @@ displayRandomEvent().catch(function () {
   console.warn("Event highlights: unexpected initialization failure.");
 });
 
-
 /* Practical 10: Faculty Experience Calculator */
 
-function calculateFacultyExperience() {
+(function initializeFacultyExperience() {
+  const checkInterval = 60000;
+  const unavailableMessage = "Faculty experience is currently unavailable.";
 
-  const facultyMembers = document.querySelectorAll(
-    ".faculty-experience"
-  );
+  let facultySection = null;
+  let facultyMembers = [];
+  let facultyTimer = null;
+  let lastCheckedDate = null;
 
-  const today = new Date();
+  // Apply the Gregorian leap-year rules, including century years.
+  function isLeapYear(year) {
+    return year % 400 === 0 ||
+      (year % 4 === 0 && year % 100 !== 0);
+  }
 
-  facultyMembers.forEach(function (member) {
-
-    const dateString = member.dataset.joiningDate;
-
-    if (!dateString || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(dateString)) {
-      member.textContent = "Invalid joining date";
-      return;
+  // Validate calendar components without constructing a Date object.
+  function parseJoiningDate(value) {
+    if (typeof value !== "string" ||
+        value.length !== 10 ||
+        !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value)) {
+      return null;
     }
 
-    const [year, month, day] = dateString
-      .split("-")
-      .map(Number);
+    const [year, month, day] = value.split("-").map(Number);
 
-    const joiningDate = new Date(
-      year,
-      month - 1,
-      day
-    );
-
-    if (
-      joiningDate.getFullYear() !== year ||
-      joiningDate.getMonth() !== month - 1 ||
-      joiningDate.getDate() !== day ||
-      joiningDate > today
-    ) {
-      member.textContent = "Invalid joining date";
-      return;
+    if (year < 1 || year > 9999 ||
+        month < 1 || month > 12) {
+      return null;
     }
 
-    let experience = today.getFullYear() - year;
+    const daysInMonth = [
+      31,
+      isLeapYear(year) ? 29 : 28,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31
+    ];
 
-    if (
-      today.getMonth() < joiningDate.getMonth() ||
-      (
-        today.getMonth() === joiningDate.getMonth() &&
-        today.getDate() < joiningDate.getDate()
-      )
-    ) {
+    if (day < 1 || day > daysInMonth[month - 1]) {
+      return null;
+    }
+
+    return { year, month, day };
+  }
+
+  // Read the device-local calendar date rather than a UTC date.
+  function getLocalCalendarDate() {
+    const now = new Date();
+
+    return {
+      year: now.getFullYear(),
+      month: now.getMonth() + 1,
+      day: now.getDate()
+    };
+  }
+
+  // Produce a comparable numeric key for a calendar date.
+  function getDateKey(date) {
+    return date.year * 10000 + date.month * 100 + date.day;
+  }
+
+  // Calculate completed calendar years using the joining anniversary.
+  function calculateCompletedYears(joiningDate, today) {
+    let anniversaryMonth = joiningDate.month;
+    let anniversaryDay = joiningDate.day;
+
+    // A leap-day anniversary falls on 1 March in non-leap years.
+    if (anniversaryMonth === 2 &&
+        anniversaryDay === 29 &&
+        !isLeapYear(today.year)) {
+      anniversaryMonth = 3;
+      anniversaryDay = 1;
+    }
+
+    let experience = today.year - joiningDate.year;
+
+    const beforeAnniversary =
+      today.month < anniversaryMonth ||
+      (today.month === anniversaryMonth &&
+        today.day < anniversaryDay);
+
+    if (beforeAnniversary) {
       experience--;
     }
 
-    member.textContent = experience + " years (Sample)";
-  });
-}
+    return Math.max(0, experience);
+  }
 
-calculateFacultyExperience();
+  // Validate the joining date and produce the required display text.
+  function getExperienceText(value, today) {
+    const joiningDate = parseJoiningDate(value);
+
+    if (!joiningDate) {
+      return "Invalid joining date";
+    }
+
+    if (getDateKey(joiningDate) > getDateKey(today)) {
+      return "Joining date is in the future.";
+    }
+
+    const experience = calculateCompletedYears(joiningDate, today);
+    const unit = experience === 1 ? "year" : "years";
+
+    return `${experience} ${unit} (Sample)`;
+  }
+
+  // Avoid rewriting the DOM when the displayed text is unchanged.
+  function updateExperienceText(member, message) {
+    if (member.textContent.trim() !== message) {
+      member.textContent = message;
+    }
+  }
+
+  // Provide unavailable feedback when a suitable section exists.
+  function showUnavailableFeedback() {
+    if (facultySection instanceof HTMLElement) {
+      let feedback = facultySection.querySelector(
+        ".faculty-unavailable-message"
+      );
+
+      if (!feedback) {
+        feedback = document.createElement("p");
+        feedback.className = "faculty-unavailable-message";
+        feedback.setAttribute("role", "status");
+        facultySection.appendChild(feedback);
+      }
+
+      updateExperienceText(feedback, unavailableMessage);
+    }
+  }
+
+  // Process each faculty profile independently.
+  function calculateFacultyExperience(today) {
+    facultyMembers.forEach(function (member) {
+      try {
+        const message = getExperienceText(
+          member.dataset.joiningDate,
+          today
+        );
+
+        updateExperienceText(member, message);
+      } catch (error) {
+        console.warn("Faculty experience: profile calculation failed.");
+        updateExperienceText(member, unavailableMessage);
+      }
+    });
+  }
+
+  // Recalculate only when the local calendar date changes.
+  function checkFacultyDate() {
+    try {
+      const today = getLocalCalendarDate();
+      const currentDateKey = getDateKey(today);
+
+      if (!Number.isFinite(currentDateKey)) {
+        throw new Error("Local calendar date unavailable.");
+      }
+
+      if (currentDateKey === lastCheckedDate) {
+        return;
+      }
+
+      calculateFacultyExperience(today);
+      lastCheckedDate = currentDateKey;
+    } catch (error) {
+      console.warn("Faculty experience: date check failed.");
+
+      facultyMembers.forEach(function (member) {
+        updateExperienceText(member, unavailableMessage);
+      });
+
+      // Permit recovery at the next available date check.
+      lastCheckedDate = null;
+    }
+  }
+
+  try {
+    facultySection = document.getElementById("faculty");
+
+    const existingTargets = document.querySelectorAll(
+      ".faculty-experience"
+    );
+
+    // Recognize incomplete homepage markup without affecting other pages.
+    const isHomepage = Boolean(
+      facultySection ||
+      existingTargets.length > 0 ||
+      document.getElementById("home") ||
+      /(?:^|\/)index\.html$/.test(window.location.pathname) ||
+      window.location.pathname.endsWith("/")
+    );
+
+    if (!isHomepage) {
+      return;
+    }
+
+    if (!(facultySection instanceof HTMLElement)) {
+      console.warn("Faculty experience: faculty section is missing.");
+
+      existingTargets.forEach(function (member) {
+        updateExperienceText(member, unavailableMessage);
+      });
+
+      return;
+    }
+
+    // Prevent repeated initialization and duplicate faculty timers.
+    if (facultySection.dataset.facultyInitialized === "true") {
+      return;
+    }
+
+    facultyMembers = Array.from(
+      facultySection.querySelectorAll(".faculty-experience")
+    ).filter(function (member) {
+      return member instanceof HTMLElement;
+    });
+
+    if (facultyMembers.length === 0) {
+      console.warn("Faculty experience: no experience targets found.");
+      showUnavailableFeedback();
+      return;
+    }
+
+    // Report incomplete cards while continuing with available profiles.
+    const facultyCards = facultySection.querySelectorAll(".faculty-card");
+
+    const incompleteCards = Array.from(facultyCards).some(
+      function (card) {
+        return card.querySelectorAll(".faculty-experience").length !== 1;
+      }
+    );
+
+    if (facultyCards.length !== 5 ||
+        facultyMembers.length !== 5 ||
+        incompleteCards) {
+      console.warn("Faculty experience: incomplete faculty markup.");
+      showUnavailableFeedback();
+    }
+
+    facultySection.dataset.facultyInitialized = "true";
+
+    // Calculate immediately, then check the local date once per minute.
+    checkFacultyDate();
+    facultyTimer = window.setInterval(checkFacultyDate, checkInterval);
+  } catch (error) {
+    // Isolate unexpected failures from other website features.
+    if (facultyTimer !== null) {
+      window.clearInterval(facultyTimer);
+    }
+
+    console.warn("Faculty experience: initialization failed.");
+
+    facultyMembers.forEach(function (member) {
+      updateExperienceText(member, unavailableMessage);
+    });
+
+    if (facultySection instanceof HTMLElement) {
+      delete facultySection.dataset.facultyInitialized;
+      showUnavailableFeedback();
+    }
+  }
+})();
 
 
 /* Practical 11: Alumni Form Validation */
