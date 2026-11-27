@@ -1781,6 +1781,16 @@ main h2 {
   font-size: 14px;
 }
 
+/* Activity Planner Feedback States */
+
+.activity-message.activity-error {
+  color: #b42318;
+}
+
+.activity-message.activity-success {
+  color: #167347;
+}
+
 .activity-container h3 {
   color: #14345a;
   font-size: 20px;

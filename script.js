@@ -557,6 +557,186 @@ displayRandomEvent().catch(function () {
   }
 })();
 
+/* Practical 17: Dynamic List Using Native JavaScript */
+
+function initializeActivityPlanner() {
+  let activitySection = null;
+  let activityForm = null;
+  let activityInput = null;
+  let addItemButton = null;
+  let activityMessage = null;
+  let activityList = null;
+
+  const unavailableMessage = "Activity planner is unavailable.";
+
+  // Display textual feedback using external CSS classes.
+  function showActivityMessage(message, isError) {
+    if (!(activityMessage instanceof HTMLElement)) {
+      return;
+    }
+
+    activityMessage.textContent = message;
+
+    activityMessage.classList.remove(
+      "activity-error",
+      "activity-success"
+    );
+
+    activityMessage.classList.add(
+      isError ? "activity-error" : "activity-success"
+    );
+  }
+
+  // Prevent navigation when the planner cannot be initialized.
+  function preventActivitySubmission(event) {
+    event.preventDefault();
+  }
+
+  // Disable an incomplete planner without affecting other features.
+  function disableActivityPlanner() {
+    if (activityForm instanceof HTMLFormElement) {
+      activityForm.removeEventListener(
+        "submit",
+        handleActivitySubmit
+      );
+
+      activityForm.addEventListener(
+        "submit",
+        preventActivitySubmission
+      );
+
+      activityForm.dataset.activityInitialized = "unavailable";
+
+      // Disable available submit controls belonging to this form.
+      Array.from(activityForm.elements).forEach(function (control) {
+        if ((control instanceof HTMLButtonElement ||
+             control instanceof HTMLInputElement) &&
+            (control.type === "submit" ||
+             control.type === "image")) {
+          control.disabled = true;
+        }
+      });
+    }
+
+    if (addItemButton instanceof HTMLButtonElement) {
+      addItemButton.disabled = true;
+    }
+
+    showActivityMessage(unavailableMessage, true);
+  }
+
+  // Process both button activation and Enter-key submission.
+  function handleActivitySubmit(event) {
+    event.preventDefault();
+
+    const activity = activityInput.value.trim();
+
+    // Preserve existing empty-input validation.
+    if (activity === "") {
+      showActivityMessage(
+        "Please enter an activity.",
+        true
+      );
+
+      activityInput.focus();
+      return;
+    }
+
+    // Create a list item without interpreting user input as HTML.
+    const newItem = document.createElement("li");
+    newItem.textContent = activity;
+
+    // Preserve existing items and their insertion order.
+    activityList.appendChild(newItem);
+
+    // Clear the input and display successful feedback.
+    activityInput.value = "";
+
+    showActivityMessage(
+      "Activity added successfully!",
+      false
+    );
+
+    activityInput.focus();
+  }
+
+  try {
+    activitySection = document.getElementById("activity-planner");
+    activityForm = document.getElementById("activity-form");
+    activityInput = document.getElementById("activity-input");
+    addItemButton = document.getElementById("add-item-btn");
+    activityMessage = document.getElementById("activity-message");
+    activityList = document.getElementById("activity-list");
+
+    // Recognize the homepage even when planner markup is incomplete.
+    const isHomepage = Boolean(
+      activitySection ||
+      activityForm ||
+      activityInput ||
+      addItemButton ||
+      activityMessage ||
+      activityList ||
+      document.getElementById("home") ||
+      /(?:^|\/)index\.html$/.test(window.location.pathname) ||
+      window.location.pathname.endsWith("/")
+    );
+
+    // Feature absence on unrelated pages is normal.
+    if (!isHomepage) {
+      return;
+    }
+
+    // Prevent repeated initialization and duplicate submit listeners.
+    if (activityForm instanceof HTMLFormElement &&
+        (activityForm.dataset.activityInitialized === "true" ||
+         activityForm.dataset.activityInitialized === "unavailable")) {
+      return;
+    }
+
+    // Validate all required elements and their relationships.
+    const dependenciesValid =
+      activitySection instanceof HTMLElement &&
+      activitySection.tagName === "SECTION" &&
+      activityForm instanceof HTMLFormElement &&
+      activityInput instanceof HTMLInputElement &&
+      activityInput.type === "text" &&
+      activityInput.maxLength === 100 &&
+      addItemButton instanceof HTMLButtonElement &&
+      addItemButton.type === "submit" &&
+      activityMessage instanceof HTMLParagraphElement &&
+      activityList instanceof HTMLUListElement &&
+      activityInput.form === activityForm &&
+      addItemButton.form === activityForm &&
+      activitySection.contains(activityForm) &&
+      activitySection.contains(activityInput) &&
+      activitySection.contains(addItemButton) &&
+      activitySection.contains(activityMessage) &&
+      activitySection.contains(activityList);
+
+    if (!dependenciesValid) {
+      console.warn("Activity planner: incomplete homepage markup.");
+      disableActivityPlanner();
+      return;
+    }
+
+    // Register exactly one native form submit listener.
+    activityForm.addEventListener(
+      "submit",
+      handleActivitySubmit
+    );
+
+    activityForm.dataset.activityInitialized = "true";
+
+  } catch (error) {
+    // Isolate unexpected initialization failures.
+    console.warn("Activity planner: initialization failed.");
+    disableActivityPlanner();
+  }
+}
+
+// Initialize independently of the other shared website features.
+initializeActivityPlanner();
+
 
 /* Practical 11: Alumni Form Validation */
 

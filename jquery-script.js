@@ -1,66 +1,50 @@
-
-/* ==================================
-   Practical 17: Dynamic List
-   Using jQuery
-================================== */
-
-$(document).ready(function () {
-
-  $("#activity-form").on("submit", function (event) {
-
-    // Prevent page refresh
-    event.preventDefault();
-
-    // Read and trim input
-    const activity = $("#activity-input").val().trim();
-
-    // Validate input
-    if (activity === "") {
-      $("#activity-message")
-        .text("Please enter an activity.")
-        .css("color", "#b42318");
-
-      return;
-    }
-
-    // Create a new list item safely
-    const newItem = $("<li></li>").text(activity);
-
-    // Append item to list
-    $("#activity-list").append(newItem);
-
-    // Clear input
-    $("#activity-input").val("");
-
-    // Show success message
-    $("#activity-message")
-      .text("Activity added successfully!")
-      .css("color", "#167347");
-
-    // Focus input again
-    $("#activity-input").focus();
-
-  });
-
-});
-
-
-
-
 /* Practical 18: Gallery Image Fade Effects */
 
-$(document).ready(function () {
+(function initializeGalleryFade() {
+  const fadeInButton = document.getElementById("gallery-fade-in");
+  const fadeOutButton = document.getElementById("gallery-fade-out");
 
-  $("#gallery-fade-in").click(function () {
-    $(".gallery-fade-image")
-      .stop(true, true)
-      .fadeTo(800, 1);
+  // Feature absence on unrelated pages is normal.
+  if (!fadeInButton && !fadeOutButton) {
+    return;
+  }
+
+  // Disable animation controls if initialization is unavailable.
+  function disableGalleryControls() {
+    if (fadeInButton instanceof HTMLButtonElement) {
+      fadeInButton.disabled = true;
+    }
+
+    if (fadeOutButton instanceof HTMLButtonElement) {
+      fadeOutButton.disabled = true;
+    }
+  }
+
+  // Preserve the static gallery when the jQuery CDN is unavailable.
+  if (typeof window.jQuery !== "function") {
+    console.warn("Gallery fade: jQuery is unavailable.");
+    disableGalleryControls();
+    return;
+  }
+
+  const $ = window.jQuery;
+
+  $(document).ready(function () {
+    try {
+      $("#gallery-fade-in").click(function () {
+        $(".gallery-fade-image")
+          .stop(true, true)
+          .fadeTo(800, 1);
+      });
+
+      $("#gallery-fade-out").click(function () {
+        $(".gallery-fade-image")
+          .stop(true, true)
+          .fadeTo(800, 0);
+      });
+    } catch (error) {
+      console.warn("Gallery fade: initialization failed.");
+      disableGalleryControls();
+    }
   });
-
-  $("#gallery-fade-out").click(function () {
-    $(".gallery-fade-image")
-      .stop(true, true)
-      .fadeTo(800, 0);
-  });
-
-});
+})();
