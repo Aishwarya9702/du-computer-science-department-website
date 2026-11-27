@@ -1760,6 +1760,12 @@ main h2 {
   outline-offset: 1px;
 }
 
+/* Activity Planner Invalid Input State */
+
+.activity-input-group input[aria-invalid="true"] {
+  border-color: #b42318;
+}
+
 .activity-input-group button {
   background-color: #14345a;
   color: white;

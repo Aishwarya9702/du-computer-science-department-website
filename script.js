@@ -587,6 +587,13 @@ function initializeActivityPlanner() {
     );
   }
 
+  // Display accessible validation feedback and retain the raw input.
+  function showActivityValidationError(message) {
+    activityInput.setAttribute("aria-invalid", "true");
+    showActivityMessage(message, true);
+    activityInput.focus();
+  }
+
   // Prevent navigation when the planner cannot be initialized.
   function preventActivitySubmission(event) {
     event.preventDefault();
@@ -594,18 +601,37 @@ function initializeActivityPlanner() {
 
   // Disable an incomplete planner without affecting other features.
   function disableActivityPlanner() {
+    // Recover the planner form when its expected identifier is missing.
+    if (!(activityForm instanceof HTMLFormElement)) {
+      const associatedForm =
+        activityInput instanceof HTMLInputElement
+          ? activityInput.form
+          : null;
+
+      if (associatedForm instanceof HTMLFormElement &&
+          activitySection instanceof HTMLElement &&
+          activitySection.contains(associatedForm)) {
+        activityForm = associatedForm;
+      } else if (activitySection instanceof HTMLElement) {
+        activityForm = activitySection.querySelector("form");
+      }
+    }
+
     if (activityForm instanceof HTMLFormElement) {
       activityForm.removeEventListener(
         "submit",
         handleActivitySubmit
       );
 
-      activityForm.addEventListener(
-        "submit",
-        preventActivitySubmission
-      );
+      // Register the navigation blocker only once.
+      if (activityForm.dataset.activityInitialized !== "unavailable") {
+        activityForm.addEventListener(
+          "submit",
+          preventActivitySubmission
+        );
 
-      activityForm.dataset.activityInitialized = "unavailable";
+        activityForm.dataset.activityInitialized = "unavailable";
+      }
 
       // Disable available submit controls belonging to this form.
       Array.from(activityForm.elements).forEach(function (control) {
@@ -629,35 +655,82 @@ function initializeActivityPlanner() {
   function handleActivitySubmit(event) {
     event.preventDefault();
 
-    const activity = activityInput.value.trim();
+    let rawActivity = null;
+    let newItem = null;
 
-    // Preserve existing empty-input validation.
-    if (activity === "") {
+    try {
+      // Read the original value before performing any trimming.
+      rawActivity = activityInput.value;
+
+      // Validate the raw UTF-16 length before other input checks.
+      if (rawActivity.length > 100) {
+        showActivityValidationError(
+          "Activity must not exceed 100 characters."
+        );
+        return;
+      }
+
+      // Remove leading and trailing whitespace after length validation.
+      const activity = rawActivity.trim();
+
+      // Reject empty and whitespace-only input.
+      if (activity === "") {
+        showActivityValidationError(
+          "Please enter an activity."
+        );
+        return;
+      }
+
+      // Create a list item without interpreting user input as HTML.
+      newItem = document.createElement("li");
+      newItem.textContent = activity;
+
+      // Preserve existing items and their insertion order.
+      activityList.appendChild(newItem);
+
+      // Clear the invalid state only after successful insertion.
+      activityInput.removeAttribute("aria-invalid");
+
+      // Clear the input and display successful feedback.
+      activityInput.value = "";
+
       showActivityMessage(
-        "Please enter an activity.",
-        true
+        "Activity added successfully!",
+        false
       );
 
-      activityInput.focus();
-      return;
+        activityInput.focus();
+
+      } catch (error) {
+      // Do not include user-provided text or exception details.
+      console.warn("Activity planner: submission processing failed.");
+
+      try {
+        // Roll back only the newly created item, if it was inserted.
+        if (newItem && newItem.parentNode === activityList) {
+          activityList.removeChild(newItem);
+        }
+
+        if (rawActivity !== null &&
+            activityInput instanceof HTMLInputElement) {
+          activityInput.value = rawActivity;
+          activityInput.removeAttribute("aria-invalid");
+        }
+      } catch (recoveryError) {
+        console.warn("Activity planner: submission recovery failed.");
+      }
+
+      try {
+        // Disable further submissions and display unavailable feedback.
+        disableActivityPlanner();
+
+        if (activityInput instanceof HTMLInputElement) {
+          activityInput.focus();
+        }
+      } catch (recoveryError) {
+        console.warn("Activity planner: safe shutdown failed.");
+      }
     }
-
-    // Create a list item without interpreting user input as HTML.
-    const newItem = document.createElement("li");
-    newItem.textContent = activity;
-
-    // Preserve existing items and their insertion order.
-    activityList.appendChild(newItem);
-
-    // Clear the input and display successful feedback.
-    activityInput.value = "";
-
-    showActivityMessage(
-      "Activity added successfully!",
-      false
-    );
-
-    activityInput.focus();
   }
 
   try {
