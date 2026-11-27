@@ -607,258 +607,355 @@ displayRandomEvent().catch(function () {
 
 /* Practical 17: Dynamic List Using Native JavaScript */
 
-function initializeActivityPlanner() {
-  let activitySection = null;
-  let activityForm = null;
-  let activityInput = null;
-  let addItemButton = null;
-  let activityMessage = null;
-  let activityList = null;
+const initializeActivityPlanner = (function () {
+  const plannerStates = new WeakSet();
+  const blockedForms = new WeakSet();
 
-  const unavailableMessage = "Activity planner is unavailable.";
+  return function initializeActivityPlanner() {
+    let activitySection = null;
+    let activityForm = null;
+    let activityInput = null;
+    let addItemButton = null;
+    let activityMessage = null;
+    let activityList = null;
 
-  // Display textual feedback using external CSS classes.
-  function showActivityMessage(message, isError) {
-    if (!(activityMessage instanceof HTMLElement)) {
-      return;
+    let available = false;
+    let ownsForm = false;
+
+    const unavailableMessage = "Activity planner is unavailable.";
+
+    // Display textual feedback using external CSS classes.
+    function showActivityMessage(message, isError) {
+      if (!(activityMessage instanceof HTMLElement)) {
+        return;
+      }
+
+      activityMessage.textContent = message;
+
+      activityMessage.classList.remove(
+        "activity-error",
+        "activity-success"
+      );
+
+      activityMessage.classList.add(
+        isError ? "activity-error" : "activity-success"
+      );
     }
 
-    activityMessage.textContent = message;
+    // Display accessible validation feedback and retain the raw input.
+    function showActivityValidationError(message) {
+      activityInput.setAttribute("aria-invalid", "true");
+      showActivityMessage(message, true);
+      activityInput.focus();
+    }
 
-    activityMessage.classList.remove(
-      "activity-error",
-      "activity-success"
-    );
-
-    activityMessage.classList.add(
-      isError ? "activity-error" : "activity-success"
-    );
-  }
-
-  // Display accessible validation feedback and retain the raw input.
-  function showActivityValidationError(message) {
-    activityInput.setAttribute("aria-invalid", "true");
-    showActivityMessage(message, true);
-    activityInput.focus();
-  }
-
-  // Prevent navigation when the planner cannot be initialized.
-  function preventActivitySubmission(event) {
-    event.preventDefault();
-  }
-
-  // Disable an incomplete planner without affecting other features.
-  function disableActivityPlanner() {
-    // Recover the planner form when its expected identifier is missing.
-    if (!(activityForm instanceof HTMLFormElement)) {
-      const associatedForm =
-        activityInput instanceof HTMLInputElement
-          ? activityInput.form
-          : null;
-
-      if (associatedForm instanceof HTMLFormElement &&
-          activitySection instanceof HTMLElement &&
-          activitySection.contains(associatedForm)) {
-        activityForm = associatedForm;
-      } else if (activitySection instanceof HTMLElement) {
-        activityForm = activitySection.querySelector("form");
+    // Recovery is best effort; diagnostics must not throw either.
+    function warnActivity(message) {
+      try {
+        console.warn(message);
+      } catch (error) {
+        // Diagnostic reporting is optional during recovery.
       }
     }
 
-    if (activityForm instanceof HTMLFormElement) {
-      activityForm.removeEventListener(
+    function recoverActivity(operation, warning) {
+      try {
+        operation();
+        return true;
+      } catch (error) {
+        warnActivity(warning);
+        return false;
+      }
+    }
+
+    function preventActivitySubmission(event) {
+      recoverActivity(function () {
+        event.preventDefault();
+      }, "Activity planner: navigation prevention failed.");
+    }
+
+    // Disable insertion first, even if listener removal fails.
+    function disableActivityPlanner() {
+      available = false;
+
+      recoverActivity(function () {
+        if (!(activityForm instanceof HTMLFormElement) &&
+            activityInput instanceof HTMLInputElement &&
+            activitySection instanceof HTMLElement) {
+          const associatedForm = activityInput.form;
+          if (associatedForm instanceof HTMLFormElement &&
+              activitySection.contains(associatedForm)) {
+            activityForm = associatedForm;
+          }
+        }
+      }, "Activity planner: associated form lookup failed.");
+
+      recoverActivity(function () {
+        if (!(activityForm instanceof HTMLFormElement) &&
+            activitySection instanceof HTMLElement) {
+          activityForm = activitySection.querySelector("form");
+        }
+      }, "Activity planner: fallback form lookup failed.");
+
+      if (activityForm instanceof HTMLFormElement) {
+        // Shared weak state survives repeated initializer calls without DOM markers.
+        const previous = plannerStates.has(activityForm);
+        if (!ownsForm && previous) {
+          return;
+        }
+        if (!ownsForm) {
+          plannerStates.add(activityForm);
+          ownsForm = true;
+        }
+
+        // Install protection before removing the original listener.
+        if (!blockedForms.has(activityForm)) {
+          const installed = recoverActivity(function () {
+            activityForm.addEventListener("submit", preventActivitySubmission);
+          }, "Activity planner: navigation blocker registration failed.");
+          if (installed) {
+            blockedForms.add(activityForm);
+          }
+        }
+
+        // Retain the inactive submit handler as a fallback if blocking failed.
+        if (blockedForms.has(activityForm)) {
+          recoverActivity(function () {
+            activityForm.removeEventListener("submit", handleActivitySubmit);
+          }, "Activity planner: submit listener removal failed.");
+        }
+
+        recoverActivity(function () {
+          activityForm.dataset.activityInitialized = "unavailable";
+        }, "Activity planner: unavailable marker update failed.");
+
+        let controls = [];
+        recoverActivity(function () {
+          controls = Array.from(activityForm.elements);
+        }, "Activity planner: submit controls lookup failed.");
+        controls.forEach(function (control) {
+          recoverActivity(function () {
+            if ((control instanceof HTMLButtonElement ||
+                 control instanceof HTMLInputElement) &&
+                (control.type === "submit" || control.type === "image")) {
+              control.disabled = true;
+            }
+          }, "Activity planner: submit control disabling failed.");
+        });
+      }
+
+      recoverActivity(function () {
+        if (addItemButton instanceof HTMLButtonElement) {
+          addItemButton.disabled = true;
+        }
+      }, "Activity planner: Add Item disabling failed.");
+
+      // Text and styling are independent so stale success can be cleared.
+      recoverActivity(function () {
+        if (activityMessage instanceof HTMLElement) {
+          activityMessage.textContent = unavailableMessage;
+        }
+      }, "Activity planner: unavailable text update failed.");
+      recoverActivity(function () {
+        if (activityMessage instanceof HTMLElement) {
+          activityMessage.classList.remove("activity-success");
+        }
+      }, "Activity planner: success style cleanup failed.");
+      recoverActivity(function () {
+        if (activityMessage instanceof HTMLElement) {
+          activityMessage.classList.add("activity-error");
+        }
+      }, "Activity planner: unavailable style update failed.");
+    }
+
+    // Process both button activation and Enter-key submission.
+    function handleActivitySubmit(event) {
+      let rawActivity = null;
+      let newItem = null;
+
+      try {
+        event.preventDefault();
+        if (!available) {
+          return;
+        }
+
+        // Read the original value before performing any trimming.
+        rawActivity = activityInput.value;
+
+        // Validate the raw UTF-16 length before other input checks.
+        if (rawActivity.length > 100) {
+          showActivityValidationError(
+            "Activity must not exceed 100 characters."
+          );
+          return;
+        }
+
+        // Remove leading and trailing whitespace after length validation.
+        const activity = rawActivity.trim();
+
+        // Reject empty and whitespace-only input.
+        if (activity === "") {
+          showActivityValidationError(
+            "Please enter an activity."
+          );
+          return;
+        }
+
+        // Create a list item without interpreting user input as HTML.
+        newItem = document.createElement("li");
+        newItem.textContent = activity;
+
+        // Preserve existing items and their insertion order.
+        activityList.appendChild(newItem);
+
+        // Clear the invalid state only after successful insertion.
+        activityInput.removeAttribute("aria-invalid");
+
+        // Clear the input and display successful feedback.
+        activityInput.value = "";
+
+        showActivityMessage(
+          "Activity added successfully!",
+          false
+        );
+
+        activityInput.focus();
+
+      } catch (error) {
+        available = false;
+        warnActivity("Activity planner: submission processing failed.");
+        preventActivitySubmission(event);
+
+        recoverActivity(function () {
+          if (newItem && newItem.parentNode === activityList) {
+            activityList.removeChild(newItem);
+          }
+        }, "Activity planner: list rollback failed.");
+        recoverActivity(function () {
+          if (rawActivity !== null &&
+              activityInput instanceof HTMLInputElement) {
+            activityInput.value = rawActivity;
+          }
+        }, "Activity planner: input restoration failed.");
+        recoverActivity(function () {
+          if (activityInput instanceof HTMLInputElement) {
+            activityInput.removeAttribute("aria-invalid");
+          }
+        }, "Activity planner: validation state cleanup failed.");
+
+        disableActivityPlanner();
+        recoverActivity(function () {
+          if (activityInput instanceof HTMLInputElement) {
+            activityInput.focus();
+          }
+        }, "Activity planner: focus restoration failed.");
+      }
+    }
+
+    try {
+      let lookupFailed = false;
+      if (!recoverActivity(function () {
+        activitySection = document.getElementById("activity-planner");
+      }, "Activity planner: target lookup failed.")) {
+        lookupFailed = true;
+      }
+      if (!recoverActivity(function () {
+        activityForm = document.getElementById("activity-form");
+      }, "Activity planner: target lookup failed.")) {
+        lookupFailed = true;
+      }
+      if (!recoverActivity(function () {
+        activityInput = document.getElementById("activity-input");
+      }, "Activity planner: target lookup failed.")) {
+        lookupFailed = true;
+      }
+      if (!recoverActivity(function () {
+        addItemButton = document.getElementById("add-item-btn");
+      }, "Activity planner: target lookup failed.")) {
+        lookupFailed = true;
+      }
+      if (!recoverActivity(function () {
+        activityMessage = document.getElementById("activity-message");
+      }, "Activity planner: target lookup failed.")) {
+        lookupFailed = true;
+      }
+      if (!recoverActivity(function () {
+        activityList = document.getElementById("activity-list");
+      }, "Activity planner: target lookup failed.")) {
+        lookupFailed = true;
+      }
+
+      // Recognize the homepage even when planner markup is incomplete.
+      const isHomepage = Boolean(
+        lookupFailed ||
+        activitySection ||
+        activityForm ||
+        activityInput ||
+        addItemButton ||
+        activityMessage ||
+        activityList ||
+        document.getElementById("home") ||
+        /(?:^|\/)index\.html$/.test(window.location.pathname) ||
+        window.location.pathname.endsWith("/")
+      );
+
+      // Feature absence on unrelated pages is normal.
+      if (!isHomepage) {
+        return;
+      }
+
+      // Weak state is authoritative even if a DOM marker update fails.
+      if (activityForm instanceof HTMLFormElement &&
+          plannerStates.has(activityForm)) {
+        return;
+      }
+
+      // Validate all required elements and their relationships.
+      const dependenciesValid =
+        !lookupFailed &&
+        activitySection instanceof HTMLElement &&
+        activitySection.tagName === "SECTION" &&
+        activityForm instanceof HTMLFormElement &&
+        activityInput instanceof HTMLInputElement &&
+        activityInput.type === "text" &&
+        activityInput.maxLength === 100 &&
+        addItemButton instanceof HTMLButtonElement &&
+        addItemButton.type === "submit" &&
+        activityMessage instanceof HTMLParagraphElement &&
+        activityList instanceof HTMLUListElement &&
+        activityInput.form === activityForm &&
+        addItemButton.form === activityForm &&
+        activitySection.contains(activityForm) &&
+        activitySection.contains(activityInput) &&
+        activitySection.contains(addItemButton) &&
+        activitySection.contains(activityMessage) &&
+        activitySection.contains(activityList);
+
+      if (!dependenciesValid) {
+        warnActivity("Activity planner: incomplete homepage markup.");
+        disableActivityPlanner();
+        return;
+      }
+
+      plannerStates.add(activityForm);
+      ownsForm = true;
+
+      // Register exactly one native form submit listener.
+      activityForm.addEventListener(
         "submit",
         handleActivitySubmit
       );
 
-      // Register the navigation blocker only once.
-      if (activityForm.dataset.activityInitialized !== "unavailable") {
-        activityForm.addEventListener(
-          "submit",
-          preventActivitySubmission
-        );
-
-        activityForm.dataset.activityInitialized = "unavailable";
-      }
-
-      // Disable available submit controls belonging to this form.
-      Array.from(activityForm.elements).forEach(function (control) {
-        if ((control instanceof HTMLButtonElement ||
-             control instanceof HTMLInputElement) &&
-            (control.type === "submit" ||
-             control.type === "image")) {
-          control.disabled = true;
-        }
-      });
-    }
-
-    if (addItemButton instanceof HTMLButtonElement) {
-      addItemButton.disabled = true;
-    }
-
-    showActivityMessage(unavailableMessage, true);
-  }
-
-  // Process both button activation and Enter-key submission.
-  function handleActivitySubmit(event) {
-    event.preventDefault();
-
-    let rawActivity = null;
-    let newItem = null;
-
-    try {
-      // Read the original value before performing any trimming.
-      rawActivity = activityInput.value;
-
-      // Validate the raw UTF-16 length before other input checks.
-      if (rawActivity.length > 100) {
-        showActivityValidationError(
-          "Activity must not exceed 100 characters."
-        );
-        return;
-      }
-
-      // Remove leading and trailing whitespace after length validation.
-      const activity = rawActivity.trim();
-
-      // Reject empty and whitespace-only input.
-      if (activity === "") {
-        showActivityValidationError(
-          "Please enter an activity."
-        );
-        return;
-      }
-
-      // Create a list item without interpreting user input as HTML.
-      newItem = document.createElement("li");
-      newItem.textContent = activity;
-
-      // Preserve existing items and their insertion order.
-      activityList.appendChild(newItem);
-
-      // Clear the invalid state only after successful insertion.
-      activityInput.removeAttribute("aria-invalid");
-
-      // Clear the input and display successful feedback.
-      activityInput.value = "";
-
-      showActivityMessage(
-        "Activity added successfully!",
-        false
-      );
-
-      activityInput.focus();
+      activityForm.dataset.activityInitialized = "true";
+      available = true;
 
     } catch (error) {
-      // Do not include user-provided text or exception details.
-      console.warn("Activity planner: submission processing failed.");
-
-      try {
-        // Roll back only the newly created item, if it was inserted.
-        if (newItem && newItem.parentNode === activityList) {
-          activityList.removeChild(newItem);
-        }
-
-        if (rawActivity !== null &&
-            activityInput instanceof HTMLInputElement) {
-          activityInput.value = rawActivity;
-          activityInput.removeAttribute("aria-invalid");
-        }
-      } catch (recoveryError) {
-        console.warn("Activity planner: submission recovery failed.");
-      }
-
-      try {
-        // Disable further submissions and display unavailable feedback.
-        disableActivityPlanner();
-
-        if (activityInput instanceof HTMLInputElement) {
-          activityInput.focus();
-        }
-      } catch (recoveryError) {
-        console.warn("Activity planner: safe shutdown failed.");
-      }
-    }
-  }
-
-  try {
-    activitySection = document.getElementById("activity-planner");
-    activityForm = document.getElementById("activity-form");
-    activityInput = document.getElementById("activity-input");
-    addItemButton = document.getElementById("add-item-btn");
-    activityMessage = document.getElementById("activity-message");
-    activityList = document.getElementById("activity-list");
-
-    // Recognize the homepage even when planner markup is incomplete.
-    const isHomepage = Boolean(
-      activitySection ||
-      activityForm ||
-      activityInput ||
-      addItemButton ||
-      activityMessage ||
-      activityList ||
-      document.getElementById("home") ||
-      /(?:^|\/)index\.html$/.test(window.location.pathname) ||
-      window.location.pathname.endsWith("/")
-    );
-
-    // Feature absence on unrelated pages is normal.
-    if (!isHomepage) {
-      return;
-    }
-
-    // Prevent repeated initialization and duplicate submit listeners.
-    if (activityForm instanceof HTMLFormElement &&
-        (activityForm.dataset.activityInitialized === "true" ||
-         activityForm.dataset.activityInitialized === "unavailable")) {
-      return;
-    }
-
-    // Validate all required elements and their relationships.
-    const dependenciesValid =
-      activitySection instanceof HTMLElement &&
-      activitySection.tagName === "SECTION" &&
-      activityForm instanceof HTMLFormElement &&
-      activityInput instanceof HTMLInputElement &&
-      activityInput.type === "text" &&
-      activityInput.maxLength === 100 &&
-      addItemButton instanceof HTMLButtonElement &&
-      addItemButton.type === "submit" &&
-      activityMessage instanceof HTMLParagraphElement &&
-      activityList instanceof HTMLUListElement &&
-      activityInput.form === activityForm &&
-      addItemButton.form === activityForm &&
-      activitySection.contains(activityForm) &&
-      activitySection.contains(activityInput) &&
-      activitySection.contains(addItemButton) &&
-      activitySection.contains(activityMessage) &&
-      activitySection.contains(activityList);
-
-    if (!dependenciesValid) {
-      console.warn("Activity planner: incomplete homepage markup.");
+      // Isolate unexpected initialization failures.
+      warnActivity("Activity planner: initialization failed.");
       disableActivityPlanner();
-      return;
     }
-
-    // Register exactly one native form submit listener.
-    activityForm.addEventListener(
-      "submit",
-      handleActivitySubmit
-    );
-
-    activityForm.dataset.activityInitialized = "true";
-
-  } catch (error) {
-    // Isolate unexpected initialization failures.
-    console.warn("Activity planner: initialization failed.");
-
-    try {
-      disableActivityPlanner();
-    } catch (recoveryError) {
-      console.warn("Activity planner: safe shutdown failed.");
-    }
-  }
-}
+  };
+})();
 
 // Initialize independently of the other shared website features.
 initializeActivityPlanner();
