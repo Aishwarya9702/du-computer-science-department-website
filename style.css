@@ -1488,6 +1488,20 @@ main h2 {
   border-radius: 6px;
 }
 
+/* Hide unavailable event images. */
+
+.random-event-container img[hidden] {
+  display: none;
+}
+
+.event-unavailable-message {
+  color: #14345a;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
 .random-event-container figcaption {
   color: #14345a;
   font-size: 18px;

@@ -30,30 +30,260 @@ const eventImages = [
   }
 ];
 
-function displayRandomEvent() {
 
-  const randomIndex = Math.floor(
-    Math.random() * eventImages.length
+async function displayRandomEvent() {
+  const eventSection = document.getElementById("event-highlights");
+  const eventImage = document.getElementById("random-event-image");
+  const eventCaption = document.getElementById("event-caption");
+
+  const unavailableMessage = "Event images are currently unavailable.";
+
+  // Recognize the homepage even if event markup is incomplete.
+  const isHomepage = Boolean(
+    eventSection ||
+    eventImage ||
+    eventCaption ||
+    document.getElementById("home") ||
+    /(?:^|\/)index\.html$/.test(window.location.pathname) ||
+    window.location.pathname.endsWith("/")
   );
 
-  const selectedEvent = eventImages[randomIndex];
+  // Feature absence on unrelated pages is normal.
+  if (!isHomepage) {
+    return;
+  }
 
-  const eventImage = document.getElementById(
-    "random-event-image"
-  );
+  function showUnavailable(keepInitialImage = false) {
+    if (eventImage instanceof HTMLImageElement) {
+      eventImage.hidden = !keepInitialImage;
+    }
 
-  const eventCaption = document.getElementById(
-    "event-caption"
-  );
+    // Preserve the initial caption when its image remains usable.
+    if (!keepInitialImage &&
+        eventCaption instanceof HTMLElement) {
+      eventCaption.textContent = unavailableMessage;
+      return;
+    }
 
-  if (eventImage && eventCaption) {
-    eventImage.src = selectedEvent.src;
-    eventImage.alt = selectedEvent.alt;
-    eventCaption.textContent = selectedEvent.caption;
+    const feedbackContainer =
+      eventSection instanceof HTMLElement
+        ? eventSection
+        : document.querySelector(".random-event-container");
+
+    if (!(feedbackContainer instanceof HTMLElement)) {
+      return;
+    }
+
+    let feedback = feedbackContainer.querySelector(
+      ".event-unavailable-message"
+    );
+
+    if (!feedback) {
+      feedback = document.createElement("p");
+      feedback.className = "event-unavailable-message";
+      feedback.setAttribute("role", "status");
+      feedbackContainer.appendChild(feedback);
+    }
+
+    feedback.textContent = unavailableMessage;
+  }
+
+  // Accept only nonempty text metadata.
+  function isNonemptyText(value) {
+    return typeof value === "string" &&
+      value.trim().length > 0;
+  }
+
+  // Restrict image sources to relative departmental event paths.
+  function isValidEventPath(value) {
+    return isNonemptyText(value) &&
+      /^images\/events\/[a-z0-9_-]+\.(?:jpg|jpeg|png|webp|gif|avif)$/i
+        .test(value.trim());
+  }
+
+  function isValidEvent(event) {
+    return event !== null &&
+      typeof event === "object" &&
+      isValidEventPath(event.src) &&
+      isNonemptyText(event.alt) &&
+      isNonemptyText(event.caption);
+  }
+
+  // Load each candidate independently before displaying it.
+  function loadEventImage(event) {
+    return new Promise(function (resolve) {
+      const candidateImage = new Image();
+
+      function cleanup() {
+        candidateImage.removeEventListener("load", handleLoad);
+        candidateImage.removeEventListener("error", handleError);
+      }
+
+      function handleLoad() {
+        cleanup();
+
+        if (candidateImage.naturalWidth > 0 &&
+            candidateImage.naturalHeight > 0) {
+          resolve(candidateImage);
+        } else {
+          resolve(null);
+        }
+      }
+
+      function handleError() {
+        cleanup();
+        resolve(null);
+      }
+
+      // Register handlers before assigning the source.
+      candidateImage.addEventListener("load", handleLoad);
+      candidateImage.addEventListener("error", handleError);
+
+      candidateImage.alt = event.alt;
+      candidateImage.src = event.src;
+    });
+  }
+
+  // Verify the initial HTML image without starting another request.
+  function verifyInitialImage() {
+    return new Promise(function (resolve) {
+      function cleanup() {
+        eventImage.removeEventListener("load", handleLoad);
+        eventImage.removeEventListener("error", handleError);
+      }
+
+      function handleLoad() {
+        cleanup();
+        resolve(
+          eventImage.naturalWidth > 0 &&
+          eventImage.naturalHeight > 0
+        );
+      }
+
+      function handleError() {
+        cleanup();
+        resolve(false);
+      }
+
+      eventImage.addEventListener("load", handleLoad);
+      eventImage.addEventListener("error", handleError);
+
+      // Account for images that finished loading before initialization.
+      if (eventImage.complete) {
+        handleLoad();
+      }
+    });
+  }
+
+  try {
+    // Validate the required DOM targets and their element types.
+    if (!(eventSection instanceof HTMLElement) ||
+        !(eventImage instanceof HTMLImageElement) ||
+        !(eventCaption instanceof HTMLElement) ||
+        eventCaption.tagName !== "FIGCAPTION" ||
+        !eventSection.contains(eventImage) ||
+        !eventSection.contains(eventCaption)) {
+      console.warn("Event highlights: incomplete homepage markup.");
+      showUnavailable();
+      return;
+    }
+
+    // Prevent duplicate initialization within the same page load.
+    if (eventSection.dataset.eventInitialized === "true") {
+      return;
+    }
+
+    eventSection.dataset.eventInitialized = "true";
+
+    const collection =
+      typeof eventImages !== "undefined" &&
+      Array.isArray(eventImages)
+        ? eventImages
+        : [];
+
+    const seenPaths = new Set();
+
+    // Create a separate collection of valid, distinct candidates.
+    const eligibleEvents = collection
+      .filter(isValidEvent)
+      .map(function (event) {
+        return {
+          src: event.src.trim(),
+          alt: event.alt.trim(),
+          caption: event.caption.trim()
+        };
+      })
+      .filter(function (event) {
+        if (seenPaths.has(event.src)) {
+          return false;
+        }
+
+        seenPaths.add(event.src);
+        return true;
+      });
+
+    // Retain the verified initial HTML image if no entry is eligible.
+    if (eligibleEvents.length === 0) {
+      console.warn("Event highlights: no eligible image entries.");
+
+      const initialImageUsable = await verifyInitialImage();
+
+      showUnavailable(initialImageUsable);
+      return;
+    }
+
+    // Use a separate candidate list without modifying eventImages.
+    const remainingEvents = eligibleEvents.slice();
+
+    // Hide the initial image if it is already known to be broken.
+    if (eventImage.complete && eventImage.naturalWidth === 0) {
+      eventImage.hidden = true;
+    }
+
+    // Each candidate can be attempted only once.
+    while (remainingEvents.length > 0) {
+      const randomIndex = Math.floor(
+        Math.random() * remainingEvents.length
+      );
+
+      const selectedEvent = remainingEvents.splice(
+        randomIndex,
+        1
+      )[0];
+
+      const loadedImage = await loadEventImage(selectedEvent);
+
+      if (loadedImage) {
+        // Reuse the successfully loaded image instead of reloading it.
+        loadedImage.id = eventImage.id;
+        loadedImage.className = eventImage.className;
+        loadedImage.hidden = false;
+
+        eventImage.replaceWith(loadedImage);
+        eventCaption.textContent = selectedEvent.caption;
+
+        return;
+      }
+
+      console.warn(
+        "Event highlights: unable to load " + selectedEvent.src
+      );
+    }
+
+    // No eligible asset could be loaded.
+    showUnavailable();
+
+  } catch (error) {
+    // Isolate unexpected failures from other shared features.
+    console.warn("Event highlights: initialization failed.");
+    showUnavailable();
   }
 }
 
-displayRandomEvent();
+// Initialize independently of the other shared JavaScript features.
+displayRandomEvent().catch(function () {
+  console.warn("Event highlights: unexpected initialization failure.");
+});
 
 
 /* Practical 10: Faculty Experience Calculator */
