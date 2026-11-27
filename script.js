@@ -295,6 +295,8 @@ displayRandomEvent().catch(function () {
   let facultyMembers = [];
   let facultyTimer = null;
   let lastCheckedDate = null;
+  let ownsInitialization = false;
+  let timerActive = false;
 
   // Apply the Gregorian leap-year rules, including century years.
   function isLeapYear(year) {
@@ -407,9 +409,39 @@ displayRandomEvent().catch(function () {
     }
   }
 
+  // Recovery diagnostics must not interrupt independent features.
+  function warnFaculty(message) {
+    try {
+      console.warn(message);
+    } catch (error) {
+      // Diagnostics are best effort only.
+    }
+  }
+
+  // Attempt each recovery operation once, without recursive recovery.
+  function recoverFaculty(operation, warning) {
+    try {
+      operation();
+      return true;
+    } catch (error) {
+      warnFaculty(warning);
+      return false;
+    }
+  }
+
+  function markUnavailable(member) {
+    return recoverFaculty(function () {
+      updateExperienceText(member, unavailableMessage);
+    }, "Faculty experience: profile feedback failed.");
+  }
+
   // Provide unavailable feedback when a suitable section exists.
   function showUnavailableFeedback() {
-    if (facultySection instanceof HTMLElement) {
+    recoverFaculty(function () {
+      if (!(facultySection instanceof HTMLElement)) {
+        return;
+      }
+
       let feedback = facultySection.querySelector(
         ".faculty-unavailable-message"
       );
@@ -418,15 +450,18 @@ displayRandomEvent().catch(function () {
         feedback = document.createElement("p");
         feedback.className = "faculty-unavailable-message";
         feedback.setAttribute("role", "status");
+        updateExperienceText(feedback, unavailableMessage);
         facultySection.appendChild(feedback);
+      } else if (feedback instanceof HTMLElement) {
+        updateExperienceText(feedback, unavailableMessage);
       }
-
-      updateExperienceText(feedback, unavailableMessage);
-    }
+    }, "Faculty experience: section feedback failed.");
   }
 
   // Process each faculty profile independently.
   function calculateFacultyExperience(today) {
+    let profileFailed = false;
+
     facultyMembers.forEach(function (member) {
       try {
         const message = getExperienceText(
@@ -436,10 +471,15 @@ displayRandomEvent().catch(function () {
 
         updateExperienceText(member, message);
       } catch (error) {
-        console.warn("Faculty experience: profile calculation failed.");
-        updateExperienceText(member, unavailableMessage);
+        profileFailed = true;
+        warnFaculty("Faculty experience: profile calculation failed.");
+        markUnavailable(member);
       }
     });
+
+    if (profileFailed) {
+      showUnavailableFeedback();
+    }
   }
 
   // Recalculate only when the local calendar date changes.
@@ -459,14 +499,11 @@ displayRandomEvent().catch(function () {
       calculateFacultyExperience(today);
       lastCheckedDate = currentDateKey;
     } catch (error) {
-      console.warn("Faculty experience: date check failed.");
-
-      facultyMembers.forEach(function (member) {
-        updateExperienceText(member, unavailableMessage);
-      });
-
-      // Permit recovery at the next available date check.
+      // Reset state before attempting any DOM recovery.
       lastCheckedDate = null;
+      warnFaculty("Faculty experience: date check failed.");
+      facultyMembers.forEach(markUnavailable);
+      showUnavailableFeedback();
     }
   }
 
@@ -491,11 +528,9 @@ displayRandomEvent().catch(function () {
     }
 
     if (!(facultySection instanceof HTMLElement)) {
-      console.warn("Faculty experience: faculty section is missing.");
+      warnFaculty("Faculty experience: faculty section is missing.");
 
-      existingTargets.forEach(function (member) {
-        updateExperienceText(member, unavailableMessage);
-      });
+      existingTargets.forEach(markUnavailable);
 
       return;
     }
@@ -512,7 +547,7 @@ displayRandomEvent().catch(function () {
     });
 
     if (facultyMembers.length === 0) {
-      console.warn("Faculty experience: no experience targets found.");
+      warnFaculty("Faculty experience: no experience targets found.");
       showUnavailableFeedback();
       return;
     }
@@ -529,31 +564,44 @@ displayRandomEvent().catch(function () {
     if (facultyCards.length !== 5 ||
         facultyMembers.length !== 5 ||
         incompleteCards) {
-      console.warn("Faculty experience: incomplete faculty markup.");
+      warnFaculty("Faculty experience: incomplete faculty markup.");
       showUnavailableFeedback();
     }
 
+    ownsInitialization = true;
     facultySection.dataset.facultyInitialized = "true";
 
     // Calculate immediately, then check the local date once per minute.
     checkFacultyDate();
-    facultyTimer = window.setInterval(checkFacultyDate, checkInterval);
+    timerActive = true;
+    facultyTimer = window.setInterval(function () {
+      if (timerActive) {
+        checkFacultyDate();
+      }
+    }, checkInterval);
   } catch (error) {
-    // Isolate unexpected failures from other website features.
+    // Disable this callback before attempting timer cleanup.
+    timerActive = false;
+    lastCheckedDate = null;
+    warnFaculty("Faculty experience: initialization failed.");
+
+    let timerCleared = true;
     if (facultyTimer !== null) {
-      window.clearInterval(facultyTimer);
+      timerCleared = recoverFaculty(function () {
+        window.clearInterval(facultyTimer);
+        facultyTimer = null;
+      }, "Faculty experience: timer cleanup failed.");
     }
 
-    console.warn("Faculty experience: initialization failed.");
-
-    facultyMembers.forEach(function (member) {
-      updateExperienceText(member, unavailableMessage);
-    });
-
-    if (facultySection instanceof HTMLElement) {
-      delete facultySection.dataset.facultyInitialized;
-      showUnavailableFeedback();
+    // Never release another initializer's marker or a live timer's guard.
+    if (ownsInitialization && timerCleared) {
+      recoverFaculty(function () {
+        delete facultySection.dataset.facultyInitialized;
+      }, "Faculty experience: initialization state cleanup failed.");
     }
+
+    facultyMembers.forEach(markUnavailable);
+    showUnavailableFeedback();
   }
 })();
 
