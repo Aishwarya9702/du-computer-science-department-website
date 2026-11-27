@@ -699,9 +699,9 @@ function initializeActivityPlanner() {
         false
       );
 
-        activityInput.focus();
+      activityInput.focus();
 
-      } catch (error) {
+    } catch (error) {
       // Do not include user-provided text or exception details.
       console.warn("Activity planner: submission processing failed.");
 
@@ -803,7 +803,12 @@ function initializeActivityPlanner() {
   } catch (error) {
     // Isolate unexpected initialization failures.
     console.warn("Activity planner: initialization failed.");
-    disableActivityPlanner();
+
+    try {
+      disableActivityPlanner();
+    } catch (recoveryError) {
+      console.warn("Activity planner: safe shutdown failed.");
+    }
   }
 }
 

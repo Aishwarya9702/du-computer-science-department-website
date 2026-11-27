@@ -1484,7 +1484,7 @@ main h2 {
   display: block;
   width: 100%;
   height: 350px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 6px;
 }
 
@@ -1507,6 +1507,8 @@ main h2 {
   font-size: 18px;
   font-weight: 600;
   margin-top: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .event-highlights-section .event-note {
@@ -1749,10 +1751,19 @@ main h2 {
 .activity-input-group input {
   flex: 1;
   min-width: 0;
+  max-width: 100%;
   padding: 12px 15px;
   font-size: 15px;
-  border: 1px solid #cbd5e1;
+  color: #24364b;
+  background-color: #ffffff;
+  border: 1px solid #64748b;
   border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.activity-input-group input::placeholder {
+  color: #64748b;
+  opacity: 1;
 }
 
 .activity-input-group input:focus {
@@ -1781,10 +1792,23 @@ main h2 {
   background-color: #234f7b;
 }
 
+.activity-input-group button:focus-visible {
+  outline: 2px solid #234f7b;
+  outline-offset: 3px;
+}
+
+.activity-input-group button:disabled {
+  background-color: #e2e8f0;
+  color: #475569;
+  cursor: not-allowed;
+}
+
 .activity-message {
   min-height: 20px;
   margin: 15px 0;
   font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 /* Activity Planner Feedback States */
@@ -1815,6 +1839,7 @@ main h2 {
   border-radius: 6px;
   color: #24364b;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 600px) {
