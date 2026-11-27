@@ -1,6 +1,7 @@
 
 /* Practical 9: Random Event Image */
 
+
 const eventImages = [
   {
     src: "images/events/event1.jpg",
@@ -16,6 +17,16 @@ const eventImages = [
     src: "images/events/event3.jpeg",
     alt: "Students and faculty seated in a lecture hall during a college event",
     caption: "Department Event"
+  },
+  {
+    src: "images/events/event4.jpg",
+    alt: "Sankalan 2026 collage showing the inaugural ceremony, technical activities, student presentations and certificate distribution",
+    caption: "Sankalan 2026"
+  },
+  {
+    src: "images/events/event5.jpg",
+    alt: "Sports Day collage showing students playing chess, participating in outdoor activities and gathering for refreshments",
+    caption: "Sports Day"
   }
 ];
 
