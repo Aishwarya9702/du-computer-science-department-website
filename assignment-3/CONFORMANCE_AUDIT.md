@@ -561,3 +561,124 @@ The initial conformance audit is approved as the baseline for corrective impleme
 All 158 formal test cases remain Not Tested. Browser verification, external validation, final documentation and submission checks remain outstanding.
 
 This approval authorizes corrective implementation and does not establish final submission readiness. Subsequent corrections and verification results shall be documented separately in a post-audit verification section while preserving the original findings and conformance classifications.
+
+
+## 23. Post-Audit Verification Update
+
+### 23.1 Purpose, scope and evidence basis
+
+This append-only update records the corrective implementation phase following approval of the initial audit. Sections 1–22, including the original classifications (30 Compliant, 75 Partially Compliant, 7 Non-Compliant, 13 Not Verifiable), 125-item traceability matrix, findings and severity counts, are historical records and remain unchanged. No revised overall SRS compliance percentage is calculated.
+
+The student confirms that all planned source corrections have been implemented, reviewed, committed and pushed to GitHub. This is user-confirmed implementation and repository activity, not independent verification of a commit, remote branch, final tag or formal test result. F-06 was explicitly approved as a preventive enhancement and F-08 accepted through inspection. The approved F-02 CSS-only limitation is retained.
+
+Evidence basis: uploaded approved SRS v1.0, approved test plan v1.0 and initial audit; four current source uploads listed below; earlier corrective implementation discussions and available replacement files. The current upload does not include fresh index.html, alumni.html, README.md, full image directory, raw browser logs or a Git repository. Earlier homepage/alumni inspection is historical evidence only. No production source or other documentation was modified for this update.
+
+### 23.2 Current source identification and actual checks
+
+The following fingerprints identify the inspected uploads, not Git commits. Line counts use splitlines; trailing whitespace counts exclude line terminators.
+
+| Production file | Uploaded filename | Lines | Trailing whitespace lines | SHA-256 |
+|---|---|---:|---:|---|
+| `script.js` | `script(20261128-100848).js` | 1817 | 0 | `a6c5d6cfd9536b18c06debca1d9c6ad2be0eac8ff18289edb873350dc21d22a2` |
+| `jquery-script.js` | `jquery-script(20261128-100847).js` | 50 | 0 | `2ca857b08e85d378f6293a5145193909b8c8524d393f7b519c9909c16cacd364` |
+| `style.css` | `style(20261128-100848).css` | 1932 | 0 | `5c155c5ca4826b3e8c1b1b1e5a6a7be23049a5274956842a31922ba50a690abd` |
+| `timetable.html` | `timetable(20261128-100847).html` | 151 | 0 | `8047db5278502372f5a40facc1b8d377d496a487de1e0e810bac7b7b38bbdd61` |
+
+Actual checks performed during this update:
+
+- Node.js `v22.16.0`: `node --check "script(20261128-100848).js"` returned exit code 0 with no diagnostic output. This is preliminary syntax evidence, not formal TC-VAL-005 execution.
+- Node.js `v22.16.0`: `node --check "jquery-script(20261128-100847).js"` returned exit code 0 with no diagnostic output. This is preliminary syntax evidence, not formal TC-VAL-005 execution.
+- `script(20261128-100848).js` is byte-for-byte identical to `F01_F02_replacement/script.js`.
+- `style(20261128-100848).css` is byte-for-byte identical to `F06_replacement/style.css`.
+- `timetable(20261128-100847).html` is byte-for-byte identical to `F06_replacement/timetable.html`.
+- `jquery-script(20261128-100847).js` is byte-for-byte identical to `jquery-script(10).js`.
+- Approved document cross-check: 125 unique SRS IDs, 158 unique test case IDs and 158 Not Tested execution entries. Every requirement and test ID in the corrective matrix was checked for existence in the approved documents. The matrix retains the original finding-level associations; supplementary checks do not imply new formal cases or a changed requirements traceability matrix.
+- No new browser, W3C, controlled fault, Git remote or ZIP submission execution was performed in this update. Prior execution reports are explicitly identified as historical evidence.
+
+### 23.3 Corrective verification matrix
+
+All entries below retain original severity. Test references are finding-level retest groups, not a claim that every listed test maps directly to every listed requirement. Formal status is Not Tested for all referenced cases. The matrix is split into two linked tables for readability.
+
+#### A. Corrective action and traceability
+
+| Finding | Original severity | Root cause or concern | Corrective action or disposition | Affected files | Related SRS IDs | Approved test case IDs |
+|---|---|---|---|---|---|---|
+| F-01 | Medium | Independent CSS hover/focus and JS state could disagree. | Disclosure state uses aria-expanded as the enhanced CSS visibility source; pointer hover, native click/Enter/Space/tap, Escape, focusout and outside click; CSS-only fallback retained. | script.js; style.css | FR-REG-02, NFR-02, AC-07 | TC-REG-003, TC-REG-004, TC-BR-004, TC-UI-001 |
+| F-02 | Medium | Left-aligned absolute menus with minimum width and nowrap could exceed viewport. | Following user-confirmed browser reproduction, conditionally align right using measured menu boundary; reposition on resize. | script.js; style.css | NFR-04, FR-REG-02, AC-08 | TC-UI-005, TC-UI-006, TC-UI-007, TC-UI-008, TC-UI-009, TC-REG-003, TC-REG-004 |
+| F-03 | High | Secondary exceptions in faculty recovery could escape and interrupt later features. | Protect per-profile writes, section feedback, warnings, date recovery, timer cleanup and owned initialization marker; deactivate timer callback on failure. | script.js | VR-INIT-01, NFR-06, VR-FAC-04 | TC-LST-028, TC-FAC-034, TC-REG-023 |
+| F-04 | Medium | Sequential shutdown could stop on a secondary exception; stale success or active insertion could remain. | Set availability false first; independently recover form, install blocker, remove handler where safe, disable controls, update feedback; weak state guards duplicate initialization; independently attempt rollback, raw input restoration, invalid-state cleanup and focus. | script.js | FR-LST-14, VR-LST-03, VR-INIT-01 | TC-LST-022, TC-LST-023, TC-LST-024, TC-LST-025, TC-LST-026, TC-LST-027, TC-LST-028, TC-LST-029 |
+| F-05 | Low | Attempt count previously depended on collection size; preventive risk with more than five entries. | Use maxAttempts = 5 and counter with full eligible copy, random index and splice; stop on success or exhaustion. | script.js | VR-IMG-02, FR-IMG-08 | TC-IMG-020, TC-IMG-021 |
+| F-06 | Medium | Scroll wrapper lacked explicit focusability and accessible identification; compatibility concern. | Add tabindex="0", role="region", aria-label="Weekly course timetable" and 2px focus-visible outline; preserve semantic table and internal scrolling. | timetable.html; style.css | NFR-02, FR-REG-08 | TC-UI-001, TC-REG-022 |
+| F-07 | Medium | Unsuitable caption target and detached original image could compromise recovery. | Validate section/figure/image/caption relationships; use event-specific status feedback; track current image after replacement; protect recovery independently. | script.js | VR-IMG-03, VR-INIT-01 | TC-IMG-018, TC-IMG-019, TC-LST-027 |
+| F-08 | Low | Continuation indentation and inherited selector duplication required review. | Retain acceptable continuation alignment, decorative comments and complementary navbar rules; conflicting visibility rules removed during F-01/F-02. | No additional changes; script.js and style.css inspected | SC-03, SC-10 | TC-VAL-007, TC-VAL-011 |
+| F-09 | Informational | README describes prior assignments rather than current features. | Defer root README finalization to Step 20; preserve historical records. | README.md (future update only) | DR-07 | TC-DOC-016 |
+| F-10 | Informational | Missing complete asset, browser, validation, Git and package evidence; supplementary fixture coverage needed. | Collect formal evidence; supplement existing cases with 50/51 surrogate-pair emoji checks, rollback fault and attempt-count instrumentation; do not add formal IDs. | Testing report, evidence directory, final ZIP and Git records (future) | IR-05, NFR-14, AC-01, AC-10, AC-11 | TC-IMG-001, TC-IMG-002, TC-LST-020, TC-LST-021, TC-LST-029, TC-DOC-009, TC-DOC-010, TC-DOC-011, TC-DOC-012, TC-DOC-013, TC-DOC-014, TC-DOC-015, TC-DOC-016, TC-DOC-017, TC-DOC-018, TC-DOC-019 |
+
+#### B. Verification evidence and remaining limitations
+
+| Finding | Preliminary verification method | Available evidence | Remaining limitations | Current disposition | Formal verification status |
+|---|---|---|---|---|---|
+| F-01 | Source inspection; earlier actual Chromium interaction checks. | Earlier discussion reports hover mismatch reproduced and corrected hover, click, repeated dismissal, outside click, keyboard and emulated touch checks. Final source contains managed visibility and focus restoration. | Physical touch, screen reader, cross-browser, destination navigation, repeated initialization and resize regression remain outstanding. CSS-only ARIA state is static. | Corrected; approved; awaiting formal verification | Not Tested |
+| F-02 | Earlier actual Chromium in-memory layout checks; final source inspection; user confirmation. | Earlier corrective discussion reports five overflowing combinations before correction and 20 of 20 JS-enabled combinations within viewport afterward. Source confirms conditional alignment. | Exact measurements are historical discussion reports, not independently reproduced in this update; no raw measurement log supplied here. Comprehensive final-candidate viewport and browser verification outstanding. CSS-only narrow viewport overflow remains documented; no global overflow concealment. | Approved JS-enabled correction; CSS-only limitation outstanding | Not Tested |
+| F-03 | Earlier Node VM controlled checks and syntax inspection; final source inspection. | Earlier discussion reports 15 date assertions and 16 initializer/recovery scenarios, including throwing getters/setters, feedback failures, timer registration failure and later sentinel execution. | Mock timer and sentinel are not real browser scheduling or downstream feature execution; physical cleanup cannot be guaranteed if API fails; clearInterval and marker deletion fault coverage not established. Real rollover/resume and live feedback pending. | Corrected; approved; awaiting formal verification | Not Tested |
+| F-04 | Source inspection; earlier corrective controlled-check phase; user approval. | Final source shows availability guard, blocker registration tracked only on success, inactive handler retained when blocker fails, and separate rollback/restoration operations. Earlier corrective implementation approved by user. | No raw F-04 execution log inspected in this update; do not infer individual fault results. If all navigation mechanisms fail, navigation prevention cannot be guaranteed; failed rollback or DOM writes may leave residual item or stale feedback. Formal fault checks and actual downstream regression pending. | Corrected; approved; awaiting formal verification | Not Tested |
+| F-05 | Source inspection; earlier controlled-check phase; fixture available. | Final source confirms five metadata entries, full eligible collection and explicit cap. Prior controlled fixture exists; no new runtime result claimed here. | Formal all-fail, fallback, extra-entry and random-boundary checks remain; image load/error depends on browser events, no unconditional completion guarantee for stalled requests. | Preventive correction implemented; approved | Not Tested |
+| F-06 | Earlier actual Chromium keyboard and layout checks; final source inspection. | Original keyboard scrolling failure was not reproduced in tested Chromium at 320px and 375px: Tab reached wrapper and arrows scrolled. Earlier corrected browser checks reported focus at all five widths and no document overflow. Final markup and CSS confirm enhancement. | Firefox, Edge, physical devices and screen-reader announcements outstanding; additional desktop Tab stop intentional. Historical browser results not repeated here. | Preventive accessibility enhancement implemented; awaiting formal verification | Not Tested |
+| F-07 | Source inspection; earlier controlled-check phase; fixture available. | Final source confirms tag and parent checks, status paragraph reuse, verified initial-image preservation, current image reference update and guarded diagnostics. | No new fault execution in this update; if DOM APIs fail, feedback/hiding may be impossible. Actual asset loading, assistive announcements and formal missing-target/secondary-failure checks pending. | Corrected; approved; awaiting formal verification | Not Tested |
+| F-08 | Earlier six-file source inspection; current uploaded files whitespace scan. | Earlier review found no genuine flagged indentation violation; complementary navbar declarations retained. Current CSS retains separate enhanced and fallback selectors. | Full final-candidate style review and external validation pending; no comprehensive style certification. | Resolved through inspection; user approved | Not Tested |
+| F-09 | Initial audit inspection; staged workflow decision. | User-requested deferral; no current README supplied for this update. | Final README accuracy and historical preservation unverified. | Deferred to Step 20 | Not Tested |
+| F-10 | Initial audit and plan review; user-confirmed push only. | Approved plan includes emoji boundary TC-LST-012; final source uploads and prior preliminary checks available. | Full asset decode/permissions, formal execution, validator logs, screenshots, exact Git revision, ZIP and public links outstanding. | Deferred to formal testing and evidence collection | Not Tested |
+
+### 23.4 Evidence classification and verification boundaries
+
+| Evidence type | Treatment in this update |
+|---|---|
+| Source inspection | Current uploaded JS, CSS and timetable inspected; previous six-file inspection retained as historical evidence. |
+| Actual syntax checks | Both current JavaScript uploads checked with Node; exit code 0. |
+| Automated or simulated controlled checks | Earlier faculty VM checks and corrective fixture discussions are preliminary; mocks do not establish actual browser scheduling, navigation, asset decoding or independent feature behavior. No new controlled runs claimed. |
+| Actual browser testing | Earlier Chromium in-memory navigation and timetable checks are recorded as reported in corrective discussions; not full deployed-site or cross-browser verification. No new browser version or measurement evidence invented. |
+| User-confirmed manual verification | Student confirms review, implementation, commit and push of planned corrections; F-02 reproduction and corrective approvals recorded as user-confirmed. No individual formal case outcomes inferred. |
+| Outstanding checks | Formal test execution, full assets, browser compatibility, external validation, evidence and final submission verification remain pending. |
+
+Recovery is best effort when browser or DOM APIs are forced to fail. An inactive planner handler prevents further insertion even if removal fails, but navigation cannot be guaranteed if all prevention mechanisms fail. Rollback, input restoration, feedback, timer cleanup and diagnostics are separate attempts, not unconditional guarantees. Supplementary fixtures must use disposable copies, restore all stubs and overrides, and verify the clean candidate afterward. For F-02, retain the previously documented CSS-only narrow-viewport overflow limitation and record actual final-candidate measurements for every dropdown at 320, 375, 768, 1024 and 1440px; do not infer exact reproduction geometry from approval alone.
+
+### 23.5 Post-audit corrective action summary
+
+| Metric | Count |
+|---|---:|
+| Original findings | 10 |
+| Addressed through corrective implementation (F-01–F-07) | 7 |
+| Resolved through inspection (F-08) | 1 |
+| Deferred (F-09, F-10) | 2 |
+| Total findings addressed | 8 of 10 |
+| Corrective action progress | 80% |
+
+Calculation: (7 implemented + 1 inspection disposition) / 10 × 100 = 80%. This is corrective action progress, not a formal test pass rate, closure rate or overall SRS compliance percentage. F-02 retains a limitation; F-06 is preventive rather than a reproduced Chromium failure. Addressed does not mean formally closed.
+
+### 23.6 Formal test execution status
+
+| Metric | Count |
+|---|---:|
+| Total approved formal cases | 158 |
+| Passed | 0 |
+| Failed | 0 |
+| Not Tested | 158 |
+| Blocked | 0 |
+
+Formal execution has not started. Preliminary source, syntax, controlled and browser checks do not change any approved case status. No formal pass rate is claimed. The approved test plan remains unchanged.
+
+### 23.7 Remaining activities and acceptance gates
+
+1. Complete AI-assisted code walkthrough of the corrected implementation and record limitations.
+2. Execute formal manual and controlled testing against the approved 158-case plan; include cross-browser, responsive, accessibility, recovery and regression checks. Record actual evidence, restore fixtures and retest confirmed defects.
+3. Run W3C HTML validation for all three pages and CSS validation; record errors, warnings and dispositions.
+4. Repeat JavaScript syntax validation on the exact final candidate and record console/dependency evidence. Preliminary syntax checks above do not replace this gate.
+5. Prepare the testing report with actual results, traceability, defects, evidence and limitations.
+6. Finalize README at Step 20 (F-09), distinguishing current features and historical Assignment 1/2 records.
+7. Verify final ZIP inventory, privacy, extraction and execution with all required assets and documents.
+8. Verify public AI conversation links and accessibility to intended reviewers.
+9. Verify exact final Git revision, historical records/tags, final tag and submission package; reverify after documentation changes. Collect remaining F-10 evidence throughout these activities.
+
+### 23.8 Post-audit conclusion
+
+The planned source corrective implementation phase is complete according to the student's confirmation and the available source evidence. Eight of ten original findings have been addressed through implementation or inspection, with two deferred to their planned workflow stages. Original audit classifications and severity levels remain unchanged. All 158 formal cases remain Not Tested. Remaining compatibility limitations, formal verification, external validation and final deliverable checks must be resolved or appropriately dispositioned under the approved acceptance criteria. The website is not yet established as submission-ready.
