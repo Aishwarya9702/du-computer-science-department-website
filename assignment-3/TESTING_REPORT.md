@@ -1,13 +1,13 @@
 # Assignment 3 — Software Testing Report
 
 **Project:** Department of Computer Science Website, University of Delhi  
-**Report state:** Interim execution report — submission verification pending  
+**Report state:** Final candidate execution report — release reverification pending  
 **Baseline:** Approved SRS v1.0 and approved test plan v1.0 (27 November 2026)  
 **Repository path:** `assignment-3/TESTING_REPORT.md`
 
 ## 1. Scope and execution summary
 
-This report records the student's confirmed execution of the approved 158-case plan. It does not alter the approved plan, SRS, audit or walkthrough. Historical Assignment 1 and Assignment 2 results are excluded. No new execution is claimed during report preparation. The exact candidate Git revision, individual execution timestamps and complete environment versions are not recorded; the working tree was user-confirmed clean at Group 8B and again during preliminary Group 8D; HEAD matched origin/main during preliminary Group 8D. Final candidate identity remains pending TC-DOC-019.
+This report records the student's confirmed execution of the approved 158-case plan. It does not alter the approved plan, SRS, audit or walkthrough. Historical Assignment 1 and Assignment 2 results are excluded. No new execution is claimed during report preparation. Individual execution timestamps and complete environment versions are not recorded; the working tree was user-confirmed clean at Group 8B and again during preliminary Group 8D; HEAD matched origin/main during preliminary Group 8D. The verified Step 22A candidate revision is `fb92f466efa693eb581ef778571826d82ab00bce`; final release identity remains pending after this documentation update.
 
 | Batch | Scope | Total | Passed | Failed | Not Tested |
 |---|---|---:|---:|---:|---:|
@@ -18,10 +18,10 @@ This report records the student's confirmed execution of the approved 158-case p
 | 5 | Cross-browser | 4 | 4 | 0 | 0 |
 | 6 | Regression | 25 | 25 | 0 | 0 |
 | 7 | Source validation | 12 | 12 | 0 | 0 |
-| 8 | Documentation and deliverables | 19 | 18 | 0 | 1 |
-| **Total** | | **158** | **157** | **0** | **1** |
+| 8 | Documentation and deliverables | 19 | 19 | 0 | 0 |
+| **Total** | | **158** | **158** | **0** | **0** |
 
-Execution coverage: **99.37%** (157/158). Recorded pass rate among executed cases: **100%** (157/157). Blocked: 0. Zero reported failures does not establish defect-free software.
+Execution coverage: **100%** (158/158). Recorded pass rate among executed cases: **100%** (158/158). Blocked: 0. Zero reported failures does not establish defect-free software.
 
 ## 2. Method and evidence policy
 
@@ -34,7 +34,7 @@ The approved methods, preconditions, inputs, actions and expected results are re
 | Controlled | 42 | 42 | 0 | 0 |
 | Fault | 16 | 16 | 0 | 0 |
 | External | 4 | 4 | 0 | 0 |
-| Document | 19 | 18 | 0 | 1 |
+| Document | 19 | 19 | 0 | 0 |
 
 ## 3. Detailed execution records
 
@@ -1949,14 +1949,14 @@ Run baseline/static checks first, then normal functional checks, controlled boun
 - **Test data:** Default candidate; synthetic data only
 - **Actions:** Record actual git rev-parse HEAD and status; compare ZIP with accepted files; after final verification inspect assignment-3-final target; repeat affected checks and rebuild ZIP after changes.
 - **Expected result:** Actual revision recorded; final tag points to accepted candidate; ZIP and records match; no invented hash or time.
-- **Actual result:** Preliminary verification Passed by user confirmation: clean working tree, HEAD matches origin/main, previous assignment tags preserved and preliminary archive consistency checked. Candidate revision not supplied; final tag not created. Final archive and tag consistency remain pending after documentation updates.
-- **Execution status:** Not Tested
-- **Evidence reference:** Group 8D preliminary user-confirmed manual verification; no independent archive, URL or Git inspection.
+- **Actual result:** Step 22A: user-confirmed candidate revision `fb92f466efa693eb581ef778571826d82ab00bce`; HEAD matched origin/main, working tree clean, assignment-1-final and assignment-2-final preserved, and local assignment-3-final peeled commit target matched HEAD. The Assignment 3 tag was not published remotely. Rebuilt candidate ZIP inventory, privacy exclusions, clean extraction, website smoke tests, documentation links, public conversation accessibility and archive consistency were confirmed. Archive SHA-256, timestamps and public URLs were not supplied. No independent repository, archive or URL inspection is claimed. Final release reverification remains pending after documentation updates.
+- **Execution status:** Passed
+- **Evidence reference:** Group 8D preliminary and Step 22A user-confirmed manual verification; candidate-level result only.
 
 
 ## 4. Requirements traceability matrix
 
-125 mapped identifiers (114 normative requirements and 11 acceptance criteria); 158 unique cases; structural coverage 100%. Execution coverage is distinct. A row with pending mapped tests is not fully verified.
+125 mapped identifiers (114 normative requirements and 11 acceptance criteria); 158 unique cases; structural coverage 100%. Execution coverage is distinct. All mapped cases passed at the verified candidate level; release acceptance remains separate.
 
 | SRS ID | Approved test cases | Recorded execution |
 |---|---|---|
@@ -2063,7 +2063,7 @@ Run baseline/static checks first, then normal functional checks, controlled boun
 | AI-11 | TC-VAL-005, TC-VAL-012 | 2/2 Passed |
 | AI-12 | TC-DOC-010 | 1/1 Passed |
 | AI-13 | TC-DOC-013 | 1/1 Passed |
-| AI-14 | TC-DOC-014, TC-DOC-015, TC-DOC-019 | 2/3 Passed; 1 Not Tested |
+| AI-14 | TC-DOC-014, TC-DOC-015, TC-DOC-019 | 3/3 Passed |
 | DR-01 | TC-DOC-017, TC-DOC-018 | 2/2 Passed |
 | DR-02 | TC-DOC-013 | 1/1 Passed |
 | DR-03 | TC-DOC-010 | 1/1 Passed |
@@ -2072,7 +2072,7 @@ Run baseline/static checks first, then normal functional checks, controlled boun
 | DR-06 | TC-DOC-014 | 1/1 Passed |
 | DR-07 | TC-DOC-016 | 1/1 Passed |
 | DR-08 | TC-DOC-018 | 1/1 Passed |
-| DR-09 | TC-DOC-019 | 0/1 Passed; 1 Not Tested |
+| DR-09 | TC-DOC-019 | 1/1 Passed |
 | DR-10 | TC-DOC-017 | 1/1 Passed |
 | AC-01 | TC-IMG-001, TC-IMG-002, TC-IMG-003, TC-IMG-005, TC-IMG-006, TC-IMG-008, TC-IMG-009, TC-IMG-010, TC-IMG-011, TC-IMG-012, TC-IMG-013 | 11/11 Passed |
 | AC-02 | TC-IMG-004, TC-IMG-014, TC-IMG-015, TC-IMG-016, TC-IMG-017, TC-IMG-018, TC-IMG-019, TC-IMG-020, TC-IMG-021 | 9/9 Passed |
@@ -2084,7 +2084,7 @@ Run baseline/static checks first, then normal functional checks, controlled boun
 | AC-08 | TC-IMG-007, TC-UI-001, TC-UI-002, TC-UI-003, TC-UI-004, TC-UI-005, TC-UI-006, TC-UI-007, TC-UI-008, TC-UI-009, TC-BR-004 | 11/11 Passed |
 | AC-09 | TC-BR-001, TC-BR-002, TC-BR-003, TC-VAL-006, TC-VAL-007, TC-VAL-008, TC-VAL-009, TC-VAL-010, TC-VAL-011, TC-VAL-012, TC-DOC-009 | 11/11 Passed |
 | AC-10 | TC-VAL-001, TC-VAL-002, TC-VAL-003, TC-VAL-004, TC-VAL-005, TC-VAL-012, TC-DOC-001, TC-DOC-002, TC-DOC-003, TC-DOC-004, TC-DOC-005, TC-DOC-006, TC-DOC-007, TC-DOC-008, TC-DOC-009, TC-DOC-010, TC-DOC-011, TC-DOC-012, TC-DOC-015 | 19/19 Passed |
-| AC-11 | TC-DOC-013, TC-DOC-014, TC-DOC-016, TC-DOC-017, TC-DOC-018, TC-DOC-019 | 5/6 Passed; 1 Not Tested |
+| AC-11 | TC-DOC-013, TC-DOC-014, TC-DOC-016, TC-DOC-017, TC-DOC-018, TC-DOC-019 | 6/6 Passed |
 
 ### Acceptance criteria
 
@@ -2100,7 +2100,7 @@ Run baseline/static checks first, then normal functional checks, controlled boun
 | AC-08 | 11/11 Passed |
 | AC-09 | 11/11 Passed |
 | AC-10 | 19/19 Passed |
-| AC-11 | 5/6 Passed; 1 Not Tested |
+| AC-11 | 6/6 Passed |
 
 ## 5. Historical audit findings and corrective verification
 
@@ -2133,9 +2133,9 @@ Original audit classifications: 30 Compliant, 75 Partially Compliant, 7 Non-Comp
 | F-07 | Event feedback recovery supplementary check Passed. |
 | F-08 | Inspection resolved; decorative comments and complementary CSS accepted. |
 | F-09 | README finalization verified through TC-DOC-016 (Group 8C user-confirmed). |
-| F-10 | Open: formal technical and documentation verification complete; preliminary submission checks passed; final TC-DOC-019 tag and archive consistency pending. |
+| F-10 | Candidate verification completed, including TC-DOC-019; final release closure conditional on successful rebuilt archive and final tag reverification. |
 
-Historical post-audit progress: eight of ten findings addressed (seven implementations and one inspection disposition; 80%). Following Group 8C, nine of ten findings are addressed, including F-09; F-10 remains open. These are finding dispositions, not formal test pass rates. Correction revisions not recorded here; refer to historical audit and development history. No new defect IDs invented.
+Historical post-audit progress: eight of ten findings addressed (seven implementations and one inspection disposition; 80%). Following Group 8C, nine of ten findings were addressed, including F-09; F-10 remained open. Step 22A completes F-10 candidate verification; unconditional release closure remains pending. These are finding dispositions, not formal test pass rates. Correction revisions not recorded here; refer to historical audit and development history. No new defect IDs invented.
 
 ## 6. Supplementary verification (not additional formal cases)
 
@@ -2228,7 +2228,7 @@ Timetable internal scrolling permitted; gallery remains two columns at 375px. Co
 
 Restoration counts are checklist confirmations, not additional test cases. Historical evidence and approved exceptions remain intact.
 
-## 9. Group 8C and preliminary Group 8D verification
+## 9. Group 8C, preliminary Group 8D and Step 22A verification
 
 Group 8C: 4/4 Passed, user-confirmed manual verification; earlier evidence reused where applicable. No production source or approved baseline documents modified; no additional observations reported. All five required documents and five W3C evidence files were confirmed present and verified. Batch 8 progress at Group 8C completion: 15/19 (historical).
 
@@ -2241,7 +2241,7 @@ Group 8C: 4/4 Passed, user-confirmed manual verification; earlier evidence reuse
 
 ### Preliminary Group 8D results
 
-Group 8D: 3/4 formal cases Passed; Batch 8: 18/19. All results are user-confirmed manual verification. No production source or approved baseline documents modified; no additional observations reported.
+Historical preliminary Group 8D: 3/4 formal cases Passed; Batch 8: 18/19. All results are user-confirmed manual verification. No production source or approved baseline documents modified; no additional observations reported.
 
 | Test ID | Verification | Status |
 |---|---|---|
@@ -2250,10 +2250,22 @@ Group 8D: 3/4 formal cases Passed; Batch 8: 18/19. All results are user-confirme
 | TC-DOC-018 | Clean extraction and Live Server execution | Passed |
 | TC-DOC-019 | Preliminary Git verification Passed; final tag and archive consistency pending | Not Tested |
 
-Both public conversation links were confirmed accessible and privacy-checked; actual URLs were not supplied. Candidate ZIP inventory, privacy, extraction, website execution and documentation accessibility were confirmed. Preliminary Git checks confirmed a clean working tree, HEAD matching origin/main, previous assignment tag preservation and candidate consistency. Actual candidate commit hash was not supplied. The final tag has not been created. These confirmations apply to the preliminary candidate, not the subsequent release; no independent inspection of the links, ZIP or Git repository is claimed.
+Both public conversation links were confirmed accessible and privacy-checked; actual URLs were not supplied. Candidate ZIP inventory, privacy, extraction, website execution and documentation accessibility were confirmed. Preliminary Git checks confirmed a clean working tree, HEAD matching origin/main, previous assignment tag preservation and candidate consistency. At that preliminary stage, the candidate commit hash was not supplied and the final tag had not been created. These confirmations apply to the preliminary candidate, not the subsequent release; no independent inspection of the links, ZIP or Git repository is claimed.
 
-After this documentation update, commit and push, rebuild the ZIP from the new committed revision and repeat affected inventory, privacy, extraction, documentation/link and website smoke checks. Reverify public conversation links if shared snapshots change. Verify clean working tree, remote synchronization, previous tags, actual accepted revision and archive consistency. Final TC-DOC-019 closure requires actual final tag verification; any subsequent documentation update requires another rebuild and affected reverification. Do not silently move a published tag; obtain explicit approval if a tag must change. Record the final revision and archive verification externally to avoid self-referential commit hashes. Exclude credentials, real alumni data, caches and .git. F-10 remains open until final consistency verification succeeds.
+### Step 22A — Completed candidate verification
+
+Step 22A: user-confirmed candidate revision `fb92f466efa693eb581ef778571826d82ab00bce`; HEAD matched origin/main, working tree clean, assignment-1-final and assignment-2-final preserved, and local assignment-3-final peeled commit target matched HEAD. The Assignment 3 tag was not published remotely. Rebuilt candidate ZIP inventory, privacy exclusions, clean extraction, website smoke tests, documentation links, public conversation accessibility and archive consistency were confirmed. Archive SHA-256, timestamps and public URLs were not supplied. No independent repository, archive or URL inspection is claimed.
+
+| Test ID | Candidate-level status | Release status |
+|---|---|---|
+| TC-DOC-019 | Passed | Final release reverification pending |
+
+Batch 8: 19/19; Group 8D: 4/4.
+
+### Mandatory final release checks
+
+Final release acceptance is pending. This documentation update creates a new revision. Commit and push only the two Markdown files; verify clean working tree, HEAD matching origin/main, previous tags and unchanged production source and approved baseline documents. Rebuild the final ZIP using git archive from the actual new committed revision; repeat affected inventory, privacy, clean extraction, documentation/link, website smoke and archive consistency checks, and reverify public conversation accessibility and privacy. Exclude credentials, real alumni data, caches, temporary fixtures and .git. Confirm the existing Assignment 3 tag is still unpublished; with explicit approval realign the local tag to the new accepted revision, verify its peeled commit matches HEAD and origin/main, then publish only that final tag and verify its remote target. Do not silently move a published tag. Record the actual final revision, archive SHA-256, tag target and final acceptance externally in the submission record or conversation to avoid another self-referential documentation commit. No subsequent revision, archive hash or timestamp is asserted. F-10 candidate verification is complete; unconditional release closure is conditional on successful final archive and tag reverification.
 
 ## 10. Conclusion
 
-157 of 158 cases are recorded Passed, zero Failed, one Not Tested; execution coverage 99.37%, executed pass rate 100%. All technical batches and Groups 8A–8C are user-confirmed complete. Preliminary Group 8D verification is user-confirmed complete (3/4 formal cases); Batch 8 progress is 18/19. Final acceptance remains pending TC-DOC-019 final tag and rebuilt archive consistency verification. F-09 is verified; F-10 remains open. No final submission readiness or comprehensive security/accessibility guarantee is claimed.
+All 158 of 158 approved cases are recorded Passed at the verified candidate level, zero Failed, zero Not Tested; execution coverage 100%, recorded pass rate 100%. Batch 8 is 19/19 and Group 8D is 4/4. F-09 remains verified; F-10 candidate verification is complete, with final release closure conditional on successful final archive and tag reverification. No final submission readiness or comprehensive security/accessibility guarantee is claimed.

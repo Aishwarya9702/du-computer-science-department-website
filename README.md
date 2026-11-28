@@ -393,7 +393,7 @@ Assignment 3 extends the shared website without replacing earlier academic docum
 
 ### AI-assisted workflow and corrective records
 
-Baseline review, approved SRS and test plan preceded incremental development; audit, corrections, walkthrough and manual verification are retained in the development record. Findings F-01–F-07 have user-confirmed corrective/supplementary verification; F-08 resolved through inspection. F-09 README finalization is verified through TC-DOC-016; F-10 remains open until final submission verification. Original audit classifications and historical findings are preserved. Supplementary verification is separate from formal counts.
+Baseline review, approved SRS and test plan preceded incremental development; audit, corrections, walkthrough and manual verification are retained in the development record. Findings F-01–F-07 have user-confirmed corrective/supplementary verification; F-08 resolved through inspection. F-09 README finalization is verified through TC-DOC-016; F-10 candidate verification is complete; final release closure remains conditional on successful final archive and tag reverification. Original audit classifications and historical findings are preserved. Supplementary verification is separate from formal counts.
 
 | Document | Assignment 3 |
 |---|---|
@@ -416,18 +416,18 @@ Both Original Development Conversation and Clean Prompt Development Conversation
 | Cross-browser | 4 | 4 | 0 | 0 |
 | Regression | 25 | 25 | 0 | 0 |
 | Source validation | 12 | 12 | 0 | 0 |
-| Documentation and deliverables | 19 | 18 | 0 | 1 |
-| **Total** | **158** | **157** | **0** | **1** |
+| Documentation and deliverables | 19 | 19 | 0 | 0 |
+| **Total** | **158** | **158** | **0** | **0** |
 
-Execution coverage **99.37%**; recorded pass rate among executed cases **100%**. Results are user-confirmed except reviewed validator screenshot contents; no independent full execution claimed. Historical Assignment 2's 168/168 results are separate. Batch 8 progress: 18/19; Group 8D progress: 3/4. Group 8C (TC-DOC-010, TC-DOC-011, TC-DOC-012 and TC-DOC-016) is user-confirmed Passed. All five required Assignment 3 documents were confirmed present, readable and consistent. TC-DOC-013, TC-DOC-017 and TC-DOC-018 are user-confirmed Passed. TC-DOC-019 preliminary verification Passed; formal status remains Not Tested pending final tag and archive consistency.
+Candidate-level execution coverage **100%**; recorded pass rate among executed cases **100%**. Results are user-confirmed except reviewed validator screenshot contents; no independent full execution claimed. Historical Assignment 2's 168/168 results are separate. Batch 8 progress: 19/19; Group 8D progress: 4/4. Group 8C (TC-DOC-010, TC-DOC-011, TC-DOC-012 and TC-DOC-016) is user-confirmed Passed. All five required Assignment 3 documents were confirmed present, readable and consistent. TC-DOC-013, TC-DOC-017 and TC-DOC-018 are user-confirmed Passed. TC-DOC-019 Passed for the verified Step 22A candidate; final release reverification remains pending.
 
 Fresh Nu HTML Checker vnu 26.11.28 validation: all three HTML files zero errors and zero warnings. W3C CSS Level 3 + SVG: zero errors, three accepted non-blocking warnings at lines 1166, 1172 and 1177 (identical background and border colors on alumni submit button normal, hover and active states). Five reviewed evidence references are listed in the testing report; all five files were user-confirmed present, readable and accurately referenced through TC-DOC-012. Both JS syntax checks reported Passed; formal Node version and exit codes not recorded. Chrome, Edge and Firefox checks reported Passed; versions and detailed subcase logs not recorded. Touch testing used Chrome emulation, not a physical device. No comprehensive WCAG or security certification claimed. F-03 supplementary recovery scope and unrecorded section feedback are documented in the report; fault recovery is best effort.
 
 ### Release status
 
-Assignment 1 and 2 tags and documentation preservation, incremental history, clean working tree and HEAD matching origin/main were user-confirmed. Public conversation accessibility and privacy, candidate ZIP inventory and privacy, clean extraction and Live Server execution of all three pages and required features were confirmed. Actual candidate commit hash and public URLs were not supplied; no independent repository or archive inspection is claimed. The final Assignment 3 tag has not been created. F-09 remains verified and F-10 remains open.
+Step 22A: user-confirmed candidate revision `fb92f466efa693eb581ef778571826d82ab00bce`; HEAD matched origin/main, working tree clean, assignment-1-final and assignment-2-final preserved, and local assignment-3-final peeled commit target matched HEAD. The Assignment 3 tag was not published remotely. Rebuilt candidate ZIP inventory, privacy exclusions, clean extraction, website smoke tests, documentation links, public conversation accessibility and archive consistency were confirmed. Archive SHA-256, timestamps and public URLs were not supplied. No independent repository, archive or URL inspection is claimed. F-09 remains verified.
 
-After documentation changes, commit/push, rebuild the ZIP from the new committed revision and repeat affected inventory, privacy, extraction, documentation/link and website smoke checks. Reverify public links if snapshots change, and verify the accepted revision, remote synchronization and archive consistency. Final TC-DOC-019 closure requires actual final tag verification; any later documentation change requires rebuilding and affected reverification. Do not silently move a published tag. Record final revision and archive verification externally if needed. No final submission readiness, hash or timestamp is asserted. Use synthetic data only; exclude credentials, real alumni data, caches and `.git` from the submission archive.
+Final release acceptance is pending. This documentation update creates a new revision. Commit and push only the two Markdown files; verify clean working tree, HEAD matching origin/main, previous tags and unchanged production source and approved baseline documents. Rebuild the final ZIP using git archive from the actual new committed revision; repeat affected inventory, privacy, clean extraction, documentation/link, website smoke and archive consistency checks, and reverify public conversation accessibility and privacy. Exclude credentials, real alumni data, caches, temporary fixtures and .git. Confirm the existing Assignment 3 tag is still unpublished; with explicit approval realign the local tag to the new accepted revision, verify its peeled commit matches HEAD and origin/main, then publish only that final tag and verify its remote target. Do not silently move a published tag. Record the actual final revision, archive SHA-256, tag target and final acceptance externally in the submission record or conversation to avoid another self-referential documentation commit. No subsequent revision, archive hash or timestamp is asserted. F-10 candidate verification is complete; unconditional release closure is conditional on successful final archive and tag reverification.
 
 ---
 
@@ -681,7 +681,7 @@ The supplied earlier Git history shows incremental Assignment 2 commits for the 
 - No backend or database is implemented.
 - No authentication, OTP, email/phone ownership verification, server-side validation or administrative registration dashboard is implemented.
 - Local form validation checks format and constraints, not the authenticity of alumni information.
-- Assignment 2 historical deliverable checks were user-confirmed passed; Assignment 3 final deliverable checks remain pending.
+- Assignment 2 historical deliverable checks were user-confirmed passed; Assignment 3 candidate-level deliverable checks passed; final release reverification remains pending.
 - The alumni form does not store or submit registration information.
 - Faculty joining dates are sample values.
 - Academic announcements and event images are illustrative.
