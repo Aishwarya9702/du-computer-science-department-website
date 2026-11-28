@@ -17,8 +17,9 @@ The website also demonstrates practical web development concepts such as semanti
 |---|---|---|
 | Assignment 1 | Original multi-page departmental website and practical exercises | Root-level documents |
 | Assignment 2 | Incremental enhancement and validation of the Alumni Registration Form | `assignment-2/` |
+| Assignment 3 | Random event images, faculty experience and native Activity Planner; corrective development and validation | `assignment-3/` |
 
-Both assignments share the same website source files. Assignment 2 extends rather than replaces Assignment 1. The Git tag `assignment-1-final` preserves the Assignment 1 baseline at commit `cf70e4a`.
+All three assignments share the same website source files. Each assignment extends rather than replaces its predecessor. The Git tag `assignment-1-final` preserves the Assignment 1 baseline at commit `cf70e4a`.
 
 ## Project Objectives
 
@@ -31,7 +32,7 @@ Both assignments share the same website source files. Assignment 2 extends rathe
 - Implement dynamic webpage functionality using JavaScript.
 - Use JavaScript Date objects to calculate faculty experience and display a live digital clock.
 - Implement random image selection on webpage refresh.
-- Use jQuery for dynamic list creation and image animation effects.
+- Use jQuery for historical Assignment 1 list creation and retained gallery animation; migrate the planner to native JavaScript in Assignment 3.
 - Practice DOM manipulation, event handling, and input validation.
 - Maintain project documentation and manual testing records.
 - Use Git and GitHub for version control and project management.
@@ -47,7 +48,7 @@ Both assignments share the same website source files. Assignment 2 extends rathe
 | CSS Flexbox | Navigation, image gallery, and multi-column layouts |
 | CSS Grid | Faculty, academic programme, and research cards |
 | JavaScript | Dynamic content, calculations, clock, and form validation |
-| jQuery 3.7.1 | Dynamic list creation and image fade effects |
+| jQuery 3.7.1 | Retained image fade effects; historical Assignment 1 list creation |
 | DOM Manipulation | Updating webpage content dynamically |
 | Git | Version control |
 | GitHub | Repository hosting and project management |
@@ -57,6 +58,8 @@ Both assignments share the same website source files. Assignment 2 extends rathe
 ---
 
 ## Assignment 1 — Website Features (Preserved)
+
+This section records the historical Assignment 1 implementation. For current event selection, faculty calculation and Activity Planner behavior, see Assignment 3 below.
 
 ### 1. Department Homepage
 
@@ -168,7 +171,7 @@ Features include:
 - DOM manipulation using JavaScript
 - Different event images across repeated page loads
 
-The current script identifies the illustrative images as Republic Day Celebration, Anti-Ragging Awareness Session, and Department Event. Random selection may repeat an image on consecutive loads.
+The historical Assignment 1 script identifies the illustrative images as Republic Day Celebration, Anti-Ragging Awareness Session, and Department Event. Random selection may repeat an image on consecutive loads.
 
 ### 9. Faculty Experience Calculator
 
@@ -374,6 +377,58 @@ The finalized Assignment 2 SRS and test plan remain the requirements and testing
 
 ---
 
+## Assignment 3 — JavaScript Enhancements and Validation
+
+Assignment 3 extends the shared website without replacing earlier academic documents or alumni functionality.
+
+### Current implementation
+
+- Event Highlights: five distinct illustrative assets (`event1.jpg`, `event2.jpeg`, `event3.jpeg`, `event4.jpg`, `event5.jpg`) with corresponding alt text and captions: Republic Day Celebration, Anti-Ragging Awareness Session, Department Event, Sankalan 2026 and Sports Day. Random selection may repeat across refreshes. Eligible assets are tried without replacement up to five attempts; verified initial fallback or unavailable feedback is used when appropriate.
+- Faculty experience: strict Gregorian joining-date validation, device-local completed years, March 1 anniversary for February 29 in non-leap years, immediate calculation and one 60-second date check timer. Unchanged text is not rewritten; invalid/future dates and recovery feedback are handled. Dates remain illustrative.
+- Student Activity Planner: native form submit handler, click/Enter support, trimmed nonblank input, maximum 100 raw UTF-16 code units, safe `createElement`, `textContent` and `appendChild` insertion, feedback, input clearing and focus restoration. Duplicates allowed; entries are temporary. Failure recovery disables processing and attempts rollback. The obsolete jQuery planner handler is removed.
+- Gallery: inherited jQuery 3.7.1 fade effects remain, configured for 800 ms with queue cleanup and two-column layout at 375px. CDN failure leaves static images and disables unavailable controls; native features remain independent.
+- Navigation: synchronized enhanced dropdown visibility and ARIA state, keyboard/click/touch handling and viewport-aware alignment. CSS-only fallback remains with documented narrow-viewport positioning limitation.
+- Timetable: focusable labelled scrolling region and visible focus styling; preventive enhancement, not a reproduced Chromium failure.
+- Alumni form, 300-character counter, privacy safeguards, digital clock and previous website content remain preserved.
+
+### AI-assisted workflow and corrective records
+
+Baseline review, approved SRS and test plan preceded incremental development; audit, corrections, walkthrough and manual verification are retained in the development record. Findings F-01–F-07 have user-confirmed corrective/supplementary verification; F-08 resolved through inspection. F-09 README finalization is verified through TC-DOC-016; F-10 remains open until final submission verification. Original audit classifications and historical findings are preserved. Supplementary verification is separate from formal counts.
+
+| Document | Assignment 3 |
+|---|---|
+| SRS | [Approved SRS](assignment-3/SRS.md) |
+| Test plan | [Approved test plan](assignment-3/ASSIGNMENT_TEST_PLAN.md) |
+| Audit | [Conformance audit and corrective records](assignment-3/CONFORMANCE_AUDIT.md) |
+| Walkthrough | [Code walkthrough](assignment-3/CODE_WALKTHROUGH.md) |
+| Execution | [Testing report](assignment-3/TESTING_REPORT.md) |
+
+The original development and clean prompt conversation links must be supplied and verified before submission; no URLs are invented here.
+
+### Assignment 3 testing status
+
+| Batch | Total | Passed | Failed | Not Tested |
+|---|---:|---:|---:|---:|
+| Event images | 21 | 21 | 0 | 0 |
+| Faculty experience | 39 | 39 | 0 | 0 |
+| Activity Planner | 29 | 29 | 0 | 0 |
+| UI/UX and accessibility | 9 | 9 | 0 | 0 |
+| Cross-browser | 4 | 4 | 0 | 0 |
+| Regression | 25 | 25 | 0 | 0 |
+| Source validation | 12 | 12 | 0 | 0 |
+| Documentation and deliverables | 19 | 15 | 0 | 4 |
+| **Total** | **158** | **154** | **0** | **4** |
+
+Execution coverage **97.47%**; recorded pass rate among executed cases **100%**. Results are user-confirmed except reviewed validator screenshot contents; no independent full execution claimed. Historical Assignment 2's 168/168 results are separate. Batch 8 progress: 15/19. Group 8C (TC-DOC-010, TC-DOC-011, TC-DOC-012 and TC-DOC-016) is user-confirmed Passed. All five required Assignment 3 documents were confirmed present, readable and consistent. Pending (Not Tested): TC-DOC-013, TC-DOC-017, TC-DOC-018 and TC-DOC-019.
+
+Fresh Nu HTML Checker vnu 26.11.28 validation: all three HTML files zero errors and zero warnings. W3C CSS Level 3 + SVG: zero errors, three accepted non-blocking warnings at lines 1166, 1172 and 1177 (identical background and border colors on alumni submit button normal, hover and active states). Five reviewed evidence references are listed in the testing report; all five files were user-confirmed present, readable and accurately referenced through TC-DOC-012. Both JS syntax checks reported Passed; formal Node version and exit codes not recorded. Chrome, Edge and Firefox checks reported Passed; versions and detailed subcase logs not recorded. Touch testing used Chrome emulation, not a physical device. No comprehensive WCAG or security certification claimed. F-03 supplementary recovery scope and unrecorded section feedback are documented in the report; fault recovery is best effort.
+
+### Release status
+
+Assignment 1 and 2 tags and documentation preservation, incremental history and clean working tree were user-confirmed before this update. Final Assignment 3 revision, public links, ZIP inventory and clean extraction/run remain pending. After actual checks, update the report and README, commit/push, rebuild and reverify the archive and final accepted revision. Create `assignment-3-final` only after acceptance verification. No final hash or timestamp is asserted. Use synthetic data only; exclude credentials, real alumni data, caches and `.git` from the submission archive.
+
+---
+
 ## Project Structure
 
 ```text
@@ -396,17 +451,31 @@ du-computer-science-department-website/
 │   └── events/
 │       ├── event1.jpg
 │       ├── event2.jpeg
-│       └── event3.jpeg
+│       ├── event3.jpeg
+│       ├── event4.jpg
+│       └── event5.jpg
 ├── screenshots/
 │   ├── html-validation.png
 │   └── css-validation.png
-└── assignment-2/
+├── assignment-2/
+│   ├── SRS.md
+│   ├── ASSIGNMENT_TEST_PLAN.md
+│   ├── CONFORMANCE_AUDIT.md
+│   ├── CODE_WALKTHROUGH.md
+│   ├── TESTING_REPORT.md
+│   └── screenshots/
+└── assignment-3/
     ├── SRS.md
     ├── ASSIGNMENT_TEST_PLAN.md
     ├── CONFORMANCE_AUDIT.md
     ├── CODE_WALKTHROUGH.md
     ├── TESTING_REPORT.md
     └── screenshots/
+        ├── w3c-index-html.png
+        ├── w3c-alumni-html.png
+        ├── w3c-timetable-html.png
+        ├── w3c-css.png
+        └── w3c-css-warnings.png
 ```
 
 Root-level academic documents and screenshots belong to Assignment 1. Assignment 2 evidence is maintained in its own screenshots directory; individual evidence filenames are recorded in the testing report. This tree reflects the documented repository structure, not an independently retrieved live GitHub manifest.
@@ -419,8 +488,8 @@ Root-level academic documents and screenshots belong to Assignment 1. Assignment
 | `alumni.html` | Alumni registration and feedback form |
 | `timetable.html` | Illustrative weekly course timetable |
 | `style.css` | Website styling and responsive layouts |
-| `script.js` | Random event images, faculty experience, alumni validation, and digital clock |
-| `jquery-script.js` | Dynamic activity list and gallery fade animations |
+| `script.js` | Random event images, faculty experience, native Activity Planner, navigation, alumni validation and digital clock |
+| `jquery-script.js` | Gallery fade animations only; historical activity handler removed in Assignment 3 |
 | `README.md` | Project documentation |
 | `TESTING.md` | Manual testing documentation |
 | `images/` | Website images and illustrative event images |
@@ -442,7 +511,7 @@ Open the downloaded project folder in Visual Studio Code.
 
 ### Step 3: Launch the Website
 
-Open `index.html` in a web browser.
+Serve the repository root over HTTP for the current candidate (Live Server recommended).
 
 Alternatively, use the Live Server extension in VS Code: right-click `index.html` and select **Open with Live Server**. Navigate to the alumni page using the website menu. A local URL used during testing was `http://127.0.0.1:5500/alumni.html` (the port may vary). Enable JavaScript for interactive features.
 
@@ -493,7 +562,7 @@ No package installation, backend server, or database setup is required.
 | 10 | Faculty experience calculation | JavaScript |
 | 11 | Alumni feedback counter and form validation | JavaScript |
 | 16 | Digital clock updating every second | JavaScript |
-| 17 | Dynamic list creation | jQuery |
+| 17 | Dynamic list creation | jQuery (Assignment 1); native JavaScript (Assignment 3) |
 | 18 | Image fade in and fade out effects | jQuery |
 
 ---
@@ -610,7 +679,7 @@ The supplied earlier Git history shows incremental Assignment 2 commits for the 
 - No backend or database is implemented.
 - No authentication, OTP, email/phone ownership verification, server-side validation or administrative registration dashboard is implemented.
 - Local form validation checks format and constraints, not the authenticity of alumni information.
-- Final deliverable checks are user-confirmed passed; the updated ZIP and Git revision require reverification before submission.
+- Assignment 2 historical deliverable checks were user-confirmed passed; Assignment 3 final deliverable checks remain pending.
 - The alumni form does not store or submit registration information.
 - Faculty joining dates are sample values.
 - Academic announcements and event images are illustrative.
