@@ -177,8 +177,8 @@
 
 /* Show Dropdown on Hover or Keyboard Focus */
 
-.dropdown:hover > .dropdown-menu,
-.dropdown:focus-within > .dropdown-menu {
+.navbar:not(.navigation-enhanced) .dropdown:hover > .dropdown-menu,
+.navbar:not(.navigation-enhanced) .dropdown:focus-within > .dropdown-menu {
   display: block;
 }
 
@@ -1900,10 +1900,21 @@ main h2 {
   background-color: #14345a;
 }
 
-/* Show dropdown when clicked */
+/* Enhanced visibility follows the disclosure accessibility state. */
 
-.dropdown.is-open > .dropdown-menu {
+.navigation-enhanced .dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
   display: block;
+}
+
+.navigation-enhanced .dropdown.align-right > .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.dropdown-toggle:focus-visible,
+.dropdown-menu a:focus-visible {
+  outline: 2px solid white;
+  outline-offset: -3px;
 }
 
 /* Mobile dropdown button styling */
@@ -1913,12 +1924,4 @@ main h2 {
     padding: 12px 14px;
     font-size: 14px;
   }
-}
-
-/* Show navigation dropdown on hover or focus */
-
-.dropdown:hover > .dropdown-menu,
-.dropdown:focus-within > .dropdown-menu,
-.dropdown.is-open > .dropdown-menu {
-  display: block;
 }

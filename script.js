@@ -1701,45 +1701,117 @@ if (document.getElementById("digital-clock")) {
 }
 
 
-/* Click-to-open navigation dropdowns */
+/* Accessible navigation disclosures */
 
-document.querySelectorAll(".dropdown-toggle").forEach((button) => {
-  button.addEventListener("click", () => {
-    const dropdown = button.closest(".dropdown");
-    if (!dropdown) {
+(function initializeNavigation() {
+  const navbar = document.querySelector(".navbar");
+  if (!navbar || navbar.classList.contains("navigation-enhanced")) {
+    return;
+  }
+
+  const disclosures = Array.from(navbar.querySelectorAll(".dropdown"))
+    .map(function (dropdown) {
+      return {
+        dropdown,
+        toggle: dropdown.querySelector(".dropdown-toggle"),
+        menu: dropdown.querySelector(".dropdown-menu")
+      };
+    });
+
+  if (!disclosures.length || disclosures.some(function (item) {
+    return !item.toggle || !item.menu;
+  })) {
+    return;
+  }
+
+  let active = null;
+  let pinned = false;
+
+  function positionMenu(item) {
+    item.dropdown.classList.remove("align-right");
+    if (item.menu.getBoundingClientRect().right >
+        document.documentElement.clientWidth) {
+      item.dropdown.classList.add("align-right");
+    }
+  }
+
+  function closeMenu(restoreFocus = false) {
+    if (!active) {
       return;
     }
-    const isOpen = dropdown.classList.contains("is-open");
+    const item = active;
+    active = null;
+    pinned = false;
+    item.toggle.setAttribute("aria-expanded", "false");
+    item.dropdown.classList.remove("align-right");
+    if (restoreFocus || item.menu.contains(document.activeElement)) {
+      item.toggle.focus();
+    }
+  }
 
-    document.querySelectorAll(".dropdown").forEach((item) => {
-      item.classList.remove("is-open");
+  function openMenu(item, pin = false) {
+    if (active !== item) {
+      closeMenu();
+      active = item;
+    }
+    pinned = pin;
+    item.toggle.setAttribute("aria-expanded", "true");
+    positionMenu(item);
+  }
 
-      const toggle = item.querySelector(".dropdown-toggle");
+  disclosures.forEach(function (item) {
+    item.toggle.setAttribute("aria-expanded", "false");
 
-      if (toggle) {
-        toggle.setAttribute("aria-expanded", "false");
+    item.dropdown.addEventListener("pointerenter", function (event) {
+      if (event.pointerType !== "mouse" || active === item ||
+          (active && active.menu.contains(document.activeElement))) {
+        return;
+      }
+      openMenu(item);
+    });
+
+    item.dropdown.addEventListener("pointerleave", function (event) {
+      if (event.pointerType === "mouse" && active === item && !pinned &&
+          !item.menu.contains(document.activeElement)) {
+        closeMenu();
       }
     });
 
-    if (!isOpen) {
-      dropdown.classList.add("is-open");
-      button.setAttribute("aria-expanded", "true");
+    // Native button activation handles mouse, touch, Enter and Space.
+    item.toggle.addEventListener("click", function () {
+      if (active === item && pinned) {
+        closeMenu();
+      } else {
+        openMenu(item, true);
+      }
+    });
+
+    item.dropdown.addEventListener("focusout", function (event) {
+      if (active === item && !item.dropdown.contains(event.relatedTarget)) {
+        closeMenu();
+      }
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    if (active && !active.dropdown.contains(event.target)) {
+      closeMenu();
     }
   });
-});
 
-/* Close dropdowns when clicking outside */
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && active) {
+      event.preventDefault();
+      closeMenu(active.dropdown.contains(document.activeElement));
+    }
+  });
 
-document.addEventListener("click", (event) => {
-  if (!event.target.closest(".dropdown")) {
-    document.querySelectorAll(".dropdown").forEach((item) => {
-      item.classList.remove("is-open");
+  window.addEventListener("resize", function () {
+    if (active) {
+      positionMenu(active);
+    }
+  });
 
-      const toggle = item.querySelector(".dropdown-toggle");
-
-      if (toggle) {
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-});
+  // Enable managed visibility only after all handlers are installed.
+  navbar.classList.add("navigation-enhanced");
+})();
