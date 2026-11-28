@@ -32,60 +32,97 @@ const eventImages = [
 
 
 async function displayRandomEvent() {
-  const eventSection = document.getElementById("event-highlights");
-  const eventImage = document.getElementById("random-event-image");
-  const eventCaption = document.getElementById("event-caption");
-
+  let eventSection = null;
+  let eventFigure = null;
+  let eventImage = null;
+  let eventCaption = null;
   const unavailableMessage = "Event images are currently unavailable.";
+  const maxAttempts = 5;
 
-  // Recognize the homepage even if event markup is incomplete.
-  const isHomepage = Boolean(
-    eventSection ||
-    eventImage ||
-    eventCaption ||
-    document.getElementById("home") ||
-    /(?:^|\/)index\.html$/.test(window.location.pathname) ||
-    window.location.pathname.endsWith("/")
-  );
+  function warnEvent(message) {
+    try {
+      console.warn(message);
+    } catch (error) {
+      // Diagnostics are best effort only.
+    }
+  }
 
-  // Feature absence on unrelated pages is normal.
-  if (!isHomepage) {
-    return;
+  function recoverEvent(operation, warning) {
+    try {
+      operation();
+    } catch (error) {
+      warnEvent(warning);
+    }
+  }
+
+  function isEventFigure(element) {
+    return element instanceof HTMLElement &&
+      element.tagName === "FIGURE" &&
+      element.classList.contains("random-event-container");
+  }
+
+  function isEventSection(element) {
+    return element instanceof HTMLElement &&
+      element.tagName === "SECTION" &&
+      element.id === "event-highlights";
+  }
+
+  function isEventImage(element) {
+    return element instanceof HTMLImageElement &&
+      isEventFigure(eventFigure) &&
+      element.parentElement === eventFigure;
+  }
+
+  function isEventCaption(element) {
+    return element instanceof HTMLElement &&
+      element.tagName === "FIGCAPTION" &&
+      isEventFigure(eventFigure) &&
+      element.parentElement === eventFigure;
   }
 
   function showUnavailable(keepInitialImage = false) {
-    if (eventImage instanceof HTMLImageElement) {
-      eventImage.hidden = !keepInitialImage;
-    }
+    recoverEvent(function () {
+      if (isEventImage(eventImage)) {
+        eventImage.hidden = !keepInitialImage;
+      }
+    }, "Event highlights: image recovery failed.");
 
-    // Preserve the initial caption when its image remains usable.
-    if (!keepInitialImage &&
-        eventCaption instanceof HTMLElement) {
-      eventCaption.textContent = unavailableMessage;
+    let captionUpdated = false;
+    recoverEvent(function () {
+      if (!keepInitialImage && isEventCaption(eventCaption)) {
+        eventCaption.textContent = unavailableMessage;
+        captionUpdated = true;
+      }
+    }, "Event highlights: caption recovery failed.");
+
+    if (captionUpdated) {
       return;
     }
 
-    const feedbackContainer =
-      eventSection instanceof HTMLElement
-        ? eventSection
-        : document.querySelector(".random-event-container");
+    recoverEvent(function () {
+      const container = isEventSection(eventSection)
+        ? eventSection : eventFigure;
 
-    if (!(feedbackContainer instanceof HTMLElement)) {
-      return;
-    }
+      if (!isEventSection(container) && !isEventFigure(container)) {
+        warnEvent("Event highlights: no suitable feedback container.");
+        return;
+      }
 
-    let feedback = feedbackContainer.querySelector(
-      ".event-unavailable-message"
-    );
+      let feedback = Array.from(container.children).find(function (child) {
+        return child.tagName === "P" &&
+          child.classList.contains("event-unavailable-message") &&
+          child.getAttribute("role") === "status";
+      });
 
-    if (!feedback) {
-      feedback = document.createElement("p");
-      feedback.className = "event-unavailable-message";
-      feedback.setAttribute("role", "status");
-      feedbackContainer.appendChild(feedback);
-    }
+      if (!feedback) {
+        feedback = document.createElement("p");
+        feedback.className = "event-unavailable-message";
+        feedback.setAttribute("role", "status");
+        container.appendChild(feedback);
+      }
 
-    feedback.textContent = unavailableMessage;
+      feedback.textContent = unavailableMessage;
+    }, "Event highlights: unavailable feedback failed.");
   }
 
   // Accept only nonempty text metadata.
@@ -111,7 +148,7 @@ async function displayRandomEvent() {
 
   // Load each candidate independently before displaying it.
   function loadEventImage(event) {
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
       const candidateImage = new Image();
 
       function cleanup() {
@@ -120,19 +157,27 @@ async function displayRandomEvent() {
       }
 
       function handleLoad() {
-        cleanup();
+        try {
+          cleanup();
 
-        if (candidateImage.naturalWidth > 0 &&
-            candidateImage.naturalHeight > 0) {
-          resolve(candidateImage);
-        } else {
-          resolve(null);
+          if (candidateImage.naturalWidth > 0 &&
+              candidateImage.naturalHeight > 0) {
+            resolve(candidateImage);
+          } else {
+            resolve(null);
+          }
+        } catch (error) {
+          reject(error);
         }
       }
 
       function handleError() {
-        cleanup();
-        resolve(null);
+        try {
+          cleanup();
+          resolve(null);
+        } catch (error) {
+          reject(error);
+        }
       }
 
       // Register handlers before assigning the source.
@@ -146,23 +191,31 @@ async function displayRandomEvent() {
 
   // Verify the initial HTML image without starting another request.
   function verifyInitialImage() {
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
       function cleanup() {
         eventImage.removeEventListener("load", handleLoad);
         eventImage.removeEventListener("error", handleError);
       }
 
       function handleLoad() {
-        cleanup();
-        resolve(
-          eventImage.naturalWidth > 0 &&
-          eventImage.naturalHeight > 0
-        );
+        try {
+          cleanup();
+          resolve(
+            eventImage.naturalWidth > 0 &&
+            eventImage.naturalHeight > 0
+          );
+        } catch (error) {
+          reject(error);
+        }
       }
 
       function handleError() {
-        cleanup();
-        resolve(false);
+        try {
+          cleanup();
+          resolve(false);
+        } catch (error) {
+          reject(error);
+        }
       }
 
       eventImage.addEventListener("load", handleLoad);
@@ -176,24 +229,40 @@ async function displayRandomEvent() {
   }
 
   try {
-    // Validate the required DOM targets and their element types.
-    if (!(eventSection instanceof HTMLElement) ||
-        !(eventImage instanceof HTMLImageElement) ||
-        !(eventCaption instanceof HTMLElement) ||
-        eventCaption.tagName !== "FIGCAPTION" ||
-        !eventSection.contains(eventImage) ||
-        !eventSection.contains(eventCaption)) {
-      console.warn("Event highlights: incomplete homepage markup.");
+    const sectionTarget = document.getElementById("event-highlights");
+    eventSection = isEventSection(sectionTarget) ? sectionTarget : null;
+    eventImage = document.getElementById("random-event-image");
+    eventCaption = document.getElementById("event-caption");
+
+    const isHomepage = Boolean(
+      eventSection || document.getElementById("home") ||
+      /(?:^|\/)index\.html$/.test(window.location.pathname) ||
+      window.location.pathname.endsWith("/")
+    );
+
+    if (!isHomepage) {
+      return;
+    }
+
+    // Prefer the dedicated section; recover a unique event figure if absent.
+    const figures = Array.from((eventSection || document)
+      .querySelectorAll("figure.random-event-container"));
+    eventFigure = figures.length === 1 ? figures[0] : null;
+    const initializationTarget = eventSection || eventFigure;
+
+    if (initializationTarget) {
+      if (initializationTarget.dataset.eventInitialized === "true") {
+        return;
+      }
+      initializationTarget.dataset.eventInitialized = "true";
+    }
+
+    if (!eventSection || !isEventImage(eventImage) ||
+        !isEventCaption(eventCaption)) {
+      warnEvent("Event highlights: incomplete homepage markup.");
       showUnavailable();
       return;
     }
-
-    // Prevent duplicate initialization within the same page load.
-    if (eventSection.dataset.eventInitialized === "true") {
-      return;
-    }
-
-    eventSection.dataset.eventInitialized = "true";
 
     const collection =
       typeof eventImages !== "undefined" &&
@@ -224,7 +293,7 @@ async function displayRandomEvent() {
 
     // Retain the verified initial HTML image if no entry is eligible.
     if (eligibleEvents.length === 0) {
-      console.warn("Event highlights: no eligible image entries.");
+      warnEvent("Event highlights: no eligible image entries.");
 
       const initialImageUsable = await verifyInitialImage();
 
@@ -241,7 +310,8 @@ async function displayRandomEvent() {
     }
 
     // Each candidate can be attempted only once.
-    while (remainingEvents.length > 0) {
+    let attempts = 0;
+    while (remainingEvents.length > 0 && attempts < maxAttempts) {
       const randomIndex = Math.floor(
         Math.random() * remainingEvents.length
       );
@@ -251,6 +321,7 @@ async function displayRandomEvent() {
         1
       )[0];
 
+      attempts++;
       const loadedImage = await loadEventImage(selectedEvent);
 
       if (loadedImage) {
@@ -260,14 +331,13 @@ async function displayRandomEvent() {
         loadedImage.hidden = false;
 
         eventImage.replaceWith(loadedImage);
+        eventImage = loadedImage;
         eventCaption.textContent = selectedEvent.caption;
 
         return;
       }
 
-      console.warn(
-        "Event highlights: unable to load " + selectedEvent.src
-      );
+      warnEvent("Event highlights: unable to load " + selectedEvent.src);
     }
 
     // No eligible asset could be loaded.
@@ -275,14 +345,18 @@ async function displayRandomEvent() {
 
   } catch (error) {
     // Isolate unexpected failures from other shared features.
-    console.warn("Event highlights: initialization failed.");
+    warnEvent("Event highlights: initialization failed.");
     showUnavailable();
   }
 }
 
 // Initialize independently of the other shared JavaScript features.
 displayRandomEvent().catch(function () {
-  console.warn("Event highlights: unexpected initialization failure.");
+  try {
+    console.warn("Event highlights: unexpected initialization failure.");
+  } catch (error) {
+    // Diagnostics are best effort only.
+  }
 });
 
 /* Practical 10: Faculty Experience Calculator */
