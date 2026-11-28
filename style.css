@@ -1350,6 +1350,11 @@ main h2 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+.timetable-wrapper:focus-visible {
+  outline: 2px solid #234f7b;
+  outline-offset: 2px;
+}
+
 /* Timetable */
 
 .course-timetable {
