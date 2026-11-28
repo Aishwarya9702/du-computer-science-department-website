@@ -403,7 +403,7 @@ Baseline review, approved SRS and test plan preceded incremental development; au
 | Walkthrough | [Code walkthrough](assignment-3/CODE_WALKTHROUGH.md) |
 | Execution | [Testing report](assignment-3/TESTING_REPORT.md) |
 
-The original development and clean prompt conversation links must be supplied and verified before submission; no URLs are invented here.
+Both Original Development Conversation and Clean Prompt Development Conversation links were user-confirmed accessible in a signed-out/private browser and privacy-checked. Actual URLs were not supplied here; reverify if shared snapshots change.
 
 ### Assignment 3 testing status
 
@@ -416,16 +416,18 @@ The original development and clean prompt conversation links must be supplied an
 | Cross-browser | 4 | 4 | 0 | 0 |
 | Regression | 25 | 25 | 0 | 0 |
 | Source validation | 12 | 12 | 0 | 0 |
-| Documentation and deliverables | 19 | 15 | 0 | 4 |
-| **Total** | **158** | **154** | **0** | **4** |
+| Documentation and deliverables | 19 | 18 | 0 | 1 |
+| **Total** | **158** | **157** | **0** | **1** |
 
-Execution coverage **97.47%**; recorded pass rate among executed cases **100%**. Results are user-confirmed except reviewed validator screenshot contents; no independent full execution claimed. Historical Assignment 2's 168/168 results are separate. Batch 8 progress: 15/19. Group 8C (TC-DOC-010, TC-DOC-011, TC-DOC-012 and TC-DOC-016) is user-confirmed Passed. All five required Assignment 3 documents were confirmed present, readable and consistent. Pending (Not Tested): TC-DOC-013, TC-DOC-017, TC-DOC-018 and TC-DOC-019.
+Execution coverage **99.37%**; recorded pass rate among executed cases **100%**. Results are user-confirmed except reviewed validator screenshot contents; no independent full execution claimed. Historical Assignment 2's 168/168 results are separate. Batch 8 progress: 18/19; Group 8D progress: 3/4. Group 8C (TC-DOC-010, TC-DOC-011, TC-DOC-012 and TC-DOC-016) is user-confirmed Passed. All five required Assignment 3 documents were confirmed present, readable and consistent. TC-DOC-013, TC-DOC-017 and TC-DOC-018 are user-confirmed Passed. TC-DOC-019 preliminary verification Passed; formal status remains Not Tested pending final tag and archive consistency.
 
 Fresh Nu HTML Checker vnu 26.11.28 validation: all three HTML files zero errors and zero warnings. W3C CSS Level 3 + SVG: zero errors, three accepted non-blocking warnings at lines 1166, 1172 and 1177 (identical background and border colors on alumni submit button normal, hover and active states). Five reviewed evidence references are listed in the testing report; all five files were user-confirmed present, readable and accurately referenced through TC-DOC-012. Both JS syntax checks reported Passed; formal Node version and exit codes not recorded. Chrome, Edge and Firefox checks reported Passed; versions and detailed subcase logs not recorded. Touch testing used Chrome emulation, not a physical device. No comprehensive WCAG or security certification claimed. F-03 supplementary recovery scope and unrecorded section feedback are documented in the report; fault recovery is best effort.
 
 ### Release status
 
-Assignment 1 and 2 tags and documentation preservation, incremental history and clean working tree were user-confirmed before this update. Final Assignment 3 revision, public links, ZIP inventory and clean extraction/run remain pending. After actual checks, update the report and README, commit/push, rebuild and reverify the archive and final accepted revision. Create `assignment-3-final` only after acceptance verification. No final hash or timestamp is asserted. Use synthetic data only; exclude credentials, real alumni data, caches and `.git` from the submission archive.
+Assignment 1 and 2 tags and documentation preservation, incremental history, clean working tree and HEAD matching origin/main were user-confirmed. Public conversation accessibility and privacy, candidate ZIP inventory and privacy, clean extraction and Live Server execution of all three pages and required features were confirmed. Actual candidate commit hash and public URLs were not supplied; no independent repository or archive inspection is claimed. The final Assignment 3 tag has not been created. F-09 remains verified and F-10 remains open.
+
+After documentation changes, commit/push, rebuild the ZIP from the new committed revision and repeat affected inventory, privacy, extraction, documentation/link and website smoke checks. Reverify public links if snapshots change, and verify the accepted revision, remote synchronization and archive consistency. Final TC-DOC-019 closure requires actual final tag verification; any later documentation change requires rebuilding and affected reverification. Do not silently move a published tag. Record final revision and archive verification externally if needed. No final submission readiness, hash or timestamp is asserted. Use synthetic data only; exclude credentials, real alumni data, caches and `.git` from the submission archive.
 
 ---
 
